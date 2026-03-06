@@ -5,129 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MINDJSET</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-
 <style>
-
-html,body{
-margin:0;
-padding:0;
-width:100%;
-height:100%;
-background:#000;
-font-family:'Playfair Display', serif;
+html, body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  background:#000;
 }
 
 body{
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: Georgia, serif;
+  overflow:hidden;
 }
 
 .page{
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:24px;
-box-sizing:border-box;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:24px;
+  box-sizing:border-box;
 }
 
-/* LOGO */
-
-.logo-wrap{
-width:100%;
-display:flex;
-justify-content:center;
-margin-bottom:60px;
+.logo{
+  max-width:68%;
+  height:auto;
+  margin-bottom:42px;
+  opacity:0;
+  transform:translateY(10px) scale(0.985);
+  animation:logoReveal 1.8s ease forwards;
 }
-
-.logo-wrap img{
-width:min(100vw,900px);
-height:auto;
-display:block;
-}
-
-/* TESTO */
 
 .text{
-display:flex;
-flex-direction:column;
-gap:6px;
-margin-top:20px;
+  color:white;
+  font-style:italic;
+  font-size:22px;
+  letter-spacing:1.5px;
+  opacity:0;
+  transform:translateY(8px);
+  animation:textReveal 1.6s ease forwards;
+  animation-delay:0.55s;
 }
 
-.private{
-font-style:italic;
-font-weight:500;
-font-size:24px;
-letter-spacing:0.5px;
+.dots{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+  opacity:0;
+  animation:dotsReveal 1.2s ease forwards;
+  animation-delay:1s;
 }
 
-.launch{
-font-style:italic;
-font-weight:500;
-font-size:24px;
-letter-spacing:0.5px;
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.8);
+  animation:pulse 1.8s ease-in-out infinite;
 }
 
-/* TABLET */
+.dot:nth-child(2){
+  animation-delay:0.25s;
+}
+
+.dot:nth-child(3){
+  animation-delay:0.5s;
+}
+
+@keyframes logoReveal{
+  from{
+    opacity:0;
+    transform:translateY(10px) scale(0.985);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes textReveal{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes dotsReveal{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes pulse{
+  0%, 100%{
+    opacity:0.25;
+    transform:scale(0.9);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.25);
+  }
+}
 
 @media (max-width:768px){
+  .logo{
+    max-width:82%;
+    margin-bottom:34px;
+  }
 
-.logo-wrap img{
-width:min(100vw,700px);
+  .text{
+    font-size:18px;
+  }
 }
-
-.private{
-font-size:22px;
-}
-
-.launch{
-font-size:22px;
-}
-
-}
-
-/* MOBILE */
 
 @media (max-width:480px){
+  .logo{
+    max-width:90%;
+    margin-bottom:28px;
+  }
 
-.logo-wrap img{
-width:min(100vw,520px);
+  .text{
+    font-size:16px;
+    letter-spacing:1px;
+  }
+
+  .dots{
+    margin-top:14px;
+    gap:8px;
+  }
+
+  .dot{
+    width:5px;
+    height:5px;
+  }
 }
-
-.private{
-font-size:18px;
-}
-
-.launch{
-font-size:18px;
-margin-top:10px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="page">
+  <img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo" alt="Mindjset logo">
+  <div class="text">Private experiences</div>
 
-<div class="logo-wrap">
-<img src="./ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg">
-</div>
-
-<div class="text">
-<div class="private">Private experiences</div>
-<div class="launch">Launching soon</div>
-</div>
-
+  <div class="dots" aria-hidden="true">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
 </div>
 
 </body>
