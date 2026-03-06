@@ -43,23 +43,35 @@ box-sizing:border-box;
 width:100%;
 display:flex;
 justify-content:center;
-margin-bottom:40px;
+margin-bottom:50px;
 }
 
 .logo-wrap img{
-width:min(88vw,520px);
+width:min(95vw,640px);
 height:auto;
 display:block;
 }
 
-/* SCRITTA */
+/* TESTO */
 
-.coming{
+.text{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.private{
 font-style:italic;
 font-weight:500;
-font-size:34px;
+font-size:28px;
 letter-spacing:0.5px;
-margin-top:10px;
+}
+
+.launch{
+font-style:italic;
+font-weight:500;
+font-size:28px;
+letter-spacing:0.5px;
 }
 
 /* TABLET */
@@ -67,12 +79,15 @@ margin-top:10px;
 @media (max-width:768px){
 
 .logo-wrap img{
-width:min(92vw,420px);
+width:min(98vw,520px);
 }
 
-.coming{
-font-size:28px;
-margin-top:30px;
+.private{
+font-size:24px;
+}
+
+.launch{
+font-size:24px;
 }
 
 }
@@ -82,12 +97,15 @@ margin-top:30px;
 @media (max-width:480px){
 
 .logo-wrap img{
-width:min(95vw,360px);
+width:min(100vw,420px);
 }
 
-.coming{
-font-size:24px;
-margin-top:40px;
+.private{
+font-size:20px;
+}
+
+.launch{
+font-size:20px;
 }
 
 }
@@ -103,7 +121,10 @@ margin-top:40px;
 <img src="./ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg">
 </div>
 
-<h1 class="coming">Coming soon</h1>
+<div class="text">
+<div class="private">Private experiences</div>
+<div class="launch">Launching soon</div>
+</div>
 
 </div>
 
