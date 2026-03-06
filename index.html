@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MINDJSET</title>
 
 <style>
@@ -59,6 +58,7 @@ gap:10px;
 opacity:0;
 animation:dotsAppear 1.5s ease forwards;
 animation-delay:1.4s;
+margin-bottom:25px;
 }
 
 .dot{
@@ -75,6 +75,24 @@ animation-delay:0.2s;
 
 .dot:nth-child(3){
 animation-delay:0.4s;
+}
+
+.instagram{
+opacity:0;
+animation:instaFade 1.5s ease forwards;
+animation-delay:2s;
+}
+
+.instagram img{
+width:28px;
+height:28px;
+opacity:0.8;
+transition:0.3s;
+}
+
+.instagram img:hover{
+opacity:1;
+transform:scale(1.1);
 }
 
 @keyframes logoFade{
@@ -100,6 +118,11 @@ transform:translateY(0);
 }
 
 @keyframes dotsAppear{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+@keyframes instaFade{
 from{opacity:0;}
 to{opacity:1;}
 }
@@ -144,6 +167,12 @@ font-size:18px;
 <div class="dot"></div>
 <div class="dot"></div>
 <div class="dot"></div>
+</div>
+
+<div class="instagram">
+<a href="https://www.instagram.com/mindjset?igsh=MThzb3BkeHM4M3Vrbw==" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
 </div>
 
 </div>
