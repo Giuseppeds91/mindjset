@@ -1,173 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MINDJSET</title>
 
 <style>
+
 html, body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  background:#000;
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+background:black;
 }
 
 body{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family: Georgia, serif;
-  overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Georgia, serif;
+overflow:hidden;
 }
 
-.page{
-  width:100%;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:24px;
-  box-sizing:border-box;
+.container{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
 }
 
 .logo{
-  max-width:68%;
-  height:auto;
-  margin-bottom:42px;
-  opacity:0;
-  transform:translateY(10px) scale(0.985);
-  animation:logoReveal 1.8s ease forwards;
+max-width:65%;
+height:auto;
+margin-bottom:35px;
+opacity:0;
+transform:translateY(10px);
+animation:logoFade 1.8s ease forwards;
 }
 
 .text{
-  color:white;
-  font-style:italic;
-  font-size:22px;
-  letter-spacing:1.5px;
-  opacity:0;
-  transform:translateY(8px);
-  animation:textReveal 1.6s ease forwards;
-  animation-delay:0.55s;
+color:white;
+font-style:italic;
+font-size:22px;
+letter-spacing:2px;
+margin-bottom:15px;
+opacity:0;
+animation:textFade 1.5s ease forwards;
+animation-delay:1s;
 }
 
 .dots{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
-  opacity:0;
-  animation:dotsReveal 1.2s ease forwards;
-  animation-delay:1s;
+display:flex;
+gap:10px;
+opacity:0;
+animation:dotsAppear 1.5s ease forwards;
+animation-delay:1.4s;
 }
 
 .dot{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.8);
-  animation:pulse 1.8s ease-in-out infinite;
+width:6px;
+height:6px;
+border-radius:50%;
+background:white;
+animation:pulse 1.6s ease-in-out infinite;
 }
 
 .dot:nth-child(2){
-  animation-delay:0.25s;
+animation-delay:0.2s;
 }
 
 .dot:nth-child(3){
-  animation-delay:0.5s;
+animation-delay:0.4s;
 }
 
-@keyframes logoReveal{
-  from{
-    opacity:0;
-    transform:translateY(10px) scale(0.985);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+@keyframes logoFade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-@keyframes textReveal{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes textFade{
+from{
+opacity:0;
+transform:translateY(6px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-@keyframes dotsReveal{
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
+@keyframes dotsAppear{
+from{opacity:0;}
+to{opacity:1;}
 }
 
 @keyframes pulse{
-  0%, 100%{
-    opacity:0.25;
-    transform:scale(0.9);
-  }
-  50%{
-    opacity:1;
-    transform:scale(1.25);
-  }
+0%,100%{
+opacity:0.3;
+transform:scale(0.9);
+}
+50%{
+opacity:1;
+transform:scale(1.3);
+}
 }
 
 @media (max-width:768px){
-  .logo{
-    max-width:82%;
-    margin-bottom:34px;
-  }
 
-  .text{
-    font-size:18px;
-  }
+.logo{
+max-width:85%;
+margin-bottom:28px;
 }
 
-@media (max-width:480px){
-  .logo{
-    max-width:90%;
-    margin-bottom:28px;
-  }
-
-  .text{
-    font-size:16px;
-    letter-spacing:1px;
-  }
-
-  .dots{
-    margin-top:14px;
-    gap:8px;
-  }
-
-  .dot{
-    width:5px;
-    height:5px;
-  }
+.text{
+font-size:18px;
 }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="page">
-  <img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo" alt="Mindjset logo">
-  <div class="text">Private experiences</div>
+<div class="container">
 
-  <div class="dots" aria-hidden="true">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
+<img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo">
+
+<div class="text">Launching soon</div>
+
+<div class="dots">
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+
 </div>
 
 </body>
+
 </html>
