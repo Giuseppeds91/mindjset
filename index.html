@@ -1,75 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MINDJSET</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINDJSET</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      color:white;
-      text-align:center;
-      background:url("ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg") center center / cover no-repeat;
-      height:100vh;
-      overflow:hidden;
-      position:relative;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .overlay{
-      position:absolute;
-      inset:0;
-      background:rgba(0,0,0,0.28);
-    }
+<style>
 
-    .center{
-      position:absolute;
-      left:50%;
-      top:74%;
-      transform:translate(-50%,-50%);
-      z-index:1;
-      width:90%;
-      max-width:900px;
-    }
+body{
+margin:0;
+font-family:Arial, sans-serif;
+color:white;
+text-align:center;
+background:url("ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg") center center / cover no-repeat;
+height:100vh;
+overflow:hidden;
+position:relative;
+}
 
-    h1{
-      margin:0;
-      font-size:42px;
-      letter-spacing:4px;
-      font-weight:600;
-      line-height:1.1;
-    }
+/* leggero oscuramento per rendere leggibile la scritta */
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.30);
+}
 
-    @media (max-width: 768px){
-      .center{
-        top:72%;
-        width:88%;
-      }
+/* posizione scritta */
+.center{
+position:absolute;
+left:50%;
+top:80%;
+transform:translate(-50%,-50%);
+z-index:1;
+width:90%;
+max-width:900px;
+}
 
-      h1{
-        font-size:32px;
-        letter-spacing:3px;
-      }
-    }
+/* scritta coming soon */
+h1{
+margin:0;
+font-size:38px;
+letter-spacing:4px;
+font-weight:600;
+}
 
-    @media (max-width: 480px){
-      .center{
-        top:74%;
-        width:90%;
-      }
+/* tablet */
+@media (max-width:768px){
 
-      h1{
-        font-size:26px;
-        letter-spacing:2px;
-      }
-    }
-  </style>
+.center{
+top:82%;
+}
+
+h1{
+font-size:30px;
+letter-spacing:3px;
+}
+
+}
+
+/* mobile */
+@media (max-width:480px){
+
+.center{
+top:84%;
+}
+
+h1{
+font-size:24px;
+letter-spacing:2px;
+}
+
+}
+
+</style>
 </head>
-<body>
-  <div class="overlay"></div>
 
-  <div class="center">
-    <h1>COMING SOON</h1>
-  </div>
+<body>
+
+<div class="overlay"></div>
+
+<div class="center">
+<h1>COMING SOON</h1>
+</div>
+
 </body>
 </html>
