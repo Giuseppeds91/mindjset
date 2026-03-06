@@ -1,106 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MINDJSET</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINDJSET</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-    }
+<style>
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      color: white;
-    }
+html,body{
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+background:#000;
+font-family:'Playfair Display', serif;
+}
 
-    .page {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      text-align: center;
-      padding: 24px;
-      box-sizing: border-box;
-    }
+body{
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+}
 
-    .logo-wrap {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 36px;
-    }
+.page{
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:24px;
+box-sizing:border-box;
+}
 
-    .logo-wrap img {
-      width: min(78vw, 420px);
-      height: auto;
-      display: block;
-    }
+/* LOGO */
 
-    .coming {
-      font-style: italic;
-      font-weight: 500;
-      font-size: 42px;
-      line-height: 1.1;
-      letter-spacing: 0.5px;
-      margin: 0;
-      color: #fff;
-    }
+.logo-wrap{
+width:100%;
+display:flex;
+justify-content:center;
+margin-bottom:40px;
+}
 
-    @media (max-width: 768px) {
-      .logo-wrap {
-        margin-bottom: 28px;
-      }
+.logo-wrap img{
+width:min(88vw,520px);
+height:auto;
+display:block;
+}
 
-      .logo-wrap img {
-        width: min(82vw, 320px);
-      }
+/* SCRITTA */
 
-      .coming {
-        font-size: 34px;
-      }
-    }
+.coming{
+font-style:italic;
+font-weight:500;
+font-size:34px;
+letter-spacing:0.5px;
+margin-top:10px;
+}
 
-    @media (max-width: 480px) {
-      .page {
-        padding: 20px;
-      }
+/* TABLET */
 
-      .logo-wrap {
-        margin-bottom: 22px;
-      }
+@media (max-width:768px){
 
-      .logo-wrap img {
-        width: min(84vw, 260px);
-      }
+.logo-wrap img{
+width:min(92vw,420px);
+}
 
-      .coming {
-        font-size: 28px;
-      }
-    }
-  </style>
+.coming{
+font-size:28px;
+margin-top:30px;
+}
+
+}
+
+/* MOBILE */
+
+@media (max-width:480px){
+
+.logo-wrap img{
+width:min(95vw,360px);
+}
+
+.coming{
+font-size:24px;
+margin-top:40px;
+}
+
+}
+
+</style>
 </head>
-<body>
-  <div class="page">
-    <div class="logo-wrap">
-      <img src="./ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" alt="Mindjset logo">
-    </div>
 
-    <h1 class="coming">Coming soon</h1>
-  </div>
+<body>
+
+<div class="page">
+
+<div class="logo-wrap">
+<img src="./ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg">
+</div>
+
+<h1 class="coming">Coming soon</h1>
+
+</div>
+
 </body>
 </html>
