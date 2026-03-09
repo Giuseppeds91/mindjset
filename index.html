@@ -2,10 +2,8 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MINDJSET</title>
 
 <style>
@@ -16,14 +14,13 @@ padding:0;
 box-sizing:border-box;
 }
 
-html,body{
+html, body{
+width:100%;
 height:100%;
+overflow:hidden;
 background:black;
 font-family:Georgia, serif;
-overflow:hidden;
 }
-
-/* VIDEO BACKGROUND */
 
 .video-bg{
 position:fixed;
@@ -32,10 +29,16 @@ left:0;
 width:100%;
 height:100%;
 object-fit:cover;
-z-index:-1;
+z-index:-2;
+background:black;
 }
 
-/* CONTENUTO */
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.20);
+z-index:-1;
+}
 
 .container{
 position:absolute;
@@ -46,17 +49,14 @@ display:flex;
 flex-direction:column;
 align-items:center;
 text-align:center;
+width:90%;
 }
-
-/* LOGO */
 
 .logo{
 max-width:65%;
 height:auto;
-margin-bottom:30px;
+margin-bottom:35px;
 }
-
-/* TESTO */
 
 .text{
 color:white;
@@ -65,8 +65,6 @@ font-size:22px;
 letter-spacing:2px;
 margin-bottom:15px;
 }
-
-/* DOTS */
 
 .dots{
 display:flex;
@@ -79,7 +77,7 @@ width:6px;
 height:6px;
 border-radius:50%;
 background:white;
-animation:pulse 1.6s infinite;
+animation:pulse 1.6s ease-in-out infinite;
 }
 
 .dot:nth-child(2){
@@ -88,6 +86,18 @@ animation-delay:0.2s;
 
 .dot:nth-child(3){
 animation-delay:0.4s;
+}
+
+.instagram img{
+width:28px;
+height:28px;
+opacity:0.8;
+transition:0.3s;
+}
+
+.instagram img:hover{
+opacity:1;
+transform:scale(1.1);
 }
 
 @keyframes pulse{
@@ -101,31 +111,13 @@ transform:scale(1.3);
 }
 }
 
-/* INSTAGRAM */
-
-.instagram img{
-width:28px;
-opacity:0.8;
-transition:0.3s;
-}
-
-.instagram img:hover{
-opacity:1;
-transform:scale(1.1);
-}
-
-/* MOBILE */
-
 @media (max-width:768px){
-
 .logo{
 max-width:85%;
 }
-
 .text{
 font-size:18px;
 }
-
 }
 
 </style>
@@ -134,28 +126,29 @@ font-size:18px;
 
 <body>
 
-<video class="video-bg" autoplay muted loop playsinline>
-<source src="video.mp4" type="video/mp4">
+<video class="video-bg" autoplay muted loop playsinline preload="auto">
+  <source src="mindjset.mp4" type="video/mp4">
 </video>
+
+<div class="overlay"></div>
 
 <div class="container">
 
-<img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo">
+  <img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo" alt="Mindjset logo">
 
-<div class="text">Launching soon</div>
+  <div class="text">Launching soon</div>
 
-<div class="dots">
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-</div>
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
 
-<div class="instagram">
-<a href="instagram://user?username=mindjset"
-onclick="setTimeout(function(){ window.location='https://www.instagram.com/mindjset'; }, 500)">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-</a>
-</div>
+  <div class="instagram">
+    <a href="instagram://user?username=mindjset" onclick="setTimeout(function(){ window.location='https://www.instagram.com/mindjset'; }, 500)">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+  </div>
 
 </div>
 
