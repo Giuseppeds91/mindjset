@@ -1,229 +1,134 @@
 export default function MindjsetLuxuryMobile() {
-  const cities = [
-    { month: "Marzo", city: "Milano" },
-    { month: "Aprile", city: "Roma" },
-    { month: "Maggio", city: "Portofino" },
-    { month: "Giugno", city: "Barcellona" },
+  const route = [
+    { month: "Marzo", city: "Milano", date: "28.03", venue: "Apollo" },
+    { month: "Aprile", city: "Roma", date: "19.04", venue: "Secret Venue" },
+    { month: "Maggio", city: "Portofino", date: "17.05", venue: "Covo di Nord-Est" },
+    { month: "Giugno", city: "Barcellona", date: "14.06", venue: "Private Rooftop" },
   ];
 
-  const events = [
-    {
-      city: "Milano",
-      venue: "Apollo Club",
-      date: "28 Marzo 2026",
-      vibe: "Red Room / Signature Night",
-    },
-    {
-      city: "Roma",
-      venue: "Secret Venue",
-      date: "18 Aprile 2026",
-      vibe: "Private Members Energy",
-    },
-    {
-      city: "Portofino",
-      venue: "Covo di Nord-Est",
-      date: "16 Maggio 2026",
-      vibe: "Riviera Midnight Session",
-    },
-  ];
-
-  const experiences = [
-    "Night culture curated with a luxury edge",
-    "Selected crowd, iconic venues, cinematic energy",
-    "A moving community across cities and seasons",
+  const drops = [
+    "Apollo Milano",
+    "Roma Private Chapter",
+    "Portofino Riviera Session",
+    "Barcelona Sunset Drop",
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden selection:bg-red-700/40">
-      <div className="relative mx-auto w-full max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-red-700/25 blur-3xl" />
-          <div className="absolute top-[22rem] -left-16 h-52 w-52 rounded-full bg-red-600/10 blur-3xl" />
-          <div className="absolute bottom-32 right-0 h-56 w-56 rounded-full bg-red-700/10 blur-3xl" />
-        </div>
+    <div className="min-h-screen bg-black text-white">
+      <main className="mx-auto w-full max-w-[430px] overflow-hidden bg-black md:max-w-[768px] lg:max-w-[1200px]">
+        <section className="relative isolate border-b border-white/10 px-5 pb-10 pt-5 sm:px-7 sm:pb-14 sm:pt-7 lg:px-10 lg:pb-16">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(220,38,38,0.22),transparent_34%),linear-gradient(to_bottom,rgba(255,255,255,0.04),transparent_25%)]" />
+          <div className="absolute left-1/2 top-24 h-48 w-48 -translate-x-1/2 rounded-full bg-red-700/20 blur-3xl" />
 
-        <section className="relative px-5 pt-6 pb-10 sm:px-6 md:px-8">
-          <div className="mb-7 flex items-center justify-between">
-            <div className="text-[14px] uppercase tracking-[0.35em] text-white/55">Mindjset</div>
-            <button className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 backdrop-blur">
-              Get Ticket
+          <div className="relative z-10 flex items-center justify-between gap-4">
+            <button className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur">
+              <span className="text-lg">←</span>
+            </button>
+
+            <div className="text-center">
+              <p className="text-[11px] uppercase tracking-[0.38em] text-white/45">Mindjset</p>
+              <h1 className="mt-2 text-[32px] font-semibold uppercase leading-none tracking-[-0.08em] sm:text-[42px] lg:text-[56px]">
+                Luxury Nights
+              </h1>
+            </div>
+
+            <button className="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-[10px] font-medium uppercase tracking-[0.28em] text-white/80 backdrop-blur">
+              Menu
             </button>
           </div>
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#190404] via-black to-black px-5 pb-6 pt-7 shadow-[0_0_80px_rgba(255,0,0,0.12)] sm:px-7 sm:pt-8">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,40,40,0.18),transparent_38%)]" />
-            <div className="relative z-10">
-              <div className="mb-5 inline-flex items-center rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-red-200">
+          <div className="relative z-10 mt-8 overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(28,7,7,0.95),rgba(0,0,0,1))] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:p-7 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-8">
+            <div>
+              <div className="inline-flex rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.34em] text-red-200">
                 Music is the answer
               </div>
 
-              <h1 className="mb-4 text-[2.7rem] font-semibold uppercase leading-[0.92] tracking-[-0.04em] sm:text-[4.2rem] md:text-[5.2rem]">
-                NOT A <span className="text-red-500">PARTY</span>
-              </h1>
-
-              <p className="max-w-md text-sm leading-6 text-white/70 sm:text-[15px]">
-                A mobile-first luxury concept built around iconic nights, elevated venues and a curated crowd moving through Europe city by city.
-              </p>
-
-              <div className="mt-7 flex flex-wrap gap-2">
-                {cities.map((item) => (
-                  <div
-                    key={item.city}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-white/80 backdrop-blur"
-                  >
-                    {item.month} → {item.city}
-                  </div>
-                ))}
+              <div className="mt-6">
+                <p className="text-[12px] uppercase tracking-[0.42em] text-white/40">Next destination</p>
+                <h2 className="mt-3 text-[48px] font-semibold uppercase leading-[0.88] tracking-[-0.1em] text-white sm:text-[64px] lg:text-[82px]">
+                  Milano
+                </h2>
+                <div className="mt-3 flex items-center gap-3 text-sm text-white/60 sm:text-base">
+                  <span>28 Marzo 2026</span>
+                  <span className="h-1 w-1 rounded-full bg-red-500" />
+                  <span>Apollo Club</span>
+                </div>
               </div>
 
-              <div className="mt-8 grid grid-cols-2 gap-3">
-                <button className="rounded-2xl bg-red-600 px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white shadow-[0_10px_30px_rgba(220,38,38,0.35)] transition hover:scale-[1.01]">
+              <p className="mt-6 max-w-[34rem] text-sm leading-6 text-white/72 sm:text-[15px] sm:leading-7">
+                Mobile-first landing experience for a premium nightlife brand: cinematic mood, curated venues, selected people, and a route that moves across Europe with a strong signature identity.
+              </p>
+
+              <div className="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+                <button className="rounded-2xl bg-red-600 px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_40px_rgba(220,38,38,0.35)] transition hover:translate-y-[-1px]">
                   Get Ticket
                 </button>
-                <button className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/85 backdrop-blur transition hover:bg-white/10">
+                <button className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur transition hover:bg-white/10">
                   Join Community
                 </button>
               </div>
             </div>
+
+            <div className="mt-8 lg:mt-0">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[290px] overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,0,0,0.16),rgba(15,0,0,0.98))] sm:max-w-[320px] lg:max-w-none">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,80,80,0.18),transparent_45%)]" />
+                <div className="absolute left-1/2 top-[18%] h-24 w-24 -translate-x-1/2 rounded-full border border-white/15 shadow-[0_0_50px_rgba(255,255,255,0.12)] sm:h-28 sm:w-28" />
+                <div className="absolute left-1/2 top-[22%] -translate-x-1/2 -rotate-[9deg] text-[34px] italic text-white/95 drop-shadow-[0_0_18px_rgba(255,255,255,0.35)] sm:text-[40px]" style={{ fontFamily: 'cursive' }}>
+                  Mindjset
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                  <div className="rounded-[24px] border border-white/10 bg-black/35 p-4 backdrop-blur-md">
+                    <p className="text-[10px] uppercase tracking-[0.34em] text-white/45">Brand statement</p>
+                    <p className="mt-3 text-[28px] font-semibold uppercase leading-[0.9] tracking-[-0.08em] sm:text-[32px]">
+                      Not a party
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-white/65">
+                      Elevated energy, iconic venues and a visual identity built for premium perception.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="px-5 pb-8 sm:px-6 md:px-8">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur sm:p-5">
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">Next route</p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">Mindjset Journey</h2>
-              </div>
-              <div className="rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-red-200">
-                Luxury Tour
-              </div>
+        <section className="border-b border-white/10 px-5 py-8 sm:px-7 sm:py-10 lg:px-10 lg:py-12">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.36em] text-white/40">Journey</p>
+              <h3 className="mt-2 text-[28px] font-semibold tracking-[-0.06em] sm:text-[36px]">Mindjset Route</h3>
             </div>
+            <div className="rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-red-200">
+              2026 Season
+            </div>
+          </div>
 
-            <div className="space-y-4">
-              {events.map((event, index) => (
-                <div key={event.city} className="relative overflow-hidden rounded-[1.6rem] border border-white/10 bg-black/60 p-4">
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-800/10 via-transparent to-transparent" />
-                  <div className="relative z-10 flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-red-500/25 bg-red-500/10 text-sm font-semibold text-red-200">
+          <div className="space-y-3 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0">
+            {route.map((item, index) => (
+              <div
+                key={item.city}
+                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-white/[0.03] p-4 transition hover:border-red-500/30 hover:bg-white/[0.05] sm:p-5"
+              >
+                <div className="absolute inset-y-0 left-0 w-[2px] bg-gradient-to-b from-red-500 via-red-500/40 to-transparent" />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex min-w-0 items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-red-500/20 bg-red-500/10 text-sm font-semibold text-red-200">
                       0{index + 1}
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <h3 className="text-xl font-semibold tracking-[-0.03em]">{event.city}</h3>
-                          <p className="mt-1 text-sm text-white/55">{event.venue}</p>
-                        </div>
-                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/65">
-                          {event.date}
-                        </span>
-                      </div>
-                      <p className="mt-4 text-sm leading-6 text-white/72">{event.vibe}</p>
+                    <div className="min-w-0">
+                      <p className="text-[10px] uppercase tracking-[0.32em] text-white/40">{item.month}</p>
+                      <h4 className="mt-2 text-[24px] font-semibold tracking-[-0.05em]">{item.city}</h4>
+                      <p className="mt-1 text-sm text-white/58">{item.venue}</p>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-5 pb-8 sm:px-6 md:px-8">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#170808] via-black to-black p-5">
-              <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">Identity</p>
-              <div className="mt-6 flex min-h-[230px] items-center justify-center rounded-[1.8rem] border border-white/10 bg-black shadow-[inset_0_0_40px_rgba(255,0,0,0.05)]">
-                <div className="text-center">
-                  <div className="mx-auto mb-4 flex h-28 w-28 items-center justify-center rounded-full border border-white/15 shadow-[0_0_40px_rgba(255,255,255,0.1)]">
-                    <span className="rotate-[-10deg] text-3xl italic text-white/90" style={{ fontFamily: 'cursive' }}>
-                      Mindjset
-                    </span>
-                  </div>
-                  <p className="text-xs uppercase tracking-[0.35em] text-white/45">Curated nights / elevated culture</p>
+                  <span className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/60">
+                    {item.date}
+                  </span>
                 </div>
               </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 backdrop-blur">
-              <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">Experience</p>
-              <div className="mt-5 space-y-3">
-                {experiences.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-[1.4rem] border border-white/10 bg-black/60 p-4 text-sm leading-6 text-white/75"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        <section className="px-5 pb-10 sm:px-6 md:px-8">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] p-5 backdrop-blur sm:p-6">
-            <div className="mb-6 flex items-end justify-between gap-4">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">Selected events</p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">Signature drops</h2>
-              </div>
-              <div className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/55 sm:block">
-                mobile first
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {[
-                'Apollo Milano',
-                'Mindjset x Amor',
-                'Portofino Session',
-                'Republiq Milano',
-                'Courmayeur Night',
-                'Roma Chapter',
-              ].map((item, i) => (
-                <div
-                  key={item}
-                  className={`group relative aspect-[0.8] overflow-hidden rounded-[1.6rem] border border-white/10 p-3 ${
-                    i % 3 === 1
-                      ? 'bg-gradient-to-b from-[#2a1711] via-[#111] to-black'
-                      : 'bg-gradient-to-b from-[#210606] via-[#100707] to-black'
-                  }`}
-                >
-                  <div className="absolute inset-0 opacity-70 bg-[radial-gradient(circle_at_top,rgba(255,60,60,0.23),transparent_36%)]" />
-                  <div className="relative z-10 flex h-full flex-col justify-between">
-                    <span className="inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[9px] uppercase tracking-[0.25em] text-white/55">
-                      event
-                    </span>
-                    <div>
-                      <p className="text-lg font-semibold uppercase leading-5 tracking-[-0.04em]">{item}</p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.22em] text-white/45">Get Ticket</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-5 pb-16 sm:px-6 md:px-8">
-          <div className="rounded-[2rem] border border-red-500/15 bg-gradient-to-b from-red-500/10 to-transparent p-5 text-center shadow-[0_0_80px_rgba(255,0,0,0.08)] sm:p-7">
-            <p className="text-[11px] uppercase tracking-[0.34em] text-red-200/80">Community access</p>
-            <h2 className="mx-auto mt-3 max-w-sm text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">
-              Selected people. Iconic nights. One moving brand.
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-white/68">
-              Designed for mobile first, built for premium perception, ready to evolve into a full journey between events, cities and community access.
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <button className="rounded-2xl bg-red-600 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_10px_30px_rgba(220,38,38,0.35)]">
-                Request Access
-              </button>
-              <button className="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white/85">
-                View Journey
-              </button>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  );
-}
+        <section className="border-b border-white/10 px-5 py-8 sm:px-7 sm:py-10 lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:px-10">
+          <div className="overflow-hidden rounded-[30px]
