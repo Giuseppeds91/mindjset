@@ -131,4 +131,104 @@ export default function MindjsetLuxuryMobile() {
         </section>
 
         <section className="border-b border-white/10 px-5 py-8 sm:px-7 sm:py-10 lg:grid lg:grid-cols-[0.95fr_1.05fr] lg:gap-6 lg:px-10">
-          <div className="overflow-hidden rounded-[30px]
+          <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(18,18,18,1),rgba(5,5,5,1))] p-5 sm:p-6">
+            <p className="text-[11px] uppercase tracking-[0.36em] text-white/40">Visual identity</p>
+            <div className="mt-6 flex min-h-[280px] items-center justify-center rounded-[26px] border border-white/10 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),rgba(0,0,0,1))] p-6 sm:min-h-[340px]">
+              <div className="text-center">
+                <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-white/15 shadow-[0_0_35px_rgba(255,255,255,0.08)] sm:h-32 sm:w-32">
+                  <span className="-rotate-[10deg] text-[34px] italic text-white/95 sm:text-[40px]" style={{ fontFamily: 'cursive' }}>
+                    Mindjset
+                  </span>
+                </div>
+                <p className="mt-5 text-[12px] uppercase tracking-[0.34em] text-white/42">Black / ivory / deep red glow</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:mt-0">
+            {[
+              {
+                title: 'Selected crowd',
+                text: 'A more curated positioning, closer to an elevated club culture than a generic event format.',
+              },
+              {
+                title: 'Iconic venues',
+                text: 'Apollo, Portofino, rooftops and hidden spaces become part of the narrative, not just locations.',
+              },
+              {
+                title: 'Travel energy',
+                text: 'The brand moves city by city like a route, making every date feel like a destination drop.',
+              },
+              {
+                title: 'Premium mobile UX',
+                text: 'Large typography, clean spacing, luxury contrast and compact CTAs designed first for the phone.',
+              },
+            ].map((card) => (
+              <div key={card.title} className="rounded-[26px] border border-white/10 bg-white/[0.03] p-5 backdrop-blur sm:p-6">
+                <p className="text-[11px] uppercase tracking-[0.34em] text-red-200/80">Mindjset code</p>
+                <h4 className="mt-3 text-[22px] font-semibold tracking-[-0.05em]">{card.title}</h4>
+                <p className="mt-3 text-sm leading-6 text-white/65">{card.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-5 py-8 sm:px-7 sm:py-10 lg:px-10 lg:py-12">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.36em] text-white/40">Selected drops</p>
+              <h3 className="mt-2 text-[28px] font-semibold tracking-[-0.06em] sm:text-[36px]">Event preview</h3>
+            </div>
+            <div className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/55 sm:block">
+              mobile first
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {drops.map((item, i) => (
+              <article
+                key={item}
+                className={`relative aspect-[0.8] overflow-hidden rounded-[28px] border border-white/10 p-4 sm:p-5 ${
+                  i % 2 === 0
+                    ? 'bg-[linear-gradient(180deg,rgba(56,8,8,0.95),rgba(8,8,8,1))]'
+                    : 'bg-[linear-gradient(180deg,rgba(34,20,16,0.95),rgba(8,8,8,1))]'
+                }`}
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,60,60,0.18),transparent_36%)]" />
+                <div className="relative z-10 flex h-full flex-col justify-between">
+                  <span className="inline-flex w-fit rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[9px] uppercase tracking-[0.25em] text-white/55">
+                    Get Ticket
+                  </span>
+                  <div>
+                    <p className="text-[26px] font-semibold uppercase leading-[0.9] tracking-[-0.08em] sm:text-[30px]">{item}</p>
+                    <p className="mt-3 text-[11px] uppercase tracking-[0.28em] text-white/42">Mindjset signature</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="px-5 pb-14 sm:px-7 sm:pb-16 lg:px-10 lg:pb-20">
+          <div className="overflow-hidden rounded-[34px] border border-red-500/15 bg-[linear-gradient(180deg,rgba(127,29,29,0.18),rgba(0,0,0,1))] p-6 text-center shadow-[0_25px_70px_rgba(127,29,29,0.18)] sm:p-8 lg:p-10">
+            <p className="text-[11px] uppercase tracking-[0.36em] text-red-200/80">Request access</p>
+            <h3 className="mx-auto mt-3 max-w-[14ch] text-[34px] font-semibold uppercase leading-[0.9] tracking-[-0.08em] sm:text-[46px] lg:text-[56px]">
+              One brand. Multiple destinations.
+            </h3>
+            <p className="mx-auto mt-4 max-w-[34rem] text-sm leading-6 text-white/68 sm:text-[15px] sm:leading-7">
+              Rebuilt to be cleaner, more stable and properly responsive: bold typography, stronger spacing, better card proportions and a much more premium mobile composition.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button className="rounded-2xl bg-red-600 px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_40px_rgba(220,38,38,0.35)]">
+                Request Access
+              </button>
+              <button className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur">
+                View All Dates
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
