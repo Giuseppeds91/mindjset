@@ -1,157 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MINDJSET</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINDJSET</title>
 
-<style>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    html, body{
+      width:100%;
+      height:100%;
+      background:#000;
+      color:#fff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x:hidden;
+    }
 
-html, body{
-width:100%;
-height:100%;
-overflow:hidden;
-background:black;
-font-family:Georgia, serif;
-}
+    body{
+      background:#000;
+    }
 
-.video-bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-background:black;
-}
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:24px 48px;
+      z-index:20;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.50), rgba(0,0,0,0));
+    }
 
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.20);
-z-index:-1;
-}
+    .brand{
+      font-size:13px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+    }
 
-.container{
-position:absolute;
-top:60%;
-left:50%;
-transform:translate(-50%,-50%);
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
-width:90%;
-}
+    nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+    }
 
-.logo{
-max-width:65%;
-height:auto;
-margin-bottom:35px;
-}
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      opacity:0.9;
+    }
 
-.text{
-color:white;
-font-style:italic;
-font-size:22px;
-letter-spacing:2px;
-margin-bottom:15px;
-}
+    .ticket-btn{
+      border:1px solid rgba(255,255,255,0.9);
+      padding:12px 22px;
+      transition:all 0.3s ease;
+      background:rgba(255,255,255,0.04);
+      backdrop-filter:blur(4px);
+    }
 
-.dots{
-display:flex;
-gap:10px;
-margin-bottom:30px;
-}
+    .ticket-btn:hover{
+      background:#fff;
+      color:#000;
+    }
 
-.dot{
-width:6px;
-height:6px;
-border-radius:50%;
-background:white;
-animation:pulse 1.6s ease-in-out infinite;
-}
+    .hero{
+      position:relative;
+      width:100%;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      background:#000;
+    }
 
-.dot:nth-child(2){
-animation-delay:0.2s;
-}
+    .hero video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:0;
+    }
 
-.dot:nth-child(3){
-animation-delay:0.4s;
-}
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.42), rgba(0,0,0,0.28) 40%, rgba(0,0,0,0.46));
+      z-index:1;
+    }
 
-.instagram img{
-width:28px;
-height:28px;
-opacity:0.8;
-transition:0.3s;
-}
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1050px;
+      padding:0 24px;
+      animation:fadeUp 1.5s ease both;
+    }
 
-.instagram img:hover{
-opacity:1;
-transform:scale(1.1);
-}
+    .hero-kicker{
+      font-size:12px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      margin-bottom:24px;
+      opacity:0.92;
+    }
 
-@keyframes pulse{
-0%,100%{
-opacity:0.3;
-transform:scale(0.9);
-}
-50%{
-opacity:1;
-transform:scale(1.3);
-}
-}
+    .hero-content h1{
+      font-size:76px;
+      line-height:1.02;
+      font-weight:300;
+      letter-spacing:-1.5px;
+      margin-bottom:26px;
+    }
 
-@media (max-width:768px){
-.logo{
-max-width:85%;
-}
-.text{
-font-size:18px;
-}
-}
+    .hero-dates{
+      font-size:19px;
+      line-height:1.9;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:22px;
+      opacity:0.95;
+    }
 
-</style>
+    .hero-desc{
+      max-width:760px;
+      margin:0 auto 34px auto;
+      font-size:17px;
+      line-height:1.7;
+      opacity:0.8;
+    }
 
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      display:inline-block;
+      border:1px solid rgba(255,255,255,0.88);
+      padding:14px 30px;
+      color:#fff;
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      transition:all 0.3s ease;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(4px);
+    }
+
+    .cta:hover{
+      background:#fff;
+      color:#000;
+    }
+
+    .secondary-link{
+      color:#fff;
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      opacity:0.82;
+    }
+
+    .bottom-social{
+      position:absolute;
+      bottom:34px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:3;
+      animation:fadeIn 2s ease both;
+      animation-delay:1s;
+    }
+
+    .bottom-social a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .bottom-social img{
+      width:26px;
+      height:26px;
+      opacity:0.82;
+      transition:all 0.3s ease;
+    }
+
+    .bottom-social img:hover{
+      opacity:1;
+      transform:scale(1.08);
+    }
+
+    .scroll-indicator{
+      position:absolute;
+      bottom:78px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:3;
+      display:flex;
+      gap:8px;
+      animation:fadeIn 2s ease both;
+      animation-delay:0.8s;
+    }
+
+    .scroll-indicator span{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:#fff;
+      opacity:0.35;
+      animation:pulse 1.6s ease-in-out infinite;
+    }
+
+    .scroll-indicator span:nth-child(2){
+      animation-delay:0.2s;
+    }
+
+    .scroll-indicator span:nth-child(3){
+      animation-delay:0.4s;
+    }
+
+    section{
+      padding:120px 10%;
+      background:#000;
+      text-align:center;
+    }
+
+    section h2{
+      font-size:34px;
+      letter-spacing:3px;
+      margin-bottom:30px;
+      font-weight:300;
+    }
+
+    section p{
+      max-width:820px;
+      margin:0 auto;
+      line-height:1.8;
+      opacity:0.78;
+      font-size:16px;
+    }
+
+    .journey-grid{
+      margin-top:54px;
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:20px;
+    }
+
+    .journey-card{
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.02);
+      padding:28px 20px;
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .journey-city{
+      font-size:22px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+
+    .journey-date{
+      font-size:13px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      opacity:0.72;
+      margin-bottom:12px;
+    }
+
+    .journey-copy{
+      font-size:14px;
+      line-height:1.7;
+      opacity:0.72;
+    }
+
+    .footer{
+      padding:48px 24px 36px;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.08);
+      background:#000;
+    }
+
+    .footer p{
+      font-size:11px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      opacity:0.65;
+    }
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(18px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes fadeIn{
+      from{ opacity:0; }
+      to{ opacity:1; }
+    }
+
+    @keyframes pulse{
+      0%,100%{
+        opacity:0.25;
+        transform:scale(0.9);
+      }
+      50%{
+        opacity:1;
+        transform:scale(1.2);
+      }
+    }
+
+    @media (max-width: 980px){
+      .hero-content h1{
+        font-size:56px;
+      }
+
+      .journey-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px){
+      header{
+        padding:18px 18px;
+      }
+
+      .brand{
+        font-size:11px;
+        letter-spacing:3px;
+      }
+
+      nav{
+        gap:12px;
+      }
+
+      nav a{
+        font-size:10px;
+        letter-spacing:1.5px;
+      }
+
+      .ticket-btn{
+        padding:10px 14px;
+      }
+
+      .hero-content{
+        padding:0 18px;
+      }
+
+      .hero-kicker{
+        font-size:11px;
+        letter-spacing:3px;
+        margin-bottom:18px;
+      }
+
+      .hero-content h1{
+        font-size:42px;
+        line-height:1.08;
+        margin-bottom:18px;
+      }
+
+      .hero-dates{
+        font-size:14px;
+        line-height:1.8;
+        letter-spacing:1.5px;
+        margin-bottom:16px;
+      }
+
+      .hero-desc{
+        font-size:14px;
+        line-height:1.7;
+        margin-bottom:26px;
+      }
+
+      .cta,
+      .secondary-link{
+        font-size:11px;
+        letter-spacing:2px;
+      }
+
+      .journey-grid{
+        grid-template-columns:1fr;
+      }
+
+      section{
+        padding:90px 7%;
+      }
+
+      section h2{
+        font-size:28px;
+      }
+
+      .scroll-indicator{
+        bottom:70px;
+      }
+
+      .bottom-social{
+        bottom:28px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<video class="video-bg" autoplay muted loop playsinline preload="auto">
-  <source src="mindjset.mp4" type="video/mp4">
-</video>
+  <header>
+    <div class="brand">MINDJSET</div>
 
-<div class="overlay"></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#ticket" class="ticket-btn">Get Ticket</a>
+    </nav>
+  </header>
 
-<div class="container">
+  <section class="hero" id="home">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="mindjset.mp4" type="video/mp4">
+    </video>
 
-  <img src="ffa8137b-45e1-430b-b761-9beff61c17cb.jpeg" class="logo" alt="Mindjset logo">
+    <div class="hero-content">
+      <div class="hero-kicker">MINDJSET PRIVATE JOURNEY</div>
 
-  <div class="text">Launching soon</div>
+      <h1>The next chapter in private experiences</h1>
 
-  <div class="dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+      <div class="hero-dates">
+        Milano · 28 March<br>
+        Roma · Barcelona · Portofino
+      </div>
+
+      <p class="hero-desc">
+        Curated nights, private access, iconic destinations.
+        A journey designed for those who move through the world differently.
+      </p>
+
+      <div class="hero-actions">
+        <a class="cta" href="#ticket">Get Ticket</a>
+        <a class="secondary-link" href="#journey">Discover the journey</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="bottom-social">
+      <a href="instagram://user?username=mindjset" onclick="setTimeout(function(){ window.location='https://www.instagram.com/mindjset'; }, 500)">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      Mindjset is a curated platform for elevated experiences across iconic destinations.
+      More than events, each chapter is designed as a private atmosphere where music,
+      aesthetics, people and places come together with intention.
+    </p>
+  </section>
+
+  <section id="journey">
+    <h2>The Journey</h2>
+
+    <div class="journey-grid">
+      <div class="journey-card">
+        <div class="journey-city">Milano</div>
+        <div class="journey-date">28 March</div>
+        <div class="journey-copy">
+          The opening chapter. A night designed to set the tone.
+        </div>
+      </div>
+
+      <div class="journey-card">
+        <div class="journey-city">Roma</div>
+        <div class="journey-date">Coming next</div>
+        <div class="journey-copy">
+          A timeless city reinterpreted through private access and atmosphere.
+        </div>
+      </div>
+
+      <div class="journey-card">
+        <div class="journey-city">Barcelona</div>
+        <div class="journey-date">Coming next</div>
+        <div class="journey-copy">
+          Mediterranean energy, curated encounters and iconic settings.
+        </div>
+      </div>
+
+      <div class="journey-card">
+        <div class="journey-city">Portofino</div>
+        <div class="journey-date">Coming next</div>
+        <div class="journey-copy">
+          A final destination shaped by elegance, intimacy and lifestyle.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ticket">
+    <h2>Get Ticket</h2>
+    <p>
+      Access the next Mindjset chapter and receive updates on future destinations,
+      private invitations and curated experiences.
+    </p>
+  </section>
+
+  <div class="footer">
+    <p>MINDJSET</p>
   </div>
-
-  <div class="instagram">
-    <a href="instagram://user?username=mindjset" onclick="setTimeout(function(){ window.location='https://www.instagram.com/mindjset'; }, 500)">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-    </a>
-  </div>
-
-</div>
 
 </body>
-
 </html>
