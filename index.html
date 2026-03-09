@@ -1,1 +1,762 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindjset — Private Event Journey</title>
+  <meta name="description" content="Mindjset è una luxury landing page minimal per presentare il concept ai soci." />
+  <style>
+    :root {
+      --bg: #060606;
+      --bg-soft: #0d0d0d;
+      --panel: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.10);
+      --text: #f6f2eb;
+      --muted: rgba(246,242,235,0.68);
+      --gold: #cfab69;
+      --gold-soft: rgba(207,171,105,0.18);
+      --max: 1220px;
+      --radius: 26px;
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(207,171,105,0.10), transparent 22%),
+        linear-gradient(180deg, #090909 0%, #050505 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(6,6,6,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-img {
+      height: 44px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .menu a { transition: color 0.25s ease; }
+    .menu a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f0debb 0%, #cfab69 52%, #9b733b 100%);
+      color: #0d0d0d;
+      box-shadow: 0 14px 34px rgba(155,115,59,0.22);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 84px 0 72px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .section-card,
+    .route-card,
+    .cta-box {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius: var(--radius);
+    }
+
+    .hero-copy {
+      padding: 42px;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 16px rgba(207,171,105,0.4);
+    }
+
+    h1 {
+      margin: 24px 0 18px;
+      font-size: clamp(3rem, 7vw, 6.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 600;
+      max-width: 700px;
+    }
+
+    h1 .gold {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .mini-stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mini-stat strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .hero-card {
+      padding: 26px;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .visual {
+      flex: 1;
+      min-height: 280px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(6,6,6,0.2), rgba(6,6,6,0.78)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') center/cover;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(207,171,105,0.08), transparent 30%, rgba(255,255,255,0.02));
+    }
+
+    .route-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      right: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(8,8,8,0.76);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .route-badge strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+      font-weight: 550;
+    }
+
+    .route-badge span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .city-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .city-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .city-row strong {
+      display: block;
+      font-size: 1.04rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+    }
+
+    .city-row small {
+      color: var(--muted);
+      display: block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .city-row span {
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    section {
+      padding: 0 0 72px;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .section-card {
+      padding: 28px;
+      min-height: 260px;
+    }
+
+    .section-card small {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .section-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      font-weight: 550;
+    }
+
+    .section-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .route-card {
+      padding: 34px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 600;
+    }
+
+    .section-head p {
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .route-line {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .route-stop {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      min-height: 180px;
+    }
+
+    .route-stop time {
+      display: block;
+      margin-bottom: 26px;
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .route-stop strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+      font-weight: 550;
+      letter-spacing: -0.03em;
+    }
+
+    .route-stop p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.94rem;
+    }
+
+    .cta-box {
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1.1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cta-box h2 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      font-weight: 600;
+    }
+
+    .cta-box p {
+      margin: 0;
+      max-width: 680px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .footer {
+      padding: 26px 0 40px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 20px;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .mobile-toggle span {
+      width: 18px;
+      height: 1.5px;
+      background: var(--text);
+      display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-wrap,
+      .section-grid,
+      .route-line,
+      .cta-box,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .menu,
+      .nav .btn-primary {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .nav.open {
+        flex-wrap: wrap;
+        padding: 18px 0;
+      }
+
+      .nav.open .menu {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 16px;
+      }
+
+      .hero-bottom {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 20px), var(--max));
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .route-card,
+      .section-card,
+      .cta-box {
+        padding: 22px;
+      }
+
+      .logo-img {
+        height: 38px;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 14vw, 4.2rem);
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav" id="mainNav">
+      <a href="#top" class="brand" aria-label="Mindjset home">
+        <img src="images/logo-mindjset.png" alt="Mindjset logo" class="logo-img" />
+      </a>
+
+      <nav class="menu">
+        <a href="#concept">Concept</a>
+        <a href="#route">Route</a>
+        <a href="#positioning">Positioning</a>
+        <a href="#contact">Get Ticket</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#contact">Get Ticket</a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Apri menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-copy">
+          <div>
+            <div class="eyebrow">Mindjset / Luxury community format</div>
+            <h1>
+              A cleaner way to present
+              <span class="gold">a luxury event journey.</span>
+            </h1>
+            <p>
+              Mindjset è un format premium costruito come un viaggio tra destinazioni iconiche. Non una semplice serata, ma una rotta fatta di selezione, status, relazioni e desiderabilità del brand.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">Get Ticket</a>
+              <a class="btn btn-secondary" href="#route">Explore Route</a>
+            </div>
+          </div>
+
+          <div class="hero-bottom">
+            <div class="mini-stat">
+              <strong>05</strong>
+              <span>Destinazioni</span>
+            </div>
+            <div class="mini-stat">
+              <strong>250+</strong>
+              <span>Guest profile</span>
+            </div>
+            <div class="mini-stat">
+              <strong>01</strong>
+              <span>Private identity</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div>
+            <div class="card-top">
+              <span>Season 2026</span>
+              <span>Milano to Courmayeur</span>
+            </div>
+
+            <div class="visual">
+              <div class="route-badge">
+                <strong>Mindjset Milano — 28 March 2026</strong>
+                <span>Opening chapter / launch event</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="city-list">
+            <div class="city-row">
+              <div>
+                <strong>Milano</strong>
+                <small>Opening night</small>
+              </div>
+              <span>28 Mar</span>
+            </div>
+            <div class="city-row">
+              <div>
+                <strong>Roma</strong>
+                <small>Members dinner</small>
+              </div>
+              <span>18 Apr</span>
+            </div>
+            <div class="city-row">
+              <div>
+                <strong>Portofino</strong>
+                <small>Signature stop</small>
+              </div>
+              <span>24 May</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="concept">
+      <div class="container section-grid">
+        <article class="section-card">
+          <small>Concept</small>
+          <h3>Luxury without excess noise</h3>
+          <p>Design minimale, tono premium, estetica pulita. L’idea deve sembrare già credibile, alta di gamma e pronta per partner e soci.</p>
+        </article>
+
+        <article class="section-card">
+          <small>Community</small>
+          <h3>People are part of the product</h3>
+          <p>La qualità della stanza, dei tavoli e delle connessioni è centrale. Il posizionamento non si comunica solo col design, ma con chi partecipa.</p>
+        </article>
+
+        <article class="section-card" id="positioning">
+          <small>Positioning</small>
+          <h3>A new premium social format</h3>
+          <p>Mindjset unisce nightlife, travel mood e members logic in un’unica narrativa, con un’identità più pulita e aspirazionale.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="route">
+      <div class="container route-card">
+        <div class="section-head">
+          <h2>The route defines the brand.</h2>
+          <p>Ogni tappa rafforza la successiva. Non eventi scollegati, ma una season costruita come una progressione desiderabile.</p>
+        </div>
+
+        <div class="route-line">
+          <article class="route-stop">
+            <time>28 Mar 2026</time>
+            <strong>Milano</strong>
+            <p>Lancio e primo statement del brand.</p>
+          </article>
+
+          <article class="route-stop">
+            <time>18 Apr 2026</time>
+            <strong>Roma</strong>
+            <p>Community dinner e relazioni di valore.</p>
+          </article>
+
+          <article class="route-stop">
+            <time>24 May 2026</time>
+            <strong>Portofino</strong>
+            <p>La tappa più iconica e visiva della season.</p>
+          </article>
+
+          <article class="route-stop">
+            <time>21 Jun 2026</time>
+            <strong>Barcelona</strong>
+            <p>Apertura internazionale del concept.</p>
+          </article>
+
+          <article class="route-stop">
+            <time>19 Jul 2026</time>
+            <strong>Courmayeur</strong>
+            <p>Finale alto di gamma e memorabile.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container cta-box">
+        <div>
+          <h2>Built to be presented, not explained too much.</h2>
+          <p>Questa versione è pensata per i soci: pulita, chiara, elegante e già leggibile come base reale di brand e landing page.</p>
+        </div>
+        <a class="btn btn-primary" href="mailto:info@mindjset.com">Request Access</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Mindjset / Private Event Journey</span>
+      <span>Milano · Roma · Portofino · Barcelona · Courmayeur</span>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    const toggle = document.getElementById('mobileToggle');
+
+    toggle?.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
