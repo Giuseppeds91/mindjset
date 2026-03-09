@@ -1,82 +1,392 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINDJSET</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #1f1f1f;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e9e9e9;
+    }
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand img {
+      width: 180px;
+      height: auto;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: 0.25s ease;
+    }
+    .btn-primary {
+      background: #e31b23;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #c9151d; }
+    .btn-secondary {
+      background: #fff;
+      color: #e31b23;
+      border: 1px solid #e31b23;
+    }
 
-<title>MINDJSET</title>
+    .hero {
+      background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+      padding: 72px 0 48px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 36px;
+    }
+    .hero-copy h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.03;
+      margin-bottom: 18px;
+      color: #2a2a2a;
+      max-width: 620px;
+      font-weight: 700;
+    }
+    .hero-copy p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: #5f5f5f;
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+    .hero-bullets {
+      display: grid;
+      gap: 14px;
+      margin: 26px 0 34px;
+    }
+    .hero-bullets li {
+      list-style: none;
+      position: relative;
+      padding-left: 28px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: #333;
+    }
+    .hero-bullets li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #e31b23;
+      font-weight: 700;
+    }
+    .hero-image {
+      border-radius: 28px;
+      overflow: hidden;
+      background: #f2f2f2;
+      min-height: 460px;
+      position: relative;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-<style>
+    .section {
+      padding: 72px 0;
+    }
+    .section-head {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 42px;
+    }
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      margin-bottom: 14px;
+      color: #252525;
+    }
+    .section-head p {
+      color: #6a6a6a;
+      font-size: 18px;
+      line-height: 1.7;
+    }
 
-body{
-margin:0;
-background:black;
-overflow:hidden;
-}
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .benefit-card {
+      background: #fff;
+      border: 1px solid #ececec;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    }
+    .benefit-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .benefit-copy {
+      padding: 24px;
+    }
+    .benefit-copy h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: #232323;
+    }
+    .benefit-copy p {
+      color: #666;
+      line-height: 1.7;
+      font-size: 16px;
+    }
 
-/* INTRO */
+    .info-box {
+      background: #f8f8f8;
+      border: 1px solid #ededed;
+      border-radius: 28px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .info-box h3 {
+      font-size: 30px;
+      margin-bottom: 14px;
+      color: #252525;
+    }
+    .info-box p {
+      color: #666;
+      line-height: 1.75;
+      font-size: 17px;
+    }
+    .info-list {
+      display: grid;
+      gap: 14px;
+    }
+    .info-item {
+      padding: 18px 20px;
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid #ededed;
+      color: #404040;
+      line-height: 1.6;
+    }
 
-#intro-loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
+    .cta-strip {
+      background: #e31b23;
+      color: #fff;
+      border-radius: 28px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .cta-strip h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .cta-strip p {
+      color: rgba(255,255,255,0.86);
+      line-height: 1.7;
+      font-size: 17px;
+      max-width: 700px;
+    }
+    .cta-strip .btn {
+      background: #fff;
+      color: #e31b23;
+    }
 
-.intro-logo{
-width:250px;
-animation:logoZoom 2s ease forwards;
-}
+    .footer {
+      padding: 34px 0 48px;
+      color: #767676;
+      font-size: 14px;
+    }
+    .footer-inner {
+      border-top: 1px solid #ededed;
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-@keyframes logoZoom{
+    @media (max-width: 980px) {
+      .hero-grid,
+      .benefits,
+      .info-box,
+      .cta-strip {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 48px;
+      }
+      .hero-image {
+        min-height: 340px;
+      }
+    }
 
-0%{
-opacity:0;
-transform:scale(0.2);
-}
-
-40%{
-opacity:1;
-transform:scale(1);
-}
-
-100%{
-opacity:0;
-transform:scale(5);
-}
-
-}
-
-</style>
-
+    @media (max-width: 640px) {
+      .brand img { width: 150px; }
+      .nav { min-height: 68px; }
+      .nav-actions { width: 100%; }
+      .nav { flex-wrap: wrap; padding: 12px 0; }
+      .btn { width: 100%; }
+      .hero-copy p,
+      .section-head p,
+      .info-box p,
+      .cta-strip p,
+      .hero-bullets li { font-size: 16px; }
+      .section { padding: 56px 0; }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand" aria-label="Mindjset home">
+        <img src="logo-mindjset.png" alt="Mindjset logo" />
+      </a>
+      <div class="nav-actions">
+        <a href="#vantaggi" class="btn btn-secondary">Scopri di più</a>
+        <a href="#cta" class="btn btn-primary">Get Ticket</a>
+      </div>
+    </div>
+  </header>
 
-<div id="intro-loader">
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Private experiences, zero noise. Solo persone, energia e destinazioni giuste.</h1>
+          <p>
+            Una landing con la stessa logica pulita, commerciale e ordinata della pagina Widiba: headline forte, vantaggi chiari, blocchi leggibili e call to action evidente.
+          </p>
+          <ul class="hero-bullets">
+            <li>Community selezionata e accesso curato.</li>
+            <li>Eventi premium tra Milano, Roma, Portofino e altre tappe iconiche.</li>
+            <li>Design semplice, chiaro e pronto da presentare.</li>
+          </ul>
+          <a href="#cta" class="btn btn-primary">Richiedi accesso</a>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80" alt="Luxury event atmosphere" />
+        </div>
+      </div>
+    </section>
 
-<img src="images/logo-mindjset.png" class="intro-logo">
+    <section class="section" id="vantaggi">
+      <div class="container">
+        <div class="section-head">
+          <h2>Una struttura che spiega subito il valore.</h2>
+          <p>
+            Hero, vantaggi, experience, info chiare e CTA finale: stesso impianto della pagina di riferimento, ma adattato a Mindjset.
+          </p>
+        </div>
 
-</div>
+        <div class="benefits">
+          <article class="benefit-card">
+            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80" alt="Exclusive community" />
+            <div class="benefit-copy">
+              <h3>Community</h3>
+              <p>Accesso selezionato, room curata e persone coerenti con il posizionamento del brand.</p>
+            </div>
+          </article>
 
-<script>
+          <article class="benefit-card">
+            <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1200&q=80" alt="Destination based events" />
+            <div class="benefit-copy">
+              <h3>Destinazioni</h3>
+              <p>Milano, Roma, Portofino e nuove tappe costruite come una season desiderabile.</p>
+            </div>
+          </article>
 
-setTimeout(function(){
+          <article class="benefit-card">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Premium event concept" />
+            <div class="benefit-copy">
+              <h3>Format</h3>
+              <p>Un impianto premium che unisce nightlife, lifestyle e members logic in modo pulito.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-document.getElementById("intro-loader").style.display="none";
-document.body.style.overflow="auto";
+    <section class="section">
+      <div class="container">
+        <div class="info-box">
+          <div>
+            <h3>Info e posizionamento</h3>
+            <p>
+              Questa sezione replica la chiarezza della pagina Widiba: testo ordinato, spazi bianchi, gerarchia netta e messaggi facilmente leggibili anche da mobile.
+            </p>
+          </div>
+          <div class="info-list">
+            <div class="info-item">Hero con messaggio commerciale chiaro e call to action immediata.</div>
+            <div class="info-item">Blocchi visuali semplici, con immagini e copy leggibile.</div>
+            <div class="info-item">Footer minimale e struttura pensata per future evoluzioni.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-},2000);
+    <section class="section" id="cta">
+      <div class="container">
+        <div class="cta-strip">
+          <div>
+            <h2>Pronto a trasformarla nella tua versione finale?</h2>
+            <p>
+              Da qui possiamo rifinire headline, immagini, colori, CTA e sezioni fino a renderla perfetta per Mindjset.
+            </p>
+          </div>
+          <a href="#" class="btn">Get Ticket</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-</script>
-
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Mindjset</span>
+      <span>Landing structure inspired by high-conversion campaign pages</span>
+    </div>
+  </footer>
 </body>
 </html>
