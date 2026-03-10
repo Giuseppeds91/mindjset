@@ -6,11 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MINDJSET</title>
+<title>Mindjset</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,94 +19,202 @@ box-sizing:border-box;
 }
 
 body{
-background:black;
-font-family:Inter, sans-serif;
-overflow:hidden;
+background:#000;
+color:white;
+font-family:Montserrat;
+overflow-x:hidden;
 }
 
-/* PRELOADER */
+a{
+text-decoration:none;
+color:white;
+}
 
-#preloader{
+/* LOADER */
+
+#loader{
 position:fixed;
 width:100%;
-height:100%;
+height:100vh;
 background:black;
 display:flex;
-align-items:center;
-justify-content:center;
 flex-direction:column;
+justify-content:center;
+align-items:center;
 z-index:9999;
 }
 
-.preloader-logo{
-width:280px;
+#logo-loader{
+font-size:60px;
+font-weight:600;
+color:#d00000;
+letter-spacing:6px;
 margin-bottom:40px;
-filter:drop-shadow(0 0 40px rgba(255,0,0,.6)) saturate(1.5);
 }
 
-.loading-bar{
-width:260px;
+#progress-bar{
+width:200px;
 height:2px;
 background:#222;
 overflow:hidden;
-margin-bottom:15px;
 }
 
-.loading-progress{
+#progress{
 height:100%;
 width:0%;
-background:#ff2020;
-transition:width .2s;
+background:#d00000;
 }
 
-.loading-number{
-color:white;
-font-family:"Playfair Display", serif;
+#percent{
+margin-top:15px;
+font-size:14px;
 font-style:italic;
-font-size:28px;
+font-family:"Playfair Display";
 }
 
-/* SITE */
+/* HEADER */
 
-#site{
-display:none;
-height:100vh;
+header{
+position:fixed;
+width:100%;
+top:0;
 display:flex;
+justify-content:space-between;
 align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
-}
-
-.container{
-max-width:700px;
-padding:20px;
+padding:20px 40px;
+z-index:10;
+background:transparent;
 }
 
 .logo{
-width:260px;
-margin:auto;
-margin-bottom:50px;
-filter:drop-shadow(0 0 50px rgba(255,0,0,.6)) saturate(1.6);
+font-size:24px;
+color:#d00000;
+font-weight:600;
+letter-spacing:4px;
 }
 
-.title{
-font-family:"Playfair Display", serif;
-font-size:56px;
-font-style:italic;
+nav a{
+margin-left:30px;
+font-size:14px;
+opacity:0.8;
+}
+
+nav a:hover{
+opacity:1;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:60px;
+letter-spacing:8px;
+color:#d00000;
 margin-bottom:20px;
 }
 
-.subtitle{
-font-size:18px;
-color:#c0c0c0;
-margin-bottom:15px;
+.hero button{
+margin-top:30px;
+padding:14px 30px;
+background:#d00000;
+border:none;
+color:white;
+font-size:14px;
+letter-spacing:2px;
+cursor:pointer;
 }
 
-.cities{
-font-size:18px;
-color:#8f8f8f;
-letter-spacing:0.05em;
+.hero button:hover{
+background:#a00000;
+}
+
+/* EVENTS */
+
+.events{
+padding:120px 20px;
+text-align:center;
+}
+
+.events h2{
+font-size:30px;
+margin-bottom:60px;
+font-family:"Playfair Display";
+}
+
+.event-list{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+}
+
+.event{
+border:1px solid #222;
+padding:40px;
+width:250px;
+transition:0.3s;
+}
+
+.event:hover{
+border-color:#d00000;
+}
+
+.event h3{
+margin-bottom:10px;
+}
+
+.event p{
+font-size:14px;
+opacity:0.7;
+}
+
+.event button{
+margin-top:20px;
+background:#d00000;
+border:none;
+padding:10px 20px;
+color:white;
+cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+padding:40px;
+text-align:center;
+font-size:12px;
+opacity:0.6;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:40px;
+}
+
+.event{
+width:100%;
+}
+
+header{
+padding:20px;
+}
+
+nav{
+display:none;
+}
+
 }
 
 </style>
@@ -117,62 +223,106 @@ letter-spacing:0.05em;
 
 <body>
 
-<!-- PRELOADER -->
+<div id="loader">
 
-<div id="preloader">
-
-<img src="logo-mindjset.png" class="preloader-logo">
-
-<div class="loading-bar">
-<div class="loading-progress" id="progress"></div>
+<div id="logo-loader">
+MINDJSET
 </div>
 
-<div class="loading-number" id="percent">0%</div>
-
+<div id="progress-bar">
+<div id="progress"></div>
 </div>
 
-<!-- SITE -->
-
-<div id="site">
-
-<div class="container">
-
-<img src="logo-mindjset.png" class="logo">
-
-<h1 class="title">Launching Soon</h1>
-
-<p class="subtitle">
-Private experiences for a selected community
-</p>
-
-<p class="cities">
-Milano — Roma — Barcellona — Portofino
-</p>
-
+<div id="percent">
+0%
 </div>
 
 </div>
+
+<header>
+
+<div class="logo">
+MINDJSET
+</div>
+
+<nav>
+<a href="#">Events</a>
+<a href="#">Community</a>
+<a href="#">Travel</a>
+<a href="#">Contact</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>MINDJSET</h1>
+
+<button>GET TICKET</button>
+
+</section>
+
+<section class="events">
+
+<h2>Upcoming Journey</h2>
+
+<div class="event-list">
+
+<div class="event">
+<h3>Milano</h3>
+<p>28 March</p>
+<button>Get Ticket</button>
+</div>
+
+<div class="event">
+<h3>Roma</h3>
+<p>April</p>
+<button>Get Ticket</button>
+</div>
+
+<div class="event">
+<h3>Portofino</h3>
+<p>Summer</p>
+<button>Get Ticket</button>
+</div>
+
+<div class="event">
+<h3>Courmayeur</h3>
+<p>Winter</p>
+<button>Get Ticket</button>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© MINDJSET
+
+</footer>
 
 <script>
 
 let percent = 0;
 
-let progress = document.getElementById("progress");
-let percentText = document.getElementById("percent");
-
 let interval = setInterval(function(){
 
 percent++;
 
-progress.style.width = percent + "%";
-percentText.innerText = percent + "%";
+document.getElementById("percent").innerText = percent + "%";
+
+document.getElementById("progress").style.width = percent + "%";
 
 if(percent >= 100){
 
 clearInterval(interval);
 
-document.getElementById("preloader").style.display="none";
-document.getElementById("site").style.display="flex";
+setTimeout(function(){
+
+document.getElementById("loader").style.display="none";
+
+},500);
 
 }
 
