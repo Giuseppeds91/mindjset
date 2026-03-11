@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
 
   <style>
     *{
@@ -17,14 +17,13 @@
     }
 
     :root{
-      --bg:#000000;
-      --white:#ffffff;
-      --muted:#9d9d9d;
-      --line:rgba(255,255,255,0.10);
-      --card:rgba(255,255,255,0.04);
-      --card-strong:rgba(255,255,255,0.06);
-      --mindjset-red:#ff2a2a;
-      --mindjset-red-dark:#7a0000;
+      --bg:#000;
+      --white:#fff;
+      --muted:#9a9a9a;
+      --soft:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.10);
+      --red:#ff2a2a;
+      --red-dark:#7a0000;
     }
 
     html{
@@ -32,9 +31,9 @@
     }
 
     body{
-      font-family:"Inter", sans-serif;
       background:#000;
       color:#fff;
+      font-family:"Inter", sans-serif;
       overflow:hidden;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
@@ -45,7 +44,7 @@
       color:inherit;
     }
 
-    img, video{
+    img,video{
       display:block;
       max-width:100%;
     }
@@ -102,17 +101,17 @@
     .loading-progress{
       width:0%;
       height:100%;
-      background:linear-gradient(90deg,var(--mindjset-red-dark) 0%,var(--mindjset-red) 60%,#ff6565 100%);
+      background:linear-gradient(90deg,var(--red-dark) 0%,var(--red) 60%,#ff6666 100%);
       box-shadow:0 0 18px rgba(255,0,0,.42);
       transition:width .12s cubic-bezier(.2,.8,.2,1);
     }
 
     .loading-number{
-      margin-top:16px;
-      color:#ffffff;
+      margin-top:14px;
+      color:#fff;
       font-family:"Playfair Display", serif;
       font-style:italic;
-      font-size:24px;
+      font-size:22px;
       letter-spacing:.08em;
       opacity:.95;
     }
@@ -135,7 +134,7 @@
     }
 
     .container{
-      width:min(1180px, calc(100% - 36px));
+      width:min(1220px, calc(100% - 36px));
       margin:0 auto;
     }
 
@@ -145,8 +144,6 @@
       position:relative;
       min-height:100vh;
       overflow:hidden;
-      display:flex;
-      align-items:flex-end;
       background:#000;
     }
 
@@ -156,48 +153,60 @@
       width:100%;
       height:100%;
       object-fit:cover;
+      filter:brightness(.48) saturate(1.08) contrast(1.04);
       z-index:0;
-      filter:brightness(.55) saturate(1.05) contrast(1.02);
     }
 
     .hero-overlay{
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.18) 24%, rgba(0,0,0,.78) 100%),
-        radial-gradient(circle at 20% 30%, rgba(255,32,32,.11), transparent 28%),
-        radial-gradient(circle at 80% 20%, rgba(255,32,32,.08), transparent 24%);
       z-index:1;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.16) 0%, rgba(0,0,0,.08) 18%, rgba(0,0,0,.68) 75%, rgba(0,0,0,.92) 100%),
+        radial-gradient(circle at 20% 30%, rgba(255,42,42,.10), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(255,42,42,.07), transparent 24%);
     }
 
-    .hero-content{
+    .hero-inner{
       position:relative;
       z-index:2;
-      width:100%;
-      padding:0 0 120px;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-end;
+      padding:0 0 180px;
     }
 
-    .hero-wrap{
-      max-width:900px;
+    .hero-copy{
+      max-width:980px;
     }
 
-    .hero h1{
-      font-size:clamp(46px, 8vw, 108px);
-      line-height:.92;
-      letter-spacing:-.06em;
-      font-weight:600;
-      max-width:900px;
+    .season{
+      display:inline-block;
+      margin-bottom:18px;
+      font-size:12px;
+      letter-spacing:.26em;
+      text-transform:uppercase;
+      color:#c6c6c6;
+    }
+
+    .hero-title{
+      font-size:clamp(52px, 9vw, 138px);
+      line-height:.88;
+      letter-spacing:-.07em;
+      font-weight:800;
+      text-transform:uppercase;
+      max-width:980px;
     }
 
     .hero-watermark{
       position:absolute;
       right:34px;
-      bottom:96px;
-      width:min(210px, 24vw);
+      bottom:108px;
+      width:min(220px, 22vw);
       opacity:.12;
       z-index:2;
       pointer-events:none;
-      filter:drop-shadow(0 0 16px rgba(255,0,0,.22));
+      filter:drop-shadow(0 0 18px rgba(255,0,0,.16));
     }
 
     /* BOTTOM MENU */
@@ -206,22 +215,22 @@
       position:fixed;
       left:0;
       right:0;
-      bottom:22px;
+      bottom:20px;
       z-index:60;
       pointer-events:none;
     }
 
     .bottom-nav{
-      width:min(820px, calc(100% - 28px));
+      width:min(920px, calc(100% - 24px));
       margin:0 auto;
-      min-height:68px;
-      display:flex;
+      min-height:70px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
       align-items:center;
-      justify-content:space-between;
       gap:16px;
       padding:10px 14px;
       border-radius:999px;
-      background:rgba(0,0,0,.56);
+      background:rgba(0,0,0,.58);
       border:1px solid rgba(255,255,255,.10);
       backdrop-filter:blur(18px);
       box-shadow:0 18px 42px rgba(0,0,0,.28);
@@ -229,33 +238,28 @@
     }
 
     .bottom-brand img{
-      width:118px;
-      height:auto;
-      opacity:.95;
+      width:108px;
+      opacity:.96;
       filter:drop-shadow(0 0 14px rgba(255,0,0,.18));
     }
 
     .bottom-menu{
       display:flex;
+      justify-content:center;
       align-items:center;
-      gap:24px;
+      gap:26px;
     }
 
     .bottom-menu a{
-      color:#f4f4f4;
       font-size:12px;
-      letter-spacing:.14em;
+      letter-spacing:.16em;
       text-transform:uppercase;
-      transition:opacity .25s ease;
+      color:#fff;
+      transition:opacity .24s ease;
     }
 
     .bottom-menu a:hover{
-      opacity:.7;
-    }
-
-    .bottom-cta{
-      display:flex;
-      align-items:center;
+      opacity:.72;
     }
 
     .btn-ticket{
@@ -268,23 +272,25 @@
       background:#fff;
       color:#000;
       font-size:12px;
-      font-weight:700;
-      letter-spacing:.10em;
+      font-weight:800;
+      letter-spacing:.12em;
       text-transform:uppercase;
-      transition:transform .28s ease, opacity .28s ease;
+      transition:transform .24s ease, opacity .24s ease;
       white-space:nowrap;
     }
 
     .btn-ticket:hover{
       transform:translateY(-1px);
-      opacity:.9;
+      opacity:.92;
     }
 
     /* EVENTS */
 
     .events{
-      padding:42px 0 120px;
+      position:relative;
+      z-index:2;
       background:#000;
+      padding:40px 0 110px;
     }
 
     .events-list{
@@ -293,21 +299,21 @@
     }
 
     .event-card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:28px;
-      padding:26px;
       display:grid;
-      grid-template-columns:1.1fr 1fr auto;
+      grid-template-columns:1.05fr 1fr auto;
       align-items:center;
       gap:18px;
-      transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+      padding:26px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.09);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     }
 
     .event-card:hover{
       transform:translateY(-2px);
-      border-color:rgba(255,255,255,0.14);
-      box-shadow:0 18px 35px rgba(0,0,0,.20);
+      border-color:rgba(255,255,255,.15);
+      box-shadow:0 18px 38px rgba(0,0,0,.22);
     }
 
     .event-city-row{
@@ -318,30 +324,30 @@
     }
 
     .event-city{
-      font-size:30px;
+      font-size:34px;
       line-height:1;
-      letter-spacing:-.04em;
-      font-weight:600;
+      letter-spacing:-.05em;
+      font-weight:800;
+      text-transform:uppercase;
     }
 
     .event-status{
-      color:#9f9f9f;
-      font-size:12px;
-      letter-spacing:.18em;
+      color:#9a9a9a;
+      font-size:11px;
+      letter-spacing:.20em;
       text-transform:uppercase;
     }
 
     .mini-logo{
-      width:34px;
-      opacity:.95;
-      filter:drop-shadow(0 0 14px rgba(255,0,0,.50));
-      animation:blinkLogo 1.3s ease-in-out infinite;
+      width:32px;
+      filter:drop-shadow(0 0 14px rgba(255,0,0,.55));
+      animation:blinkLogo 1.2s ease-in-out infinite;
     }
 
     @keyframes blinkLogo{
-      0%{opacity:.25; transform:scale(.96)}
-      50%{opacity:1; transform:scale(1)}
-      100%{opacity:.25; transform:scale(.96)}
+      0%{opacity:.28;transform:scale(.96)}
+      50%{opacity:1;transform:scale(1)}
+      100%{opacity:.28;transform:scale(.96)}
     }
 
     .event-details{
@@ -351,13 +357,13 @@
     }
 
     .event-date{
-      color:#ffffff;
-      font-weight:600;
+      color:#fff;
+      font-weight:700;
       margin-bottom:2px;
     }
 
     .event-location{
-      color:#9f9f9f;
+      color:#9a9a9a;
     }
 
     .event-actions{
@@ -373,56 +379,56 @@
       min-height:44px;
       padding:0 18px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,.10);
       color:#d0d0d0;
-      font-size:12px;
-      letter-spacing:.14em;
+      font-size:11px;
+      letter-spacing:.16em;
       text-transform:uppercase;
-      background:rgba(255,255,255,0.03);
+      background:rgba(255,255,255,.03);
       white-space:nowrap;
     }
 
-    .ticket-btn{
+    .ticket-link{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       min-height:46px;
       padding:0 22px;
       border-radius:999px;
-      background:#ffffff;
-      color:#000000;
+      background:#fff;
+      color:#000;
       font-size:12px;
-      font-weight:700;
-      letter-spacing:.10em;
+      font-weight:800;
+      letter-spacing:.12em;
       text-transform:uppercase;
       white-space:nowrap;
-      transition:transform .28s ease, opacity .28s ease;
+      transition:transform .24s ease, opacity .24s ease;
     }
 
-    .ticket-btn:hover{
+    .ticket-link:hover{
       transform:translateY(-1px);
-      opacity:.9;
+      opacity:.92;
     }
 
     /* FOOTER */
 
     .footer{
-      padding:24px 0 34px;
-      color:#7e7e7e;
-      font-size:13px;
       background:#000;
+      color:#7d7d7d;
+      font-size:13px;
+      padding:22px 0 34px;
     }
 
     .footer-inner{
-      border-top:1px solid rgba(255,255,255,0.08);
-      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:18px;
       display:flex;
       justify-content:space-between;
-      gap:16px;
+      gap:14px;
       flex-wrap:wrap;
     }
 
-    /* RESPONSIVE */
+    /* MOBILE */
 
     @media (max-width: 980px){
       .event-card{
@@ -437,51 +443,46 @@
 
     @media (max-width: 760px){
       .preloader-logo{
-        width:min(360px, 80vw);
+        width:min(360px,80vw);
       }
 
       .loading-number{
-        font-size:22px;
+        font-size:20px;
       }
 
-      .hero-content{
-        padding:0 0 128px;
+      .hero-inner{
+        padding:0 0 170px;
+      }
+
+      .hero-title{
+        font-size:clamp(40px, 12vw, 82px);
       }
 
       .hero-watermark{
         width:150px;
         right:18px;
-        bottom:94px;
+        bottom:102px;
       }
 
       .bottom-nav{
-        width:min(100% - 18px, 820px);
-        border-radius:26px;
+        grid-template-columns:1fr;
+        border-radius:28px;
         min-height:auto;
         padding:12px;
-        flex-wrap:wrap;
-        justify-content:center;
       }
 
       .bottom-brand{
-        width:100%;
         display:flex;
         justify-content:center;
       }
 
       .bottom-brand img{
-        width:102px;
+        width:98px;
       }
 
       .bottom-menu{
-        width:100%;
-        justify-content:center;
-        gap:16px;
         flex-wrap:wrap;
-      }
-
-      .bottom-cta{
-        width:100%;
+        gap:16px;
       }
 
       .btn-ticket{
@@ -489,7 +490,7 @@
       }
 
       .event-city{
-        font-size:24px;
+        font-size:26px;
       }
 
       .event-details{
@@ -500,24 +501,19 @@
 </head>
 <body>
 
-  <!-- PRELOADER -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset logo">
-
       <div class="loading-bar">
         <div class="loading-progress" id="loading-progress"></div>
       </div>
-
       <div class="loading-number" id="loading-number">0%</div>
     </div>
   </div>
 
-  <!-- SITE -->
   <div id="site">
 
     <main>
-
       <section class="hero">
         <video class="hero-video" autoplay muted loop playsinline>
           <source src="assets/hero-mindjset.mp4" type="video/mp4">
@@ -525,10 +521,11 @@
 
         <div class="hero-overlay"></div>
 
-        <div class="hero-content">
+        <div class="hero-inner">
           <div class="container">
-            <div class="hero-wrap">
-              <h1>Mindjset nightlife across iconic cities.</h1>
+            <div class="hero-copy">
+              <span class="season">Season 2026</span>
+              <h1 class="hero-title">Mindjset<br>nightlife<br>across iconic cities.</h1>
             </div>
           </div>
         </div>
@@ -548,15 +545,12 @@
             <a href="#contact">Contact</a>
           </nav>
 
-          <div class="bottom-cta">
-            <a href="#events" class="btn-ticket">Get Ticket</a>
-          </div>
+          <a href="#events" class="btn-ticket">Get Ticket</a>
         </div>
       </div>
 
       <section class="events" id="events">
         <div class="container">
-
           <div class="events-list">
 
             <article class="event-card">
@@ -565,7 +559,7 @@
                   <div class="event-city">Milano</div>
                   <img src="logo-mindjset.png" alt="Mindjset active" class="mini-logo">
                 </div>
-                <div class="event-status">Now loading</div>
+                <div class="event-status">Now Loading</div>
               </div>
 
               <div class="event-details">
@@ -574,7 +568,7 @@
               </div>
 
               <div class="event-actions">
-                <a href="#" class="ticket-btn">Get Ticket</a>
+                <a href="#" class="ticket-link">Get Ticket</a>
               </div>
             </article>
 
@@ -632,7 +626,6 @@
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="footer" id="contact">
@@ -664,7 +657,6 @@
 
       if(percent >= 100){
         clearInterval(interval);
-
         setTimeout(() => {
           preloader.classList.add("hide");
           site.classList.add("show");
