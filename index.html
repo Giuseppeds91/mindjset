@@ -19,7 +19,7 @@
     :root{
       --bg:#000000;
       --white:#ffffff;
-      --muted:#9c9c9c;
+      --muted:#9d9d9d;
       --line:rgba(255,255,255,0.10);
       --card:rgba(255,255,255,0.04);
       --card-strong:rgba(255,255,255,0.06);
@@ -34,7 +34,7 @@
     body{
       font-family:"Inter", sans-serif;
       background:#000;
-      color:var(--white);
+      color:#fff;
       overflow:hidden;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
@@ -60,7 +60,7 @@
       align-items:center;
       justify-content:center;
       z-index:99999;
-      transition:opacity 0.9s ease, visibility 0.9s ease;
+      transition:opacity .9s ease, visibility .9s ease;
     }
 
     #preloader.hide{
@@ -70,7 +70,7 @@
     }
 
     .preloader-inner{
-      width:min(88vw, 680px);
+      width:min(88vw,680px);
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -78,7 +78,7 @@
     }
 
     .preloader-logo{
-      width:min(520px, 78vw);
+      width:min(520px,78vw);
       margin-bottom:42px;
       filter:drop-shadow(0 0 55px rgba(255,0,0,.75)) saturate(1.6) brightness(1.15);
       transform:scale(.98);
@@ -92,7 +92,7 @@
     }
 
     .loading-bar{
-      width:min(520px, 82vw);
+      width:min(520px,82vw);
       height:2px;
       background:rgba(255,255,255,.14);
       overflow:hidden;
@@ -102,7 +102,7 @@
     .loading-progress{
       width:0%;
       height:100%;
-      background:linear-gradient(90deg, var(--mindjset-red-dark) 0%, var(--mindjset-red) 60%, #ff6565 100%);
+      background:linear-gradient(90deg,var(--mindjset-red-dark) 0%,var(--mindjset-red) 60%,#ff6565 100%);
       box-shadow:0 0 18px rgba(255,0,0,.42);
       transition:width .12s cubic-bezier(.2,.8,.2,1);
     }
@@ -139,88 +139,6 @@
       margin:0 auto;
     }
 
-    /* HEADER */
-
-    .topbar{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      z-index:50;
-      background:linear-gradient(180deg, rgba(0,0,0,0.70), rgba(0,0,0,0.18));
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,255,255,0.06);
-    }
-
-    .nav{
-      min-height:78px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand img{
-      width:128px;
-      height:auto;
-      opacity:.95;
-      filter:drop-shadow(0 0 18px rgba(255,0,0,.20));
-    }
-
-    .menu{
-      display:flex;
-      align-items:center;
-      gap:28px;
-    }
-
-    .menu a{
-      color:#f5f5f5;
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      transition:opacity .25s ease;
-    }
-
-    .menu a:hover{
-      opacity:.70;
-    }
-
-    .nav-right{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:44px;
-      padding:0 20px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      transition:transform .28s ease, background .28s ease, border-color .28s ease, color .28s ease, opacity .28s ease;
-      white-space:nowrap;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .btn-primary{
-      background:#ffffff;
-      color:#000;
-    }
-
-    .btn-secondary{
-      border:1px solid rgba(255,255,255,0.14);
-      color:#fff;
-      background:rgba(255,255,255,0.03);
-    }
-
     /* HERO */
 
     .hero{
@@ -246,8 +164,8 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.35) 22%, rgba(0,0,0,.72) 100%),
-        radial-gradient(circle at 20% 30%, rgba(255,32,32,.10), transparent 28%),
+        linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.18) 24%, rgba(0,0,0,.78) 100%),
+        radial-gradient(circle at 20% 30%, rgba(255,32,32,.11), transparent 28%),
         radial-gradient(circle at 80% 20%, rgba(255,32,32,.08), transparent 24%);
       z-index:1;
     }
@@ -256,76 +174,117 @@
       position:relative;
       z-index:2;
       width:100%;
-      padding:140px 0 54px;
+      padding:0 0 120px;
     }
 
     .hero-wrap{
-      max-width:840px;
-    }
-
-    .eyebrow{
-      display:inline-block;
-      margin-bottom:18px;
-      color:#bdbdbd;
-      font-size:12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
+      max-width:900px;
     }
 
     .hero h1{
-      font-size:clamp(44px, 8vw, 96px);
-      line-height:.93;
+      font-size:clamp(46px, 8vw, 108px);
+      line-height:.92;
       letter-spacing:-.06em;
-      margin-bottom:18px;
       font-weight:600;
-      max-width:860px;
-    }
-
-    .hero p{
-      max-width:720px;
-      color:#d0d0d0;
-      font-size:18px;
-      line-height:1.75;
+      max-width:900px;
     }
 
     .hero-watermark{
       position:absolute;
-      right:38px;
-      bottom:22px;
-      width:min(240px, 28vw);
-      opacity:.13;
+      right:34px;
+      bottom:96px;
+      width:min(210px, 24vw);
+      opacity:.12;
       z-index:2;
       pointer-events:none;
-      filter:drop-shadow(0 0 18px rgba(255,0,0,.18));
+      filter:drop-shadow(0 0 16px rgba(255,0,0,.22));
+    }
+
+    /* BOTTOM MENU */
+
+    .bottom-nav-wrap{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:22px;
+      z-index:60;
+      pointer-events:none;
+    }
+
+    .bottom-nav{
+      width:min(820px, calc(100% - 28px));
+      margin:0 auto;
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(0,0,0,.56);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(18px);
+      box-shadow:0 18px 42px rgba(0,0,0,.28);
+      pointer-events:auto;
+    }
+
+    .bottom-brand img{
+      width:118px;
+      height:auto;
+      opacity:.95;
+      filter:drop-shadow(0 0 14px rgba(255,0,0,.18));
+    }
+
+    .bottom-menu{
+      display:flex;
+      align-items:center;
+      gap:24px;
+    }
+
+    .bottom-menu a{
+      color:#f4f4f4;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      transition:opacity .25s ease;
+    }
+
+    .bottom-menu a:hover{
+      opacity:.7;
+    }
+
+    .bottom-cta{
+      display:flex;
+      align-items:center;
+    }
+
+    .btn-ticket{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 20px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      transition:transform .28s ease, opacity .28s ease;
+      white-space:nowrap;
+    }
+
+    .btn-ticket:hover{
+      transform:translateY(-1px);
+      opacity:.9;
     }
 
     /* EVENTS */
 
     .events{
-      padding:54px 0 86px;
+      padding:42px 0 120px;
       background:#000;
-    }
-
-    .events-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:28px;
-    }
-
-    .events-head h2{
-      font-size:clamp(28px, 4vw, 44px);
-      letter-spacing:-.04em;
-      font-weight:600;
-      margin-bottom:10px;
-    }
-
-    .events-head p{
-      color:#8f8f8f;
-      font-size:15px;
-      max-width:460px;
-      line-height:1.75;
     }
 
     .events-list{
@@ -448,7 +407,7 @@
     /* FOOTER */
 
     .footer{
-      padding:24px 0 40px;
+      padding:24px 0 34px;
       color:#7e7e7e;
       font-size:13px;
       background:#000;
@@ -474,38 +433,9 @@
       .event-actions{
         justify-content:flex-start;
       }
-
-      .events-head{
-        display:grid;
-        grid-template-columns:1fr;
-      }
     }
 
     @media (max-width: 760px){
-      .nav{
-        flex-wrap:wrap;
-        padding:14px 0;
-      }
-
-      .menu{
-        width:100%;
-        justify-content:center;
-        gap:18px;
-        order:3;
-      }
-
-      .nav-right{
-        width:100%;
-      }
-
-      .btn{
-        width:100%;
-      }
-
-      .brand img{
-        width:112px;
-      }
-
       .preloader-logo{
         width:min(360px, 80vw);
       }
@@ -515,23 +445,55 @@
       }
 
       .hero-content{
-        padding:132px 0 44px;
+        padding:0 0 128px;
       }
 
-      .hero p,
-      .events-head p,
-      .event-details{
-        font-size:16px;
+      .hero-watermark{
+        width:150px;
+        right:18px;
+        bottom:94px;
+      }
+
+      .bottom-nav{
+        width:min(100% - 18px, 820px);
+        border-radius:26px;
+        min-height:auto;
+        padding:12px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .bottom-brand{
+        width:100%;
+        display:flex;
+        justify-content:center;
+      }
+
+      .bottom-brand img{
+        width:102px;
+      }
+
+      .bottom-menu{
+        width:100%;
+        justify-content:center;
+        gap:16px;
+        flex-wrap:wrap;
+      }
+
+      .bottom-cta{
+        width:100%;
+      }
+
+      .btn-ticket{
+        width:100%;
       }
 
       .event-city{
         font-size:24px;
       }
 
-      .hero-watermark{
-        width:170px;
-        right:20px;
-        bottom:18px;
+      .event-details{
+        font-size:16px;
       }
     }
   </style>
@@ -554,24 +516,6 @@
   <!-- SITE -->
   <div id="site">
 
-    <header class="topbar">
-      <div class="container nav">
-        <a href="#" class="brand">
-          <img src="logo-mindjset.png" alt="Mindjset logo">
-        </a>
-
-        <nav class="menu">
-          <a href="#events">Get Ticket</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="nav-right">
-          <a href="#events" class="btn btn-secondary">Season 2026</a>
-        </div>
-      </div>
-    </header>
-
     <main>
 
       <section class="hero">
@@ -584,11 +528,7 @@
         <div class="hero-content">
           <div class="container">
             <div class="hero-wrap">
-              <span class="eyebrow">Season 2026</span>
               <h1>Mindjset nightlife across iconic cities.</h1>
-              <p>
-                Una room, una città, un’identità precisa. Eventi premium tra Milano, Roma, Barcellona e Portofino.
-              </p>
             </div>
           </div>
         </div>
@@ -596,17 +536,26 @@
         <img src="logo-mindjset.png" alt="Mindjset watermark" class="hero-watermark">
       </section>
 
+      <div class="bottom-nav-wrap">
+        <div class="bottom-nav">
+          <a href="#" class="bottom-brand">
+            <img src="logo-mindjset.png" alt="Mindjset logo">
+          </a>
+
+          <nav class="bottom-menu">
+            <a href="#events">Get Ticket</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div class="bottom-cta">
+            <a href="#events" class="btn-ticket">Get Ticket</a>
+          </div>
+        </div>
+      </div>
+
       <section class="events" id="events">
         <div class="container">
-
-          <div class="events-head">
-            <div>
-              <h2>Upcoming Events</h2>
-              <p>
-                Primo appuntamento live a Milano. Gli altri capitoli della season verranno annunciati presto.
-              </p>
-            </div>
-          </div>
 
           <div class="events-list">
 
@@ -689,7 +638,7 @@
     <footer class="footer" id="contact">
       <div class="container footer-inner">
         <span>Mindjset</span>
-        <span id="gallery">Gallery & ticket page next step</span>
+        <span id="gallery">Gallery next step</span>
       </div>
     </footer>
 
