@@ -23,9 +23,7 @@
       --muted:rgba(255,255,255,.68);
       --muted-2:rgba(255,255,255,.52);
       --line:rgba(255,255,255,.10);
-      --line-strong:rgba(255,255,255,.16);
       --glass:rgba(10,10,10,.56);
-      --glass-2:rgba(255,255,255,.04);
       --red:#ff2a2a;
       --shadow:0 20px 60px rgba(0,0,0,.35);
     }
@@ -145,23 +143,14 @@
       background:#000;
     }
 
-    .hero-video,
-    .hero-video-fallback{
+    .hero-video{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
-    }
-
-    .hero-video{
       z-index:0;
-      filter:grayscale(.08) brightness(.26) contrast(1.02) saturate(.88);
-    }
-
-    .hero-video-fallback{
-      z-index:-1;
-      opacity:0;
+      filter:grayscale(.08) brightness(.24) contrast(1.02) saturate(.88);
     }
 
     .hero-overlay{
@@ -169,7 +158,7 @@
       inset:0;
       z-index:1;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.54) 0%, rgba(0,0,0,.38) 24%, rgba(0,0,0,.58) 62%, rgba(0,0,0,.88) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.54) 0%, rgba(0,0,0,.36) 24%, rgba(0,0,0,.58) 62%, rgba(0,0,0,.88) 100%),
         radial-gradient(circle at 50% 40%, rgba(255,255,255,.03), transparent 30%),
         radial-gradient(circle at 20% 25%, rgba(255,42,42,.05), transparent 22%);
     }
@@ -226,7 +215,7 @@
       margin:0 auto;
       min-height:64px;
       display:grid;
-      grid-template-columns:auto 1fr auto;
+      grid-template-columns:1fr auto;
       align-items:center;
       gap:18px;
       padding:10px 12px 10px 16px;
@@ -239,25 +228,13 @@
       pointer-events:auto;
     }
 
-    .bottom-brand{
-      display:flex;
-      align-items:center;
-      min-width:0;
-    }
-
-    .bottom-brand img{
-      width:110px;
-      clip-path: inset(20% 0 20% 0);
-      opacity:.95;
-      filter:drop-shadow(0 0 12px rgba(255,0,0,.12));
-    }
-
     .bottom-menu{
       display:flex;
-      justify-content:center;
+      justify-content:flex-start;
       align-items:center;
       gap:12px;
       flex-wrap:wrap;
+      min-width:0;
     }
 
     .nav-link{
@@ -327,16 +304,14 @@
       min-height:250px;
       padding:24px;
       border-radius:28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
       border:1px solid rgba(255,255,255,.10);
       box-shadow:0 18px 44px rgba(0,0,0,.24);
       overflow:hidden;
     }
 
     .event-card.featured{
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border-color:rgba(255,255,255,.14);
     }
 
@@ -349,8 +324,9 @@
     .event-city-row{
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:12px;
       min-height:32px;
+      flex-wrap:wrap;
     }
 
     .event-city{
@@ -361,11 +337,28 @@
       text-transform:uppercase;
     }
 
-    .mini-logo{
-      width:34px;
-      clip-path: inset(20% 0 20% 0);
-      filter:drop-shadow(0 0 12px rgba(255,0,0,.28));
-      opacity:.96;
+    .live-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:24px;
+      padding:0 10px;
+      border-radius:999px;
+      background:rgba(255,42,42,.14);
+      border:1px solid rgba(255,42,42,.38);
+      color:#ff3b3b;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      animation:liveBlink 1.2s ease-in-out infinite;
+      box-shadow:0 0 16px rgba(255,42,42,.14);
+    }
+
+    @keyframes liveBlink{
+      0%{opacity:.45; box-shadow:0 0 10px rgba(255,42,42,.08);}
+      50%{opacity:1; box-shadow:0 0 22px rgba(255,42,42,.26);}
+      100%{opacity:.45; box-shadow:0 0 10px rgba(255,42,42,.08);}
     }
 
     .event-status{
@@ -566,15 +559,8 @@
         border-radius:22px;
       }
 
-      .bottom-brand{
-        justify-content:center;
-      }
-
-      .bottom-brand img{
-        width:96px;
-      }
-
       .bottom-menu{
+        justify-content:center;
         gap:8px;
       }
 
@@ -652,8 +638,6 @@
 
 <body>
 
-  <!-- PRELOADER -->
-
   <div id="preloader">
     <div class="preloader-inner">
       <img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset">
@@ -666,15 +650,9 @@
 
   <div id="site">
 
-    <!-- HERO -->
-
     <section class="hero">
       <video class="hero-video" autoplay muted loop playsinline>
         <source src="assets/nightlife-bg.mp4" type="video/mp4">
-      </video>
-
-      <video class="hero-video-fallback" autoplay muted loop playsinline>
-        <source src="assets/hero-mindjset.mp4" type="video/mp4">
       </video>
 
       <div class="hero-overlay"></div>
@@ -694,25 +672,17 @@
       <img src="logo-mindjset.png" class="hero-watermark" alt="Mindjset watermark">
     </section>
 
-    <!-- BOTTOM NAV -->
-
     <div class="bottom-nav-wrap">
       <div class="bottom-nav">
-        <a href="#" class="bottom-brand" aria-label="Mindjset home">
-          <img src="logo-mindjset.png" alt="Mindjset logo">
-        </a>
-
         <nav class="bottom-menu">
-          <a href="javascript:void(0)" class="nav-link">Get Ticket</a>
           <a href="#events" class="nav-link">Events</a>
+          <a href="#gallery" class="nav-link">Gallery</a>
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
         <a href="javascript:void(0)" class="btn-ticket">Get Ticket</a>
       </div>
     </div>
-
-    <!-- EVENTS -->
 
     <section class="events" id="events">
       <div class="container">
@@ -722,7 +692,7 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Milano</div>
-                <img src="logo-mindjset.png" class="mini-logo" alt="Mindjset active">
+                <span class="live-badge">Live</span>
               </div>
               <div class="event-status">Current Event</div>
 
@@ -798,9 +768,9 @@
       </div>
     </section>
 
-  </div>
+    <div id="gallery"></div>
 
-  <!-- CONTACT PANEL -->
+  </div>
 
   <aside class="contact-panel" id="contact-panel" aria-hidden="true">
     <div class="contact-head">
