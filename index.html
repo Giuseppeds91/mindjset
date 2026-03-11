@@ -1,334 +1,627 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINDJSET</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
-<title>Mindjset</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+    :root{
+      --bg:#000000;
+      --white:#ffffff;
+      --muted:#9a9a9a;
+      --line:rgba(255,255,255,0.10);
+      --card:rgba(255,255,255,0.04);
+      --mindjset-red:#ff2a2a;
+      --mindjset-red-dark:#7a0000;
+    }
 
-<style>
+    html{
+      scroll-behavior:smooth;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    body{
+      font-family:"Inter", sans-serif;
+      background:#000;
+      color:var(--white);
+      overflow:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
 
-body{
-background:#000;
-color:white;
-font-family:Montserrat;
-overflow-x:hidden;
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-a{
-text-decoration:none;
-color:white;
-}
+    img{
+      display:block;
+      max-width:100%;
+    }
 
-/* LOADER */
+    /* PRELOADER */
 
-#loader{
-position:fixed;
-width:100%;
-height:100vh;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
+    #preloader{
+      position:fixed;
+      inset:0;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      transition:opacity 0.9s ease, visibility 0.9s ease;
+    }
 
-#logo-loader{
-font-size:60px;
-font-weight:600;
-color:#d00000;
-letter-spacing:6px;
-margin-bottom:40px;
-}
+    #preloader.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
 
-#progress-bar{
-width:200px;
-height:2px;
-background:#222;
-overflow:hidden;
-}
+    .preloader-inner{
+      width:min(88vw, 680px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
 
-#progress{
-height:100%;
-width:0%;
-background:#d00000;
-}
+    .preloader-logo{
+      width:min(520px, 78vw);
+      margin-bottom:42px;
+      filter:drop-shadow(0 0 55px rgba(255,0,0,.75)) saturate(1.6) brightness(1.15);
+      transform:scale(.98);
+      animation:logoBreath 2.2s ease-in-out infinite;
+    }
 
-#percent{
-margin-top:15px;
-font-size:14px;
-font-style:italic;
-font-family:"Playfair Display";
-}
+    @keyframes logoBreath{
+      0%{transform:scale(.98)}
+      50%{transform:scale(1)}
+      100%{transform:scale(.98)}
+    }
 
-/* HEADER */
+    .loading-bar{
+      width:min(520px, 82vw);
+      height:2px;
+      background:rgba(255,255,255,0.14);
+      overflow:hidden;
+      border-radius:999px;
+    }
 
-header{
-position:fixed;
-width:100%;
-top:0;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-z-index:10;
-background:transparent;
-}
+    .loading-progress{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg, var(--mindjset-red-dark) 0%, var(--mindjset-red) 60%, #ff6565 100%);
+      box-shadow:0 0 18px rgba(255,0,0,.42);
+      transition:width .12s cubic-bezier(.2,.8,.2,1);
+    }
 
-.logo{
-font-size:24px;
-color:#d00000;
-font-weight:600;
-letter-spacing:4px;
-}
+    .loading-number{
+      margin-top:16px;
+      color:#ffffff;
+      font-family:"Playfair Display", serif;
+      font-style:italic;
+      font-size:28px;
+      letter-spacing:.08em;
+      opacity:.95;
+    }
 
-nav a{
-margin-left:30px;
-font-size:14px;
-opacity:0.8;
-}
+    /* SITE */
 
-nav a:hover{
-opacity:1;
-}
+    #site{
+      opacity:0;
+      transform:translateY(18px);
+      filter:blur(8px);
+      transition:opacity 1s ease, transform 1s ease, filter 1s ease;
+      min-height:100vh;
+      background:#000;
+    }
 
-/* HERO */
+    #site.show{
+      opacity:1;
+      transform:translateY(0);
+      filter:blur(0);
+    }
 
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
+    .container{
+      width:min(1160px, calc(100% - 36px));
+      margin:0 auto;
+    }
 
-.hero h1{
-font-size:60px;
-letter-spacing:8px;
-color:#d00000;
-margin-bottom:20px;
-}
+    /* HEADER */
 
-.hero button{
-margin-top:30px;
-padding:14px 30px;
-background:#d00000;
-border:none;
-color:white;
-font-size:14px;
-letter-spacing:2px;
-cursor:pointer;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(0,0,0,0.84);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
 
-.hero button:hover{
-background:#a00000;
-}
+    .nav{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-/* EVENTS */
+    .brand img{
+      width:182px;
+      height:auto;
+      filter:drop-shadow(0 0 24px rgba(255,0,0,.25));
+    }
 
-.events{
-padding:120px 20px;
-text-align:center;
-}
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:30px;
+    }
 
-.events h2{
-font-size:30px;
-margin-bottom:60px;
-font-family:"Playfair Display";
-}
+    .menu a{
+      color:#f5f5f5;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:opacity .25s ease;
+    }
 
-.event-list{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
-}
+    .menu a:hover{
+      opacity:.68;
+    }
 
-.event{
-border:1px solid #222;
-padding:40px;
-width:250px;
-transition:0.3s;
-}
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
-.event:hover{
-border-color:#d00000;
-}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 22px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform .28s ease, background .28s ease, border-color .28s ease, color .28s ease;
+    }
 
-.event h3{
-margin-bottom:10px;
-}
+    .btn:hover{
+      transform:translateY(-1px);
+    }
 
-.event p{
-font-size:14px;
-opacity:0.7;
-}
+    .btn-primary{
+      background:var(--white);
+      color:#000;
+    }
 
-.event button{
-margin-top:20px;
-background:#d00000;
-border:none;
-padding:10px 20px;
-color:white;
-cursor:pointer;
-}
+    .btn-secondary{
+      border:1px solid rgba(255,255,255,0.14);
+      color:#fff;
+      background:rgba(255,255,255,0.03);
+    }
 
-/* FOOTER */
+    /* HERO */
 
-footer{
-padding:40px;
-text-align:center;
-font-size:12px;
-opacity:0.6;
-}
+    .hero{
+      padding:76px 0 34px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
 
-/* MOBILE */
+    .hero-wrap{
+      max-width:880px;
+    }
 
-@media(max-width:768px){
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:18px;
+      color:#8f8f8f;
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
 
-.hero h1{
-font-size:40px;
-}
+    .hero h1{
+      font-size:clamp(42px, 7vw, 92px);
+      line-height:.95;
+      letter-spacing:-.05em;
+      margin-bottom:18px;
+      font-weight:600;
+    }
 
-.event{
-width:100%;
-}
+    .hero p{
+      max-width:700px;
+      color:#b0b0b0;
+      font-size:18px;
+      line-height:1.75;
+    }
 
-header{
-padding:20px;
-}
+    /* EVENTS */
 
-nav{
-display:none;
-}
+    .events{
+      padding:42px 0 80px;
+    }
 
-}
+    .events-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:26px;
+    }
 
-</style>
+    .events-head h2{
+      font-size:clamp(28px, 4vw, 44px);
+      letter-spacing:-.04em;
+      font-weight:600;
+    }
 
+    .events-head p{
+      color:#8f8f8f;
+      font-size:15px;
+      max-width:460px;
+      line-height:1.7;
+    }
+
+    .events-list{
+      display:grid;
+      gap:18px;
+    }
+
+    .event-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:28px;
+      padding:26px;
+      display:grid;
+      grid-template-columns:1.2fr 1fr auto;
+      align-items:center;
+      gap:18px;
+      transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+    }
+
+    .event-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.14);
+      box-shadow:0 18px 35px rgba(0,0,0,.18);
+    }
+
+    .event-city{
+      font-size:30px;
+      line-height:1;
+      letter-spacing:-.04em;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+
+    .event-status{
+      color:#9f9f9f;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .event-details{
+      color:#bdbdbd;
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    .event-date{
+      color:#ffffff;
+      font-weight:600;
+    }
+
+    .event-location{
+      color:#9f9f9f;
+    }
+
+    .event-actions{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    .soon-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.10);
+      color:#d0d0d0;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,0.03);
+      white-space:nowrap;
+    }
+
+    .ticket-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 22px;
+      border-radius:999px;
+      background:#ffffff;
+      color:#000000;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      transition:transform .28s ease, opacity .28s ease;
+    }
+
+    .ticket-btn:hover{
+      transform:translateY(-1px);
+      opacity:.9;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      padding:24px 0 40px;
+      color:#7e7e7e;
+      font-size:13px;
+    }
+
+    .footer-inner{
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding-top:20px;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 980px){
+      .event-card{
+        grid-template-columns:1fr;
+        align-items:flex-start;
+      }
+
+      .event-actions{
+        justify-content:flex-start;
+      }
+
+      .events-head{
+        grid-template-columns:1fr;
+        display:grid;
+      }
+    }
+
+    @media (max-width: 720px){
+      .nav{
+        flex-wrap:wrap;
+        padding:14px 0;
+      }
+
+      .menu{
+        width:100%;
+        justify-content:center;
+        gap:18px;
+        order:3;
+      }
+
+      .nav-right{
+        width:100%;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .brand img{
+        width:154px;
+      }
+
+      .preloader-logo{
+        width:min(360px, 80vw);
+      }
+
+      .loading-number{
+        font-size:24px;
+      }
+
+      .hero p,
+      .events-head p,
+      .event-details{
+        font-size:16px;
+      }
+
+      .event-city{
+        font-size:24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="loader">
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset logo">
 
-<div id="logo-loader">
-MINDJSET
-</div>
+      <div class="loading-bar">
+        <div class="loading-progress" id="loading-progress"></div>
+      </div>
 
-<div id="progress-bar">
-<div id="progress"></div>
-</div>
+      <div class="loading-number" id="loading-number">0%</div>
+    </div>
+  </div>
 
-<div id="percent">
-0%
-</div>
+  <!-- SITE -->
+  <div id="site">
 
-</div>
+    <header class="topbar">
+      <div class="container nav">
+        <a href="#" class="brand">
+          <img src="logo-mindjset.png" alt="Mindjset logo">
+        </a>
 
-<header>
+        <nav class="menu">
+          <a href="#events">Events</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-<div class="logo">
-MINDJSET
-</div>
+        <div class="nav-right">
+          <a href="#events" class="btn btn-primary">Get Ticket</a>
+        </div>
+      </div>
+    </header>
 
-<nav>
-<a href="#">Events</a>
-<a href="#">Community</a>
-<a href="#">Travel</a>
-<a href="#">Contact</a>
-</nav>
+    <main>
 
-</header>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-wrap">
+            <span class="eyebrow">Season 01</span>
+            <h1>Mindjset events<br>across iconic cities.</h1>
+            <p>
+              Una piattaforma premium di esperienze private. Una città alla volta, una room alla volta, una community alla volta.
+            </p>
+          </div>
+        </div>
+      </section>
 
-<section class="hero">
+      <section class="events" id="events">
+        <div class="container">
 
-<h1>MINDJSET</h1>
+          <div class="events-head">
+            <h2>Upcoming Events</h2>
+            <p>
+              Il primo appuntamento è live. Gli altri capitoli della season verranno annunciati presto.
+            </p>
+          </div>
 
-<button>GET TICKET</button>
+          <div class="events-list">
 
-</section>
+            <article class="event-card">
+              <div>
+                <div class="event-city">Milano</div>
+                <div class="event-status">Live now</div>
+              </div>
 
-<section class="events">
+              <div class="event-details">
+                <div class="event-date">Sabato 28 Marzo</div>
+                <div class="event-location">Nepentha Club — Piazza Armando Diaz, Milano</div>
+              </div>
 
-<h2>Upcoming Journey</h2>
+              <div class="event-actions">
+                <a href="#" class="ticket-btn">Get Ticket</a>
+              </div>
+            </article>
 
-<div class="event-list">
+            <article class="event-card">
+              <div>
+                <div class="event-city">Roma</div>
+                <div class="event-status">Next Chapter</div>
+              </div>
 
-<div class="event">
-<h3>Milano</h3>
-<p>28 March</p>
-<button>Get Ticket</button>
-</div>
+              <div class="event-details">
+                Dettagli, line up e location in arrivo.
+              </div>
 
-<div class="event">
-<h3>Roma</h3>
-<p>April</p>
-<button>Get Ticket</button>
-</div>
+              <div class="event-actions">
+                <span class="soon-badge">Launching Soon</span>
+              </div>
+            </article>
 
-<div class="event">
-<h3>Portofino</h3>
-<p>Summer</p>
-<button>Get Ticket</button>
-</div>
+            <article class="event-card">
+              <div>
+                <div class="event-city">Barcellona</div>
+                <div class="event-status">International Stop</div>
+              </div>
 
-<div class="event">
-<h3>Courmayeur</h3>
-<p>Winter</p>
-<button>Get Ticket</button>
-</div>
+              <div class="event-details">
+                La prossima tappa europea verrà comunicata presto.
+              </div>
 
-</div>
+              <div class="event-actions">
+                <span class="soon-badge">Launching Soon</span>
+              </div>
+            </article>
 
-</section>
+            <article class="event-card">
+              <div>
+                <div class="event-city">Portofino</div>
+                <div class="event-status">Summer Signature</div>
+              </div>
 
-<footer>
+              <div class="event-details">
+                Un nuovo chapter sul mare, dettagli in arrivo.
+              </div>
 
-© MINDJSET
+              <div class="event-actions">
+                <span class="soon-badge">Launching Soon</span>
+              </div>
+            </article>
 
-</footer>
+          </div>
+        </div>
+      </section>
 
-<script>
+    </main>
 
-let percent = 0;
+    <footer class="footer" id="contact">
+      <div class="container footer-inner">
+        <span>Mindjset</span>
+        <span id="gallery">Gallery & ticket pages coming next</span>
+      </div>
+    </footer>
 
-let interval = setInterval(function(){
+  </div>
 
-percent++;
+  <script>
+    const preloader = document.getElementById("preloader");
+    const site = document.getElementById("site");
+    const progress = document.getElementById("loading-progress");
+    const number = document.getElementById("loading-number");
+    const logo = document.querySelector(".preloader-logo");
 
-document.getElementById("percent").innerText = percent + "%";
+    let percent = 0;
 
-document.getElementById("progress").style.width = percent + "%";
+    const interval = setInterval(() => {
+      percent += 1;
+      progress.style.width = percent + "%";
+      number.innerText = percent + "%";
 
-if(percent >= 100){
+      if(percent > 78){
+        logo.style.transform = `scale(${0.98 + (percent - 78) * 0.008})`;
+      }
 
-clearInterval(interval);
+      if(percent >= 100){
+        clearInterval(interval);
 
-setTimeout(function(){
-
-document.getElementById("loader").style.display="none";
-
-},500);
-
-}
-
-},25);
-
-</script>
+        setTimeout(() => {
+          preloader.classList.add("hide");
+          site.classList.add("show");
+          document.body.style.overflow = "auto";
+        }, 380);
+      }
+    }, 22);
+  </script>
 
 </body>
 </html>
