@@ -2,428 +2,896 @@
 <html lang="it">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MINDJSET</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<title>MINDJSET</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    :root{
+      --bg:#000;
+      --white:#fff;
+      --muted:rgba(255,255,255,.68);
+      --muted-2:rgba(255,255,255,.52);
+      --line:rgba(255,255,255,.10);
+      --line-strong:rgba(255,255,255,.16);
+      --glass:rgba(10,10,10,.56);
+      --glass-2:rgba(255,255,255,.04);
+      --red:#ff2a2a;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    html{
+      scroll-behavior:smooth;
+    }
 
-<style>
+    body{
+      background:#000;
+      color:#fff;
+      font-family:"Inter",sans-serif;
+      overflow:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
-body{
-background:#000;
-color:#fff;
-font-family:"Inter",sans-serif;
-overflow:hidden;
-}
+    img,video{
+      display:block;
+      max-width:100%;
+    }
 
-/* ---------------- PRELOADER ---------------- */
+    /* ---------------- PRELOADER ---------------- */
 
-#preloader{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-transition:opacity .8s ease;
-}
+    #preloader{
+      position:fixed;
+      inset:0;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      transition:opacity .8s ease;
+    }
 
-#preloader.hide{
-opacity:0;
-pointer-events:none;
-}
+    #preloader.hide{
+      opacity:0;
+      pointer-events:none;
+    }
 
-.preloader-inner{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-width:min(90vw,500px);
-text-align:center;
-}
+    .preloader-inner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      width:min(90vw,500px);
+      text-align:center;
+    }
 
-.preloader-logo{
-width:min(380px,70vw);
-margin-bottom:40px;
-clip-path: inset(20% 0 20% 0);
-filter:drop-shadow(0 0 30px rgba(255,0,0,.25));
-animation:breath 2.4s ease-in-out infinite;
-}
+    .preloader-logo{
+      width:min(380px,70vw);
+      margin-bottom:40px;
+      clip-path: inset(20% 0 20% 0);
+      filter:drop-shadow(0 0 30px rgba(255,0,0,.25));
+      animation:breath 2.4s ease-in-out infinite;
+    }
 
-@keyframes breath{
-0%{transform:scale(.98)}
-50%{transform:scale(1)}
-100%{transform:scale(.98)}
-}
+    @keyframes breath{
+      0%{transform:scale(.98)}
+      50%{transform:scale(1)}
+      100%{transform:scale(.98)}
+    }
 
-.loading-bar{
-width:100%;
-height:2px;
-background:rgba(255,255,255,.15);
-border-radius:999px;
-overflow:hidden;
-margin-bottom:14px;
-}
+    .loading-bar{
+      width:100%;
+      height:2px;
+      background:rgba(255,255,255,.15);
+      border-radius:999px;
+      overflow:hidden;
+      margin-bottom:14px;
+    }
 
-.loading-progress{
-width:0%;
-height:100%;
-background:linear-gradient(90deg,#5a0000,#ff2a2a,#ff6b6b);
-box-shadow:0 0 14px rgba(255,0,0,.4);
-transition:width .15s ease;
-}
+    .loading-progress{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,#5a0000,#ff2a2a,#ff6b6b);
+      box-shadow:0 0 14px rgba(255,0,0,.4);
+      transition:width .15s ease;
+    }
 
-.loading-number{
-font-size:12px;
-letter-spacing:.3em;
-text-transform:uppercase;
-opacity:.7;
-}
+    .loading-number{
+      font-size:12px;
+      letter-spacing:.3em;
+      text-transform:uppercase;
+      opacity:.7;
+    }
 
-/* ---------------- SITE ---------------- */
+    /* ---------------- SITE ---------------- */
 
-#site{
-opacity:0;
-transition:opacity 1s ease;
-}
+    #site{
+      opacity:0;
+      transition:opacity 1s ease;
+      min-height:100vh;
+      background:#000;
+    }
 
-#site.show{
-opacity:1;
-}
+    #site.show{
+      opacity:1;
+    }
 
-/* ---------------- HERO ---------------- */
+    .container{
+      width:min(1220px, calc(100% - 40px));
+      margin:auto;
+    }
 
-.hero{
-position:relative;
-min-height:100vh;
-overflow:hidden;
-}
+    /* ---------------- HERO ---------------- */
 
-.hero-video{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(.45);
-}
+    .hero{
+      position:relative;
+      min-height:100vh;
+      overflow:hidden;
+      background:#000;
+    }
 
-.hero-overlay{
-position:absolute;
-inset:0;
-background:linear-gradient(180deg,transparent,black);
-}
+    .hero-video,
+    .hero-video-fallback{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
 
-.hero-inner{
-position:relative;
-display:flex;
-align-items:flex-end;
-min-height:100vh;
-padding-bottom:180px;
-}
+    .hero-video{
+      z-index:0;
+      filter:grayscale(.08) brightness(.26) contrast(1.02) saturate(.88);
+    }
 
-.container{
-width:1200px;
-max-width:90%;
-margin:auto;
-}
+    .hero-video-fallback{
+      z-index:-1;
+      opacity:0;
+    }
 
-.hero-title{
-font-size:clamp(60px,10vw,140px);
-line-height:.9;
-font-weight:800;
-text-transform:uppercase;
-}
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.54) 0%, rgba(0,0,0,.38) 24%, rgba(0,0,0,.58) 62%, rgba(0,0,0,.88) 100%),
+        radial-gradient(circle at 50% 40%, rgba(255,255,255,.03), transparent 30%),
+        radial-gradient(circle at 20% 25%, rgba(255,42,42,.05), transparent 22%);
+    }
 
-.hero-watermark{
-position:absolute;
-right:40px;
-bottom:120px;
-width:200px;
-opacity:.12;
-clip-path: inset(20% 0 20% 0);
-}
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:flex-end;
+      padding:0 0 250px;
+    }
 
-/* ---------------- MENU ---------------- */
+    .hero-copy{
+      max-width:980px;
+    }
 
-.bottom-nav-wrap{
-position:fixed;
-bottom:20px;
-left:0;
-right:0;
-display:flex;
-justify-content:center;
-z-index:50;
-}
+    .hero-title{
+      font-size:clamp(48px, 8.2vw, 132px);
+      line-height:.9;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:-.065em;
+      max-width:980px;
+      text-wrap:balance;
+    }
 
-.bottom-nav{
-width:min(900px,95%);
-display:grid;
-grid-template-columns:auto 1fr auto;
-align-items:center;
-padding:10px 16px;
-border-radius:999px;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.1);
-}
+    .hero-watermark{
+      position:absolute;
+      right:34px;
+      bottom:138px;
+      width:min(220px, 20vw);
+      opacity:.11;
+      clip-path: inset(20% 0 20% 0);
+      z-index:2;
+      pointer-events:none;
+      filter:drop-shadow(0 0 18px rgba(255,0,0,.12));
+    }
 
-.bottom-brand img{
-width:110px;
-clip-path: inset(20% 0 20% 0);
-}
+    /* ---------------- BOTTOM NAV ---------------- */
 
-.bottom-menu{
-display:flex;
-justify-content:center;
-gap:26px;
-}
+    .bottom-nav-wrap{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:18px;
+      z-index:70;
+      pointer-events:none;
+      padding:0 12px;
+    }
 
-.bottom-menu a{
-font-size:12px;
-letter-spacing:.18em;
-text-transform:uppercase;
-}
+    .bottom-nav{
+      width:min(920px, 100%);
+      margin:0 auto;
+      min-height:64px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:18px;
+      padding:10px 12px 10px 16px;
+      border-radius:24px;
+      background:rgba(8,8,8,.68);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 16px 40px rgba(0,0,0,.34);
+      pointer-events:auto;
+    }
 
-.btn-ticket{
-background:#fff;
-color:#000;
-padding:12px 24px;
-border-radius:999px;
-font-size:12px;
-font-weight:700;
-letter-spacing:.12em;
-}
+    .bottom-brand{
+      display:flex;
+      align-items:center;
+      min-width:0;
+    }
 
-/* ---------------- EVENTS ---------------- */
+    .bottom-brand img{
+      width:110px;
+      clip-path: inset(20% 0 20% 0);
+      opacity:.95;
+      filter:drop-shadow(0 0 12px rgba(255,0,0,.12));
+    }
 
-.events{
-padding:80px 0;
-}
+    .bottom-menu{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
 
-.events-list{
-display:grid;
-gap:20px;
-}
+    .nav-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      color:#fff;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      transition:background .25s ease, opacity .25s ease, transform .25s ease;
+      white-space:nowrap;
+    }
 
-.event-card{
-display:grid;
-grid-template-columns:1fr 1fr auto;
-align-items:center;
-padding:26px;
-border-radius:24px;
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.1);
-}
+    .nav-link:hover{
+      background:rgba(255,255,255,.05);
+      opacity:.92;
+    }
 
-.event-city{
-font-size:34px;
-font-weight:800;
-text-transform:uppercase;
-}
+    .btn-ticket{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 20px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      transition:transform .22s ease, opacity .22s ease;
+    }
 
-.event-details{
-color:#aaa;
-}
+    .btn-ticket:hover{
+      transform:translateY(-1px);
+      opacity:.94;
+    }
 
-.ticket-link{
-background:#fff;
-color:#000;
-padding:12px 22px;
-border-radius:999px;
-font-size:12px;
-font-weight:700;
-}
+    /* ---------------- EVENTS ---------------- */
 
-.mini-logo{
-width:32px;
-clip-path: inset(20% 0 20% 0);
-}
+    .events{
+      position:relative;
+      z-index:2;
+      background:#000;
+      padding:26px 0 120px;
+    }
 
-/* ---------------- MOBILE ---------------- */
+    .events-list{
+      display:grid;
+      grid-template-columns:1.25fr .9fr .9fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
 
-@media(max-width:800px){
+    .event-card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:250px;
+      padding:24px;
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 18px 44px rgba(0,0,0,.24);
+      overflow:hidden;
+    }
 
-.hero-title{
-font-size:50px;
-}
+    .event-card.featured{
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border-color:rgba(255,255,255,.14);
+    }
 
-.event-card{
-grid-template-columns:1fr;
-gap:14px;
-}
+    .event-top{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
 
-.bottom-nav{
-grid-template-columns:1fr;
-gap:12px;
-}
+    .event-city-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-height:32px;
+    }
 
-}
+    .event-city{
+      font-size:clamp(24px, 2.2vw, 34px);
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-.05em;
+      text-transform:uppercase;
+    }
 
-</style>
+    .mini-logo{
+      width:34px;
+      clip-path: inset(20% 0 20% 0);
+      filter:drop-shadow(0 0 12px rgba(255,0,0,.28));
+      opacity:.96;
+    }
 
+    .event-status{
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted-2);
+    }
+
+    .event-body{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .event-date{
+      color:#fff;
+      font-size:16px;
+      font-weight:700;
+      line-height:1.3;
+    }
+
+    .event-location{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .event-note{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+      max-width:28ch;
+    }
+
+    .event-actions{
+      margin-top:26px;
+      display:flex;
+      align-items:center;
+    }
+
+    .ticket-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 20px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      transition:transform .22s ease, opacity .22s ease;
+    }
+
+    .ticket-link:hover{
+      transform:translateY(-1px);
+      opacity:.94;
+    }
+
+    .soon-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      color:rgba(255,255,255,.72);
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    /* ---------------- CONTACT PANEL ---------------- */
+
+    .contact-panel{
+      position:fixed;
+      right:20px;
+      bottom:100px;
+      width:min(360px, calc(100vw - 24px));
+      padding:22px;
+      border-radius:24px;
+      background:rgba(8,8,8,.86);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+      z-index:80;
+      opacity:0;
+      transform:translateY(18px);
+      pointer-events:none;
+      transition:opacity .28s ease, transform .28s ease;
+    }
+
+    .contact-panel.show{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+
+    .contact-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .contact-title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .contact-close{
+      width:34px;
+      height:34px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .contact-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .contact-item{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding:14px 14px 15px;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.07);
+    }
+
+    .contact-label{
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.52);
+    }
+
+    .contact-value{
+      font-size:15px;
+      color:#fff;
+      word-break:break-word;
+      line-height:1.45;
+    }
+
+    .contact-value a{
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 1080px){
+      .events-list{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 820px){
+      .hero-inner{
+        padding:0 0 250px;
+      }
+
+      .hero-title{
+        font-size:clamp(42px, 12vw, 70px);
+      }
+
+      .hero-watermark{
+        width:142px;
+        right:18px;
+        bottom:118px;
+      }
+
+      .bottom-nav{
+        grid-template-columns:1fr;
+        gap:10px;
+        padding:12px;
+        border-radius:22px;
+      }
+
+      .bottom-brand{
+        justify-content:center;
+      }
+
+      .bottom-brand img{
+        width:96px;
+      }
+
+      .bottom-menu{
+        gap:8px;
+      }
+
+      .nav-link{
+        min-height:40px;
+        padding:0 14px;
+        font-size:10px;
+        letter-spacing:.16em;
+      }
+
+      .btn-ticket{
+        width:100%;
+      }
+
+      .events{
+        padding:16px 0 120px;
+      }
+
+      .events-list{
+        grid-template-columns:1fr;
+      }
+
+      .event-card{
+        min-height:auto;
+      }
+
+      .contact-panel{
+        left:12px;
+        right:12px;
+        width:auto;
+        bottom:108px;
+      }
+    }
+
+    @media (max-width: 520px){
+      .container{
+        width:min(100% - 24px, 1220px);
+      }
+
+      .hero-inner{
+        padding:0 0 238px;
+      }
+
+      .hero-title{
+        letter-spacing:-.06em;
+      }
+
+      .bottom-nav-wrap{
+        bottom:12px;
+        padding:0 10px;
+      }
+
+      .bottom-nav{
+        min-height:auto;
+      }
+
+      .nav-link,
+      .btn-ticket,
+      .ticket-link{
+        min-height:44px;
+      }
+
+      .event-card{
+        padding:20px;
+        border-radius:24px;
+      }
+
+      .event-location,
+      .event-note{
+        font-size:13px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- PRELOADER -->
+  <!-- PRELOADER -->
 
-<div id="preloader">
+  <div id="preloader">
+    <div class="preloader-inner">
+      <img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset">
+      <div class="loading-bar">
+        <div class="loading-progress" id="loading-progress"></div>
+      </div>
+      <div class="loading-number" id="loading-number">0%</div>
+    </div>
+  </div>
 
-<div class="preloader-inner">
+  <div id="site">
 
-<img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset">
+    <!-- HERO -->
 
-<div class="loading-bar">
-<div class="loading-progress" id="loading-progress"></div>
-</div>
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="assets/nightlife-bg.mp4" type="video/mp4">
+      </video>
 
-<div class="loading-number" id="loading-number">0%</div>
+      <video class="hero-video-fallback" autoplay muted loop playsinline>
+        <source src="assets/hero-mindjset.mp4" type="video/mp4">
+      </video>
 
-</div>
+      <div class="hero-overlay"></div>
 
-</div>
+      <div class="hero-inner">
+        <div class="container">
+          <div class="hero-copy">
+            <h1 class="hero-title">
+              Mindjset<br>
+              nightlife<br>
+              across iconic cities
+            </h1>
+          </div>
+        </div>
+      </div>
 
+      <img src="logo-mindjset.png" class="hero-watermark" alt="Mindjset watermark">
+    </section>
 
-<div id="site">
+    <!-- BOTTOM NAV -->
 
-<!-- HERO -->
+    <div class="bottom-nav-wrap">
+      <div class="bottom-nav">
+        <a href="#" class="bottom-brand" aria-label="Mindjset home">
+          <img src="logo-mindjset.png" alt="Mindjset logo">
+        </a>
 
-<section class="hero">
+        <nav class="bottom-menu">
+          <a href="javascript:void(0)" class="nav-link">Get Ticket</a>
+          <a href="#events" class="nav-link">Events</a>
+          <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
+        </nav>
 
-<video class="hero-video" autoplay muted loop playsinline>
-<source src="assets/hero-mindjset.mp4" type="video/mp4">
-</video>
+        <a href="javascript:void(0)" class="btn-ticket">Get Ticket</a>
+      </div>
+    </div>
 
-<div class="hero-overlay"></div>
+    <!-- EVENTS -->
 
-<div class="hero-inner">
+    <section class="events" id="events">
+      <div class="container">
+        <div class="events-list">
 
-<div class="container">
+          <article class="event-card featured">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Milano</div>
+                <img src="logo-mindjset.png" class="mini-logo" alt="Mindjset active">
+              </div>
+              <div class="event-status">Current Event</div>
 
-<h1 class="hero-title">
+              <div class="event-body">
+                <div class="event-date">Sabato 28 Marzo</div>
+                <div class="event-location">Nepentha Club — Piazza Armando Diaz, Milano</div>
+              </div>
+            </div>
 
-Mindjset<br>
-nightlife<br>
-across iconic cities
+            <div class="event-actions">
+              <a href="javascript:void(0)" class="ticket-link">Get Ticket</a>
+            </div>
+          </article>
 
-</h1>
+          <article class="event-card">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Roma</div>
+              </div>
+              <div class="event-status">Next Chapter</div>
 
-</div>
+              <div class="event-body">
+                <div class="event-note">
+                  Dettagli, line up e location verranno comunicati prossimamente.
+                </div>
+              </div>
+            </div>
 
-</div>
+            <div class="event-actions">
+              <span class="soon-badge">Dettagli in arrivo</span>
+            </div>
+          </article>
 
-<img src="logo-mindjset.png" class="hero-watermark">
+          <article class="event-card">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Barcellona</div>
+              </div>
+              <div class="event-status">International Stop</div>
 
-</section>
+              <div class="event-body">
+                <div class="event-note">
+                  La prossima tappa europea verrà annunciata presto.
+                </div>
+              </div>
+            </div>
 
-<!-- MENU -->
+            <div class="event-actions">
+              <span class="soon-badge">Dettagli in arrivo</span>
+            </div>
+          </article>
 
-<div class="bottom-nav-wrap">
+          <article class="event-card">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Portofino</div>
+              </div>
+              <div class="event-status">Summer Signature</div>
 
-<div class="bottom-nav">
+              <div class="event-body">
+                <div class="event-note">
+                  Un nuovo chapter sul mare. Maggiori dettagli in arrivo.
+                </div>
+              </div>
+            </div>
 
-<a class="bottom-brand">
-<img src="logo-mindjset.png">
-</a>
+            <div class="event-actions">
+              <span class="soon-badge">Dettagli in arrivo</span>
+            </div>
+          </article>
 
-<div class="bottom-menu">
+        </div>
+      </div>
+    </section>
 
-<a href="#events">Get Ticket</a>
-<a href="#gallery">Gallery</a>
-<a href="#contact">Contact</a>
+  </div>
 
-</div>
+  <!-- CONTACT PANEL -->
 
-<a href="#events" class="btn-ticket">Get Ticket</a>
+  <aside class="contact-panel" id="contact-panel" aria-hidden="true">
+    <div class="contact-head">
+      <div class="contact-title">Contact</div>
+      <button class="contact-close" id="contact-close" aria-label="Chiudi contatti">×</button>
+    </div>
 
-</div>
+    <div class="contact-list">
+      <div class="contact-item">
+        <div class="contact-label">E-mail</div>
+        <div class="contact-value">
+          <a href="mailto:mindjsetmusic@gmail.com">mindjsetmusic@gmail.com</a>
+        </div>
+      </div>
 
-</div>
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">
+          Scrivi sul profilo IG Mindjset.
+        </div>
+      </div>
+    </div>
+  </aside>
 
-<!-- EVENTS -->
+  <script>
+    const progress = document.getElementById("loading-progress");
+    const number = document.getElementById("loading-number");
+    const preloader = document.getElementById("preloader");
+    const site = document.getElementById("site");
 
-<section class="events" id="events">
+    let percent = 0;
 
-<div class="container">
+    const interval = setInterval(() => {
+      percent++;
+      progress.style.width = percent + "%";
+      number.innerText = percent + "%";
 
-<div class="events-list">
+      if(percent >= 100){
+        clearInterval(interval);
 
-<div class="event-card">
+        setTimeout(() => {
+          preloader.classList.add("hide");
+          site.classList.add("show");
+          document.body.style.overflow = "auto";
+        }, 300);
+      }
+    }, 20);
 
-<div>
-<div class="event-city">Milano</div>
-<img src="logo-mindjset.png" class="mini-logo">
-</div>
+    const contactToggle = document.getElementById("contact-toggle");
+    const contactPanel = document.getElementById("contact-panel");
+    const contactClose = document.getElementById("contact-close");
 
-<div class="event-details">
-Sabato 28 Marzo<br>
-Nepentha Club — Milano
-</div>
+    function openContactPanel(){
+      contactPanel.classList.add("show");
+      contactPanel.setAttribute("aria-hidden", "false");
+    }
 
-<div>
-<a class="ticket-link">Get Ticket</a>
-</div>
+    function closeContactPanel(){
+      contactPanel.classList.remove("show");
+      contactPanel.setAttribute("aria-hidden", "true");
+    }
 
-</div>
+    contactToggle.addEventListener("click", function(e){
+      e.preventDefault();
+      const isOpen = contactPanel.classList.contains("show");
+      if(isOpen){
+        closeContactPanel();
+      } else {
+        openContactPanel();
+      }
+    });
 
-</div>
+    contactClose.addEventListener("click", function(){
+      closeContactPanel();
+    });
 
-</div>
+    document.addEventListener("click", function(e){
+      const clickedInsidePanel = contactPanel.contains(e.target);
+      const clickedToggle = contactToggle.contains(e.target);
 
-</section>
+      if(!clickedInsidePanel && !clickedToggle){
+        closeContactPanel();
+      }
+    });
 
-</div>
-
-<script>
-
-const progress=document.getElementById("loading-progress")
-const number=document.getElementById("loading-number")
-const preloader=document.getElementById("preloader")
-const site=document.getElementById("site")
-
-let percent=0
-
-const interval=setInterval(()=>{
-
-percent++
-
-progress.style.width=percent+"%"
-
-number.innerText=percent+"%"
-
-if(percent>=100){
-
-clearInterval(interval)
-
-setTimeout(()=>{
-
-preloader.classList.add("hide")
-site.classList.add("show")
-
-document.body.style.overflow="auto"
-
-},300)
-
-}
-
-},20)
-
-</script>
+    document.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){
+        closeContactPanel();
+      }
+    });
+  </script>
 
 </body>
-
 </html>
