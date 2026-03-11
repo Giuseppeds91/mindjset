@@ -81,7 +81,8 @@
     .preloader-logo{
       width:min(380px,70vw);
       margin-bottom:40px;
-      clip-path: inset(20% 0 20% 0);
+      /* TAGLIO PIU' FORTE PER ELIMINARE LE LINEE */
+      clip-path: inset(32% 0 32% 0);
       filter:drop-shadow(0 0 30px rgba(255,0,0,.25));
       animation:breath 2.4s ease-in-out infinite;
     }
@@ -184,18 +185,6 @@
       letter-spacing:-.065em;
       max-width:980px;
       text-wrap:balance;
-    }
-
-    .hero-watermark{
-      position:absolute;
-      right:34px;
-      bottom:138px;
-      width:min(220px, 20vw);
-      opacity:.11;
-      clip-path: inset(20% 0 20% 0);
-      z-index:2;
-      pointer-events:none;
-      filter:drop-shadow(0 0 18px rgba(255,0,0,.12));
     }
 
     /* ---------------- BOTTOM NAV ---------------- */
@@ -546,12 +535,6 @@
         font-size:clamp(42px, 12vw, 70px);
       }
 
-      .hero-watermark{
-        width:142px;
-        right:18px;
-        bottom:118px;
-      }
-
       .bottom-nav{
         grid-template-columns:1fr;
         gap:10px;
@@ -651,8 +634,8 @@
   <div id="site">
 
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="nightlife-bg.mp4" type="video/mp4">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="./nightlife-bg.mp4" type="video/mp4">
       </video>
 
       <div class="hero-overlay"></div>
@@ -668,8 +651,6 @@
           </div>
         </div>
       </div>
-
-      <img src="logo-mindjset.png" class="hero-watermark" alt="Mindjset watermark">
     </section>
 
     <div class="bottom-nav-wrap">
