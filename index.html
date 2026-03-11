@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MINDJSET</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
 background:#000;
@@ -20,21 +28,7 @@ font-family:"Inter",sans-serif;
 overflow:hidden;
 }
 
-img,video{
-display:block;
-max-width:100%;
-}
-
-/* ---------- LOGO FIX (toglie le linee) ---------- */
-
-.preloader-logo,
-.hero-watermark,
-.bottom-brand img,
-.mini-logo{
-clip-path: inset(20% 0 20% 0);
-}
-
-/* ---------- PRELOADER ---------- */
+/* ---------------- PRELOADER ---------------- */
 
 #preloader{
 position:fixed;
@@ -53,35 +47,53 @@ pointer-events:none;
 }
 
 .preloader-inner{
-width:420px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+width:min(90vw,500px);
 text-align:center;
 }
 
 .preloader-logo{
-width:320px;
+width:min(380px,70vw);
 margin-bottom:40px;
-filter:drop-shadow(0 0 40px red);
+clip-path: inset(20% 0 20% 0);
+filter:drop-shadow(0 0 30px rgba(255,0,0,.25));
+animation:breath 2.4s ease-in-out infinite;
+}
+
+@keyframes breath{
+0%{transform:scale(.98)}
+50%{transform:scale(1)}
+100%{transform:scale(.98)}
 }
 
 .loading-bar{
 width:100%;
 height:2px;
-background:#333;
+background:rgba(255,255,255,.15);
+border-radius:999px;
 overflow:hidden;
+margin-bottom:14px;
 }
 
 .loading-progress{
 width:0%;
 height:100%;
-background:red;
+background:linear-gradient(90deg,#5a0000,#ff2a2a,#ff6b6b);
+box-shadow:0 0 14px rgba(255,0,0,.4);
+transition:width .15s ease;
 }
 
 .loading-number{
-margin-top:10px;
-font-size:22px;
+font-size:12px;
+letter-spacing:.3em;
+text-transform:uppercase;
+opacity:.7;
 }
 
-/* ---------- SITE ---------- */
+/* ---------------- SITE ---------------- */
 
 #site{
 opacity:0;
@@ -92,7 +104,7 @@ transition:opacity 1s ease;
 opacity:1;
 }
 
-/* ---------- HERO ---------- */
+/* ---------------- HERO ---------------- */
 
 .hero{
 position:relative;
@@ -106,20 +118,20 @@ inset:0;
 width:100%;
 height:100%;
 object-fit:cover;
-filter:brightness(.5);
+filter:brightness(.45);
 }
 
 .hero-overlay{
 position:absolute;
 inset:0;
-background:linear-gradient(to bottom,transparent,black);
+background:linear-gradient(180deg,transparent,black);
 }
 
 .hero-inner{
 position:relative;
-min-height:100vh;
 display:flex;
 align-items:flex-end;
+min-height:100vh;
 padding-bottom:180px;
 }
 
@@ -130,7 +142,7 @@ margin:auto;
 }
 
 .hero-title{
-font-size:120px;
+font-size:clamp(60px,10vw,140px);
 line-height:.9;
 font-weight:800;
 text-transform:uppercase;
@@ -141,10 +153,11 @@ position:absolute;
 right:40px;
 bottom:120px;
 width:200px;
-opacity:.15;
+opacity:.12;
+clip-path: inset(20% 0 20% 0);
 }
 
-/* ---------- MENU ---------- */
+/* ---------------- MENU ---------------- */
 
 .bottom-nav-wrap{
 position:fixed;
@@ -157,44 +170,45 @@ z-index:50;
 }
 
 .bottom-nav{
-width:900px;
-max-width:95%;
+width:min(900px,95%);
 display:grid;
 grid-template-columns:auto 1fr auto;
 align-items:center;
 padding:10px 16px;
 border-radius:999px;
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.55);
 backdrop-filter:blur(20px);
 border:1px solid rgba(255,255,255,.1);
 }
 
 .bottom-brand img{
 width:110px;
+clip-path: inset(20% 0 20% 0);
 }
 
 .bottom-menu{
 display:flex;
 justify-content:center;
-gap:24px;
+gap:26px;
 }
 
 .bottom-menu a{
 font-size:12px;
-letter-spacing:.15em;
+letter-spacing:.18em;
 text-transform:uppercase;
 }
 
 .btn-ticket{
 background:#fff;
 color:#000;
-padding:12px 22px;
+padding:12px 24px;
 border-radius:999px;
 font-size:12px;
 font-weight:700;
+letter-spacing:.12em;
 }
 
-/* ---------- EVENTS ---------- */
+/* ---------------- EVENTS ---------------- */
 
 .events{
 padding:80px 0;
@@ -228,7 +242,7 @@ color:#aaa;
 .ticket-link{
 background:#fff;
 color:#000;
-padding:12px 20px;
+padding:12px 22px;
 border-radius:999px;
 font-size:12px;
 font-weight:700;
@@ -236,14 +250,15 @@ font-weight:700;
 
 .mini-logo{
 width:32px;
+clip-path: inset(20% 0 20% 0);
 }
 
-/* ---------- MOBILE ---------- */
+/* ---------------- MOBILE ---------------- */
 
 @media(max-width:800px){
 
 .hero-title{
-font-size:60px;
+font-size:50px;
 }
 
 .event-card{
@@ -259,21 +274,33 @@ gap:12px;
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- PRELOADER -->
+
 <div id="preloader">
+
 <div class="preloader-inner">
-<img src="logo-mindjset.png" class="preloader-logo">
+
+<img src="logo-mindjset.png" class="preloader-logo" alt="Mindjset">
+
 <div class="loading-bar">
 <div class="loading-progress" id="loading-progress"></div>
 </div>
+
 <div class="loading-number" id="loading-number">0%</div>
-</div>
+
 </div>
 
+</div>
+
+
 <div id="site">
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -284,20 +311,29 @@ gap:12px;
 <div class="hero-overlay"></div>
 
 <div class="hero-inner">
+
 <div class="container">
+
 <h1 class="hero-title">
+
 Mindjset<br>
 nightlife<br>
 across iconic cities
+
 </h1>
+
 </div>
+
 </div>
 
 <img src="logo-mindjset.png" class="hero-watermark">
 
 </section>
 
+<!-- MENU -->
+
 <div class="bottom-nav-wrap">
+
 <div class="bottom-nav">
 
 <a class="bottom-brand">
@@ -305,15 +341,20 @@ across iconic cities
 </a>
 
 <div class="bottom-menu">
+
 <a href="#events">Get Ticket</a>
 <a href="#gallery">Gallery</a>
 <a href="#contact">Contact</a>
+
 </div>
 
 <a href="#events" class="btn-ticket">Get Ticket</a>
 
 </div>
+
 </div>
+
+<!-- EVENTS -->
 
 <section class="events" id="events">
 
@@ -349,35 +390,40 @@ Nepentha Club — Milano
 
 <script>
 
-const progress = document.getElementById("loading-progress");
-const number = document.getElementById("loading-number");
-const preloader = document.getElementById("preloader");
-const site = document.getElementById("site");
+const progress=document.getElementById("loading-progress")
+const number=document.getElementById("loading-number")
+const preloader=document.getElementById("preloader")
+const site=document.getElementById("site")
 
-let percent=0;
+let percent=0
 
 const interval=setInterval(()=>{
 
-percent++;
+percent++
 
-progress.style.width=percent+"%";
-number.innerText=percent+"%";
+progress.style.width=percent+"%"
+
+number.innerText=percent+"%"
 
 if(percent>=100){
 
-clearInterval(interval);
+clearInterval(interval)
 
 setTimeout(()=>{
-preloader.classList.add("hide");
-site.classList.add("show");
-document.body.style.overflow="auto";
-},300);
+
+preloader.classList.add("hide")
+site.classList.add("show")
+
+document.body.style.overflow="auto"
+
+},300)
 
 }
 
-},20);
+},20)
 
 </script>
 
 </body>
+
 </html>
