@@ -731,9 +731,18 @@
   <div id="site">
 
     <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto">
-        <source src="./nightlife-bg.mp4" type="video/mp4">
-      </video>
+      <video 
+  class="hero-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster="preview.jpg"
+  id="heroVideo"
+>
+  <source src="./nightlife-bg.mp4" type="video/mp4">
+</video>
 
       <div class="hero-overlay"></div>
 
@@ -994,7 +1003,27 @@
         closeGalleryPanel();
       }
     });
-  </script>
+  <script>
+  function forcePlayVideo() {
+    const video = document.getElementById("heroVideo");
 
+    if (video) {
+      video.muted = true;
+      video.play().catch(() => {
+        console.log("Autoplay bloccato, retry...");
+      });
+    }
+  }
+
+  window.addEventListener("load", forcePlayVideo);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      forcePlayVideo();
+    }
+  });
+
+  document.addEventListener("click", forcePlayVideo);
+</script>
 </body>
 </html>
