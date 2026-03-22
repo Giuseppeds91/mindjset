@@ -998,12 +998,14 @@
     });
 
     document.addEventListener("keydown", function(e){
-      if(e.key === "Escape"){
-        closeContactPanel();
-        closeGalleryPanel();
-      }
-    });
-  <script>
+  if(e.key === "Escape"){
+    closeContactPanel();
+    closeGalleryPanel();
+  }
+});
+</script>
+
+<script>
   function forcePlayVideo() {
     const video = document.getElementById("heroVideo");
 
