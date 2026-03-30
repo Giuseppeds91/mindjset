@@ -79,6 +79,10 @@
       max-width:100%;
     }
 
+    button{
+      font-family:inherit;
+    }
+
     /* ---------------- PRELOADER ---------------- */
 
     #preloader{
@@ -391,7 +395,7 @@
       text-transform:uppercase;
     }
 
-    .live-badge{
+    .recap-badge{
       display:inline-flex;
       align-items:center;
       justify-content:center;
@@ -405,8 +409,7 @@
       font-weight:800;
       letter-spacing:.18em;
       text-transform:uppercase;
-      animation:liveBlink 1.2s ease-in-out infinite;
-      box-shadow:0 0 16px rgba(255,42,42,.14);
+      box-shadow:0 0 18px rgba(255,42,42,.14);
     }
 
     .soon-live-badge{
@@ -488,6 +491,8 @@
       letter-spacing:.16em;
       text-transform:uppercase;
       transition:transform .22s ease, opacity .22s ease;
+      border:none;
+      cursor:pointer;
     }
 
     .ticket-link:hover{
@@ -601,6 +606,102 @@
       text-underline-offset:3px;
     }
 
+    /* ---------------- INFO MODAL ---------------- */
+
+    .info-modal{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(0,0,0,.62);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:120;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity .28s ease, visibility .28s ease;
+    }
+
+    .info-modal.show{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .info-modal-box{
+      position:relative;
+      width:min(420px, 100%);
+      padding:24px;
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(12,12,12,.94), rgba(6,6,6,.96));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 20px 60px rgba(0,0,0,.45), 0 0 30px rgba(255,42,42,.08);
+      transform:translateY(12px) scale(.98);
+      transition:transform .28s ease;
+    }
+
+    .info-modal.show .info-modal-box{
+      transform:translateY(0) scale(1);
+    }
+
+    .info-modal-close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      width:36px;
+      height:36px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .info-modal-kicker{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:24px;
+      padding:0 10px;
+      margin-bottom:14px;
+      border-radius:999px;
+      background:rgba(255,42,42,.12);
+      border:1px solid rgba(255,42,42,.28);
+      color:#ff5555;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .info-modal-title{
+      font-size:22px;
+      line-height:1.1;
+      font-weight:800;
+      letter-spacing:-.04em;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+
+    .info-modal-text{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+
+    .info-modal-footer{
+      font-size:10px;
+      font-weight:600;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.48);
+    }
+
     /* ---------------- MOBILE ---------------- */
 
     @media (max-width: 1080px){
@@ -712,6 +813,15 @@
       .event-note{
         font-size:13px;
       }
+
+      .info-modal-box{
+        padding:22px 18px;
+        border-radius:22px;
+      }
+
+      .info-modal-title{
+        font-size:20px;
+      }
     }
   </style>
 </head>
@@ -731,19 +841,19 @@
   <div id="site">
 
     <section class="hero">
- <video 
-  class="hero-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  webkit-playsinline
-  preload="auto"
-  id="heroVideo"
-  style="pointer-events:none;"
->
-  <source src="./nightlife-bg.mp4" type="video/mp4">
-</video>
+      <video 
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        id="heroVideo"
+        style="pointer-events:none;"
+      >
+        <source src="./nightlife-bg.mp4" type="video/mp4">
+      </video>
 
       <div class="hero-overlay"></div>
 
@@ -780,9 +890,9 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Milano</div>
-                <span class="live-badge">Live</span>
+                <span class="recap-badge">Recap Soon</span>
               </div>
-              <div class="event-status">Current Event</div>
+              <div class="event-status">The Night Has Ended</div>
 
               <div class="event-body">
                 <div class="event-date">Sabato 28 Marzo 2026</div>
@@ -791,7 +901,7 @@
             </div>
 
             <div class="event-actions">
-              <a href="https://www.eventbrite.it/e/mindjset-the-bizarre-match-2803-tickets-1984997506978" class="ticket-link" target="_blank" onclick="fbq('track', 'InitiateCheckout');">Get Ticket</a>
+              <button type="button" class="ticket-link" data-modal="milano-recap">Unlock Recap</button>
             </div>
           </article>
 
@@ -805,15 +915,12 @@
 
               <div class="event-body">
                 <div class="event-date">Sabato 25 Aprile 2026</div>
-                <div class="event-location">Roma Centro</div>
-                <div class="event-note">
-                  Location, line up e ulteriori dettagli in arrivo.
-                </div>
+                <div class="event-location">Notorius Club Roma - Piazza Barberini - Via di S. Nicola da Tolentino, 22, Roma</div>
               </div>
             </div>
 
             <div class="event-actions">
-              <span class="soon-badge">Dettagli in arrivo</span>
+              <button type="button" class="ticket-link" data-modal="roma-tickets">Ticket Drop Soon</button>
             </div>
           </article>
 
@@ -895,6 +1002,17 @@
     </div>
   </aside>
 
+  <!-- INFO MODAL -->
+  <div class="info-modal" id="info-modal" aria-hidden="true">
+    <div class="info-modal-box" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+      <button class="info-modal-close" id="info-modal-close" aria-label="Chiudi popup">×</button>
+      <div class="info-modal-kicker" id="info-modal-kicker">Update</div>
+      <div class="info-modal-title" id="info-modal-title">Mindjset</div>
+      <div class="info-modal-text" id="info-modal-text"></div>
+      <div class="info-modal-footer" id="info-modal-footer">Stay tuned for the drop</div>
+    </div>
+  </div>
+
   <script>
     const progress = document.getElementById("loading-progress");
     const number = document.getElementById("loading-number");
@@ -930,6 +1048,28 @@
     const galleryPanel = document.getElementById("gallery-panel");
     const galleryClose = document.getElementById("gallery-close");
 
+    const infoModal = document.getElementById("info-modal");
+    const infoModalClose = document.getElementById("info-modal-close");
+    const infoModalKicker = document.getElementById("info-modal-kicker");
+    const infoModalTitle = document.getElementById("info-modal-title");
+    const infoModalText = document.getElementById("info-modal-text");
+    const infoModalFooter = document.getElementById("info-modal-footer");
+
+    const modalContent = {
+      "milano-recap": {
+        kicker: "Milano Recap",
+        title: "Milano Recap",
+        text: "Photo & video from the last Mindjset night will be live soon.",
+        footer: "Stay tuned for the drop"
+      },
+      "roma-tickets": {
+        kicker: "Roma Tickets",
+        title: "Roma Tickets",
+        text: "Tickets for the next Mindjset night will be live soon.",
+        footer: "Stay tuned for the drop"
+      }
+    };
+
     function openContactPanel(){
       contactPanel.classList.add("show");
       contactPanel.setAttribute("aria-hidden", "false");
@@ -950,10 +1090,29 @@
       galleryPanel.setAttribute("aria-hidden", "true");
     }
 
+    function openInfoModal(key){
+      const content = modalContent[key];
+      if(!content) return;
+
+      infoModalKicker.textContent = content.kicker;
+      infoModalTitle.textContent = content.title;
+      infoModalText.textContent = content.text;
+      infoModalFooter.textContent = content.footer;
+
+      infoModal.classList.add("show");
+      infoModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeInfoModal(){
+      infoModal.classList.remove("show");
+      infoModal.setAttribute("aria-hidden", "true");
+    }
+
     contactToggle.addEventListener("click", function(e){
       e.preventDefault();
       const isOpen = contactPanel.classList.contains("show");
       closeGalleryPanel();
+      closeInfoModal();
 
       if(isOpen){
         closeContactPanel();
@@ -970,6 +1129,7 @@
       e.preventDefault();
       const isOpen = galleryPanel.classList.contains("show");
       closeContactPanel();
+      closeInfoModal();
 
       if(isOpen){
         closeGalleryPanel();
@@ -982,12 +1142,33 @@
       closeGalleryPanel();
     });
 
+    document.querySelectorAll("[data-modal]").forEach(button => {
+      button.addEventListener("click", function(){
+        closeContactPanel();
+        closeGalleryPanel();
+        openInfoModal(this.dataset.modal);
+      });
+    });
+
+    infoModalClose.addEventListener("click", function(){
+      closeInfoModal();
+    });
+
+    infoModal.addEventListener("click", function(e){
+      if(e.target === infoModal){
+        closeInfoModal();
+      }
+    });
+
     document.addEventListener("click", function(e){
       const clickedInsideContact = contactPanel.contains(e.target);
       const clickedContactToggle = contactToggle.contains(e.target);
 
       const clickedInsideGallery = galleryPanel.contains(e.target);
       const clickedGalleryToggle = galleryToggle.contains(e.target);
+
+      const clickedInsideModalBox = e.target.closest(".info-modal-box");
+      const clickedModalTrigger = e.target.closest("[data-modal]");
 
       if(!clickedInsideContact && !clickedContactToggle){
         closeContactPanel();
@@ -996,37 +1177,42 @@
       if(!clickedInsideGallery && !clickedGalleryToggle){
         closeGalleryPanel();
       }
+
+      if(infoModal.classList.contains("show") && !clickedInsideModalBox && !clickedModalTrigger && e.target !== infoModal){
+        closeInfoModal();
+      }
     });
 
     document.addEventListener("keydown", function(e){
-  if(e.key === "Escape"){
-    closeContactPanel();
-    closeGalleryPanel();
-  }
-});
-</script>
+      if(e.key === "Escape"){
+        closeContactPanel();
+        closeGalleryPanel();
+        closeInfoModal();
+      }
+    });
+  </script>
 
-<script>
-  function forcePlayVideo() {
-    const video = document.getElementById("heroVideo");
+  <script>
+    function forcePlayVideo() {
+      const video = document.getElementById("heroVideo");
 
-    if (video) {
-      video.muted = true;
-      video.play().catch(() => {
-        console.log("Autoplay bloccato, retry...");
-      });
+      if (video) {
+        video.muted = true;
+        video.play().catch(() => {
+          console.log("Autoplay bloccato, retry...");
+        });
+      }
     }
-  }
 
-  window.addEventListener("load", forcePlayVideo);
+    window.addEventListener("load", forcePlayVideo);
 
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) {
-      forcePlayVideo();
-    }
-  });
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        forcePlayVideo();
+      }
+    });
 
-  document.addEventListener("click", forcePlayVideo);
-</script>
+    document.addEventListener("click", forcePlayVideo);
+  </script>
 </body>
 </html>
