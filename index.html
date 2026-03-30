@@ -398,20 +398,12 @@
     }
 
     .recap-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:24px;
-      padding:0 10px;
-      border-radius:999px;
-      background:rgba(255,42,42,.14);
-      border:1px solid rgba(255,42,42,.38);
+      display:inline-block;
       color:#ff3b3b;
-      font-size:10px;
+      font-size:12px;
       font-weight:800;
       letter-spacing:.18em;
       text-transform:uppercase;
-      box-shadow:0 0 18px rgba(255,42,42,.14);
     }
 
     .soon-live-badge{
@@ -664,20 +656,7 @@
     }
 
     .info-modal-kicker{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:24px;
-      padding:0 10px;
-      margin-bottom:14px;
-      border-radius:999px;
-      background:rgba(255,42,42,.12);
-      border:1px solid rgba(255,42,42,.28);
-      color:#ff5555;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      display:none;
     }
 
     .info-modal-title{
@@ -911,13 +890,13 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Roma</div>
-                <span class="soon-live-badge">Soon</span>
+                <span class="soon-live-badge">Launching Soon</span>
               </div>
               <div class="event-status">Next Event</div>
 
               <div class="event-body">
                 <div class="event-date">Sabato 25 Aprile 2026</div>
-                <div class="event-location">Notorius Club Roma - Piazza Barberini - Via di S. Nicola da Tolentino, 22, Roma</div>
+                <div class="event-location">Notorious Club Roma - Piazza Barberini - Via di S. Nicola da Tolentino, 22, Roma</div>
               </div>
             </div>
 
@@ -985,6 +964,13 @@
           <a href="mailto:mindjsetmusic@gmail.com">mindjsetmusic@gmail.com</a>
         </div>
       </div>
+
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">
+          <a href="https://www.instagram.com/mindjset/" target="_blank" rel="noopener noreferrer">@mindjset</a>
+        </div>
+      </div>
     </div>
   </aside>
 
@@ -1007,7 +993,7 @@
   <div class="info-modal" id="info-modal" aria-hidden="true">
     <div class="info-modal-box" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
       <button class="info-modal-close" id="info-modal-close" aria-label="Chiudi popup">×</button>
-      <div class="info-modal-kicker" id="info-modal-kicker">Update</div>
+      <div class="info-modal-kicker" id="info-modal-kicker"></div>
       <div class="info-modal-title" id="info-modal-title">Mindjset</div>
       <div class="info-modal-text" id="info-modal-text"></div>
       <div class="info-modal-footer" id="info-modal-footer">Stay tuned for the drop</div>
@@ -1058,19 +1044,19 @@
 
     const modalContent = {
       "milano-recap": {
-        kicker: "Milano Recap",
+        kicker: "",
         title: "Milano Recap",
         text: "Photo & video from the last Mindjset night will be live soon.",
         footer: "Stay tuned for the drop"
       },
       "roma-tickets": {
-        kicker: "Roma Tickets",
+        kicker: "",
         title: "Roma Tickets",
         text: "Tickets for the next Mindjset night will be live soon.",
         footer: "Stay tuned for the drop"
       },
       "next-drop": {
-        kicker: "Mindjset",
+        kicker: "",
         title: "Next Drop",
         text: "Mindjset updates, tickets and recap content will be live soon.",
         footer: "Stay tuned"
@@ -1174,19 +1160,12 @@
       const clickedInsideGallery = galleryPanel.contains(e.target);
       const clickedGalleryToggle = galleryToggle.contains(e.target);
 
-      const clickedInsideModalBox = e.target.closest(".info-modal-box");
-      const clickedModalTrigger = e.target.closest("[data-modal]");
-
       if(!clickedInsideContact && !clickedContactToggle){
         closeContactPanel();
       }
 
       if(!clickedInsideGallery && !clickedGalleryToggle){
         closeGalleryPanel();
-      }
-
-      if(infoModal.classList.contains("show") && !clickedInsideModalBox && !clickedModalTrigger && e.target !== infoModal){
-        closeInfoModal();
       }
     });
 
