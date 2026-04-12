@@ -58,13 +58,19 @@
     }
 
     .topbar-inner{
-      width:min(1240px, calc(100% - 28px));
-      margin:auto;
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-    }
+  width:min(1240px, calc(100% - 28px));
+  margin:auto;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+}
 
     .top-label{
       color:rgba(255,255,255,.86);
@@ -447,11 +453,14 @@
       font-size:16px;
     }
 
-    .lightbox-close{
-      top:-40px;
-      right:0;
-      z-index:120;
-    }
+   .lightbox-close{
+  top:-40px;
+  right:0;
+  z-index:120;
+  width:44px;
+  height:44px;
+  font-size:20px;
+}
 
     .lightbox-prev,
     .lightbox-next{
@@ -511,10 +520,14 @@
     }
 
     @media (max-width: 720px){
-      .lightbox-close{
-        top:-34px;
-        right:0;
-      }
+  .lightbox-close{
+    top:-34px;
+    right:0;
+    width:42px;
+    height:42px;
+    font-size:18px;
+  }
+}
 
       .lightbox-counter{
         left:0;
@@ -560,10 +573,13 @@
 <body>
   <main class="page">
     <header class="topbar">
-      <div class="topbar-inner">
-        <span class="top-label">Unlock Recap</span>
-      </div>
-    </header>
+  <div class="topbar-inner">
+    <div class="top-left">
+      <span class="top-label">Unlock Recap</span>
+    </div>
+    <a class="back-link" href="index.html">Back to home</a>
+  </div>
+</header>
 
     <section class="hero">
       <div class="shell">
