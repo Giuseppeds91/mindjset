@@ -8,8 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-
+    *{margin:0;padding:0;box-sizing:border-box}
     :root{
       --bg:#000;
       --text:#fff;
@@ -21,8 +20,7 @@
       --shadow:0 18px 48px rgba(0,0,0,.34);
     }
 
-    html { scroll-behavior:smooth; }
-
+    html{scroll-behavior:smooth}
     body{
       background:#000;
       color:#fff;
@@ -32,9 +30,9 @@
       overflow-x:hidden;
     }
 
-    a { text-decoration:none; color:inherit; }
-    img,video { display:block; width:100%; }
-    button { font:inherit; }
+    a{text-decoration:none;color:inherit}
+    img,video{display:block;width:100%}
+    button{font:inherit}
 
     .page{
       min-height:100vh;
@@ -73,10 +71,10 @@
       align-items:center;
       justify-content:center;
       min-height:44px;
-      padding:0;
-      background:transparent;
-      border:none;
-      color:rgba(255,255,255,.86);
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
       font-size:11px;
       font-weight:700;
       letter-spacing:.18em;
@@ -86,43 +84,15 @@
 
     .back-link:hover{
       transform:translateY(-1px);
-      color:#fff;
+      background:rgba(255,255,255,.05);
     }
 
     .hero{
-      position:relative;
       padding:26px 0 8px;
-      overflow:hidden;
-    }
-
-    .hero-bg-logo{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .hero-bg-logo img{
-      width:min(760px, 92vw);
-      opacity:.055;
-      filter:grayscale(1) brightness(1.2);
-      animation:heroPulse 5s ease-in-out infinite;
-      transform:translateY(-8px);
-    }
-
-    @keyframes heroPulse{
-      0%{opacity:.03; transform:translateY(-8px) scale(.98)}
-      50%{opacity:.085; transform:translateY(-8px) scale(1)}
-      100%{opacity:.03; transform:translateY(-8px) scale(.98)}
     }
 
     .hero-copy{
-      position:relative;
-      z-index:1;
-      padding:40px 2px 8px;
+      padding:28px 2px 8px;
     }
 
     .hero-kicker{
@@ -135,28 +105,21 @@
 
     .hero-title{
       font-size:clamp(44px, 13vw, 110px);
-      line-height:1.02;
+      line-height:.9;
       letter-spacing:-.075em;
       text-transform:uppercase;
       font-weight:800;
-      max-width:980px;
+      max-width:780px;
     }
 
-    .hero-title span{
-      display:block;
-    }
-
-    .hero-title span + span{
-      margin-top:.12em;
-    }
+    .hero-title span{display:block}
 
     .hero-text{
-      margin-top:20px;
-      margin-bottom:50px;
+      margin-top:18px;
       color:var(--muted);
       font-size:15px;
       line-height:1.6;
-      max-width:420px;
+      max-width:360px;
       text-transform:uppercase;
       letter-spacing:.12em;
       font-weight:600;
@@ -228,14 +191,29 @@
       color:#fff;
     }
 
-    .live-pill{
-      animation:liveBlink 1.15s ease-in-out infinite;
+    
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:8px;
     }
 
-    @keyframes liveBlink{
-      0%{opacity:.38; box-shadow:0 0 0 rgba(0,0,0,0)}
-      50%{opacity:1; box-shadow:0 0 14px rgba(0,0,0,.22)}
-      100%{opacity:.38; box-shadow:0 0 0 rgba(0,0,0,0)}
+    
+    .gallery-label{
+      min-height:20px;
+      padding:0 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      font-size:9px;
+      letter-spacing:.14em;
+      display:inline-flex;
+      align-items:center;
+      text-transform:uppercase;
+      flex-shrink:0;
+    }
+
+    .tab-btn.active .status-pill{
+      background:#000;
+      color:#fff;
     }
 
     .panel{
@@ -244,13 +222,11 @@
       animation:fadeIn .28s ease;
     }
 
-    .panel.active{
-      display:block;
-    }
+    .panel.active{display:block}
 
     @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(8px); }
-      to{ opacity:1; transform:translateY(0); }
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
     .section-head{
@@ -278,66 +254,6 @@
       font-weight:800;
     }
 
-    .milano-actions{
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-      margin:18px 0 22px;
-    }
-
-    .milano-jump{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:32px;
-      padding:0;
-      border:none;
-      background:transparent;
-      color:#fff;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.20em;
-      text-transform:uppercase;
-      transition:.22s ease;
-    }
-
-    .milano-jump:hover{
-      opacity:.72;
-      transform:translateY(-1px);
-    }
-
-    .events-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:42px;
-      padding:0 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      color:#fff;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      transition:.25s ease;
-    }
-
-    .events-link:hover{
-      transform:translateY(-1px);
-      border-color:rgba(255,255,255,.18);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
-    }
-
-    .video-label,
-    .gallery-label{
-      margin:0 0 12px;
-      font-size:11px;
-      color:rgba(255,255,255,.52);
-      letter-spacing:.24em;
-      text-transform:uppercase;
-    }
-
     .photo-grid{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
@@ -353,8 +269,6 @@
       aspect-ratio:1/1;
       cursor:pointer;
       box-shadow:0 10px 24px rgba(0,0,0,.18);
-      padding:0;
-      appearance:none;
     }
 
     .thumb img{
@@ -362,12 +276,20 @@
       height:100%;
       object-fit:cover;
       transition:transform .32s ease, opacity .32s ease;
-      opacity:1;
     }
 
     .thumb:hover img{
       transform:scale(1.05);
       opacity:.94;
+    }
+
+    .video-label,
+    .gallery-label{
+      margin:0 0 12px;
+      font-size:11px;
+      color:rgba(255,255,255,.52);
+      letter-spacing:.24em;
+      text-transform:uppercase;
     }
 
     .video-grid{
@@ -393,25 +315,20 @@
     }
 
     .empty-state{
-      padding:4px 0 0;
-      color:rgba(255,255,255,.68);
-    }
-
-    .empty-copy{
-      font-size:14px;
-      line-height:1.7;
-      max-width:460px;
-      margin-bottom:8px;
-      color:rgba(255,255,255,.60);
-    }
-
-    .empty-meta{
-      font-size:11px;
-      color:rgba(255,255,255,.46);
+      min-height:220px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:28px;
+      color:rgba(255,255,255,.52);
+      font-size:12px;
       line-height:1.8;
-      text-transform:uppercase;
       letter-spacing:.16em;
-      margin-bottom:18px;
+      text-transform:uppercase;
     }
 
     .closing{
@@ -420,12 +337,13 @@
 
     .closing-copy{
       text-align:center;
-      font-size:clamp(20px, 6.2vw, 34px);
+      font-size:clamp(16px, 4.2vw, 34px);
       line-height:1.08;
       letter-spacing:.16em;
       text-transform:uppercase;
       color:rgba(255,255,255,.92);
       font-weight:700;
+      white-space:nowrap;
     }
 
     .lightbox{
@@ -439,9 +357,7 @@
       padding:16px;
     }
 
-    .lightbox.show{
-      display:flex;
-    }
+    .lightbox.show{display:flex}
 
     .lightbox-inner{
       position:relative;
@@ -472,71 +388,38 @@
       position:absolute;
       border:none;
       border-radius:999px;
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.08);
       color:#fff;
       cursor:pointer;
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-      opacity:.62;
-      transition:.22s ease;
-      width:38px;
-      height:38px;
-      font-size:16px;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .lightbox-close{
       top:-6px;
       right:0;
+      width:42px;
+      height:42px;
+      font-size:18px;
     }
 
     .lightbox-prev,
     .lightbox-next{
       top:50%;
       transform:translateY(-50%);
+      width:42px;
+      height:42px;
+      font-size:18px;
     }
 
-    .lightbox-prev{ left:6px; }
-    .lightbox-next{ right:6px; }
-
-    .lightbox-close:hover,
-    .lightbox-prev:hover,
-    .lightbox-next:hover{
-      opacity:1;
-      background:rgba(255,255,255,.10);
-    }
-
-    .lightbox-download{
-      position:absolute;
-      right:0;
-      bottom:-44px;
-      min-height:36px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      cursor:pointer;
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-      opacity:.72;
-      transition:.22s ease;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .lightbox-download:hover{
-      opacity:1;
-      background:rgba(255,255,255,.10);
-    }
+    .lightbox-prev{left:6px}
+    .lightbox-next{right:6px}
 
     .lightbox-counter{
       position:absolute;
-      left:0;
-      bottom:-40px;
+      left:50%;
+      bottom:-38px;
+      transform:translateX(-50%);
       font-size:11px;
       letter-spacing:.18em;
       text-transform:uppercase;
@@ -544,28 +427,35 @@
     }
 
     @media (min-width: 721px){
-      .shell{ width:min(1240px, calc(100% - 48px)); }
-      .topbar-inner{ width:min(1240px, calc(100% - 48px)); }
-      .hero{ padding:38px 0 14px; }
-      .hero-copy{ padding:58px 0 12px; }
-      .hero-text{ max-width:520px; font-size:16px; }
-      .tab-bar{ grid-template-columns:repeat(4, 1fr); gap:12px; }
-      .tab-btn{ min-height:86px; padding:16px 18px; }
-      .section-head{ gap:8px; padding:18px 0 24px; margin-bottom:26px; }
-      .photo-grid{ grid-template-columns:repeat(5, 1fr); gap:10px; }
-      .thumb{ border-radius:16px; }
-      .video-grid{ grid-template-columns:1fr 1fr; gap:14px; }
-      .lightbox-prev{ left:16px; }
-      .lightbox-next{ right:16px; }
+      .shell{width:min(1240px, calc(100% - 48px))}
+      .topbar-inner{width:min(1240px, calc(100% - 48px))}
+      .hero{padding:38px 0 14px}
+      .hero-copy{padding:44px 38px 34px;border-radius:34px}
+      .hero-text{max-width:520px;font-size:16px}
+      .tab-bar{grid-template-columns:repeat(4, 1fr);gap:12px}
+      .tab-btn{min-height:86px;padding:16px 18px}
+      .tab-city{font-size:12px}
+      .section-head{gap:8px;padding:18px 0 24px;margin-bottom:26px}
+      .photo-grid{grid-template-columns:repeat(5, 1fr);gap:10px}
+      .thumb{border-radius:16px}
+      .video-grid{grid-template-columns:1fr 1fr;gap:14px}
+      .empty-state{min-height:280px;font-size:13px}
+      .lightbox-prev{left:16px}
+      .lightbox-next{right:16px}
+    }
+      .lightbox-prev{left:16px}
+      .lightbox-next{right:16px}
     }
 
     @media (min-width: 1080px){
-      .hero-copy{ padding:76px 0 14px; }
-      .hero-title{ font-size:clamp(60px, 8vw, 120px); }
-      .hero-text{ max-width:560px; }
-      .section-head{ padding-top:12px; }
-      .photo-grid{ grid-template-columns:repeat(6, 1fr); gap:12px; }
-      .thumb{ border-radius:18px; }
+      .hero-copy{padding:22px 0 10px}
+      .hero-title{font-size:clamp(60px, 8vw, 120px)}
+      .hero-text{max-width:560px}
+      .section-head{
+        padding-top:12px;
+      }
+      .photo-grid{grid-template-columns:repeat(6, 1fr);gap:12px}
+      .thumb{border-radius:18px}
     }
   </style>
 </head>
@@ -573,14 +463,11 @@
   <main class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="back-link" href="index.html">Back to home</a>
+        <a class="back-link" href="/">Back to site</a>
       </div>
     </header>
 
     <section class="hero">
-      <div class="hero-bg-logo">
-        <img src="logo-mindjset.png" alt="Mindjset logo background">
-      </div>
       <div class="shell">
         <div class="hero-copy">
           <div class="hero-kicker">Unlock Recap</div>
@@ -596,10 +483,10 @@
     <section class="tab-section">
       <div class="shell">
         <div class="tab-bar">
-          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill live-pill">Live</span></button>
+          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill">Live</span></button>
           <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span class="status-pill">Soon</span></button>
-          <button class="tab-btn" data-event="barcellona"><span class="tab-city">Barcellona</span><span class="status-pill">Soon</span></button>
-          <button class="tab-btn" data-event="other-moments"><span class="tab-city">Other Cities</span><span class="status-pill">Coming Soon</span></button>
+          <button class="tab-btn" data-event="barcellona"><span class="tab-city">Barcelona</span><span class="status-pill">Soon</span></button>
+          <button class="tab-btn" data-event="other-moments"><span class="tab-city">Other Moments</span><span class="status-pill">Archive</span></button>
         </div>
       </div>
     </section>
@@ -611,13 +498,7 @@
           <div class="date">28 March 2026</div>
         </div>
 
-        <div class="milano-actions">
-          <a class="milano-jump" href="#milano-photos">Photos</a>
-          <a class="milano-jump" href="#milano-videos">Videos</a>
-        </div>
-
-        <div class="gallery-label" id="milano-photos">Photos below — videos further down</div>
-
+        
         <div class="photo-grid" id="milano-grid">
           <button class="thumb" type="button" data-index="0"><img src="images/milano (1).jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
           <button class="thumb" type="button" data-index="1"><img src="images/milano (2).jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
@@ -672,7 +553,7 @@
           <button class="thumb" type="button" data-index="50"><img src="images/milano (51).jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
         </div>
 
-        <div class="video-label" id="milano-videos" style="margin-top:28px">Video Moments</div>
+        <div class="video-label" style="margin-top:28px">Video Moments</div>
         <div class="video-grid">
           <div class="video-card">
             <video controls preload="metadata" poster="images/milano-video-poster-1.jpg">
@@ -692,41 +573,23 @@
           <div class="city">Roma</div>
           <div class="date">25 April 2026</div>
         </div>
-        <div class="empty-state">
-          <div>
-            <p class="empty-copy">The next chapter is almost here.</p>
-            <div class="empty-meta">Notorious Club Roma — Piazza Barberini — Via di S. Nicola da Tolentino, 22</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
+        <div class="empty-state">Roma will unlock soon</div>
       </article>
 
       <article class="panel" id="barcellona">
         <div class="section-head">
-          <div class="city">Barcellona</div>
+          <div class="city">Barcelona</div>
           <div class="date">23 May 2026</div>
         </div>
-        <div class="empty-state">
-          <div>
-            <p class="empty-copy">The next European stop will be announced soon.</p>
-            <div class="empty-meta">International stop — more details coming soon</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
+        <div class="empty-state">Barcelona will unlock soon</div>
       </article>
 
       <article class="panel" id="other-moments">
         <div class="section-head">
-          <div class="city">Other Cities</div>
-          <div class="date">Coming Soon</div>
+          <div class="city">Other Moments</div>
+          <div class="date">Archive</div>
         </div>
-        <div class="empty-state">
-          <div>
-            <p class="empty-copy">More cities are coming soon.</p>
-            <div class="empty-meta">New chapters will be added over time</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
+        <div class="empty-state">More will appear here</div>
       </article>
     </section>
 
@@ -740,11 +603,10 @@
       <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
       <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">‹</button>
       <div class="lightbox-image-wrap">
-        <img class="lightbox-image" id="lightbox-image" src="" alt="Expanded photo" loading="eager">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Expanded photo">
       </div>
       <button class="lightbox-next" id="lightbox-next" aria-label="Next">›</button>
       <div class="lightbox-counter" id="lightbox-counter"></div>
-      <a class="lightbox-download" id="lightbox-download" href="" download>Save Photo</a>
     </div>
   </div>
 
@@ -765,22 +627,18 @@
     const initialEvent = params.get('event');
     if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
 
-    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano (${i + 1}).jpg`);
+    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano-${i + 1}.jpg`);
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = document.getElementById('lightbox-close');
     const lightboxPrev = document.getElementById('lightbox-prev');
     const lightboxNext = document.getElementById('lightbox-next');
     const lightboxCounter = document.getElementById('lightbox-counter');
-    const lightboxDownload = document.getElementById('lightbox-download');
     const thumbs = document.querySelectorAll('#milano-grid .thumb');
     let currentIndex = 0;
 
     function updateLightbox(){
-      const currentSrc = milanoImages[currentIndex];
-      lightboxImage.src = currentSrc;
-      lightboxImage.alt = `Mindjset Milano photo ${currentIndex + 1}`;
-      lightboxDownload.href = currentSrc;
+      lightboxImage.src = milanoImages[currentIndex];
       lightboxCounter.textContent = `${currentIndex + 1} / ${milanoImages.length}`;
     }
 
