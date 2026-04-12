@@ -12,7 +12,7 @@
     :root{
       --bg:#000;
       --text:#fff;
-      --muted:rgba(255,255,255,.70);
+      --muted:rgba(255,255,255,.68);
       --muted-2:rgba(255,255,255,.46);
       --line:rgba(255,255,255,.08);
       --panel:rgba(255,255,255,.03);
@@ -43,14 +43,14 @@
     }
 
     .shell{
-      width:min(1180px, calc(100% - 28px));
+      width:min(1240px, calc(100% - 28px));
       margin:auto;
     }
 
     .topbar{
       position:sticky;
       top:0;
-      z-index:30;
+      z-index:40;
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
       background:rgba(0,0,0,.56);
@@ -58,7 +58,7 @@
     }
 
     .topbar-inner{
-      width:min(1180px, calc(100% - 28px));
+      width:min(1240px, calc(100% - 28px));
       margin:auto;
       min-height:76px;
       display:flex;
@@ -124,6 +124,9 @@
       font-size:15px;
       line-height:1.6;
       max-width:360px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:600;
     }
 
     .tab-section{
@@ -199,58 +202,63 @@
       display:flex;
       flex-direction:column;
       align-items:flex-start;
-      gap:10px;
+      gap:6px;
       padding:14px 0 22px;
       border-bottom:1px solid rgba(255,255,255,.07);
       margin-bottom:22px;
     }
 
-    .label{
+    .section-head .city{
+      font-size:12px;
+      color:rgba(255,255,255,.52);
+      letter-spacing:.28em;
+      text-transform:uppercase;
+    }
+
+    .section-head .date{
+      font-size:clamp(28px, 9vw, 52px);
+      line-height:.95;
+      letter-spacing:-.06em;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    .photo-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:8px;
+    }
+
+    .thumb{
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.06);
+      background:#0a0a0a;
+      aspect-ratio:1/1;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+    }
+
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .32s ease, opacity .32s ease;
+    }
+
+    .thumb:hover img{
+      transform:scale(1.05);
+      opacity:.94;
+    }
+
+    .video-label,
+    .gallery-label{
+      margin:0 0 12px;
       font-size:11px;
       color:rgba(255,255,255,.52);
       letter-spacing:.24em;
       text-transform:uppercase;
-    }
-
-    .section-head h2{
-      font-size:clamp(24px, 8vw, 48px);
-      line-height:.95;
-      letter-spacing:-.06em;
-      text-transform:uppercase;
-    }
-
-    .section-head p{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-      max-width:420px;
-    }
-
-    .masonry{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-    }
-
-    .card,
-    .video-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,.07);
-      background:#0a0a0a;
-      box-shadow:0 12px 32px rgba(0,0,0,.22);
-    }
-
-    .card{
-      aspect-ratio:4/5;
-    }
-
-    .card img,
-    .video-card video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
     }
 
     .video-grid{
@@ -260,8 +268,19 @@
       margin-top:28px;
     }
 
+    .video-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.07);
+      background:#0a0a0a;
+      box-shadow:0 12px 32px rgba(0,0,0,.22);
+    }
+
     .video-card video{
+      width:100%;
       aspect-ratio:16/10;
+      object-fit:cover;
     }
 
     .empty-state{
@@ -287,43 +306,120 @@
 
     .closing-copy{
       text-align:center;
-      font-size:clamp(18px, 5.8vw, 30px);
-      line-height:1.18;
+      font-size:clamp(20px, 6.2vw, 34px);
+      line-height:1.08;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.94);
+      z-index:100;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+    }
+
+    .lightbox.show{display:flex}
+
+    .lightbox-inner{
+      position:relative;
+      width:min(100%, 1200px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .lightbox-image-wrap{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .lightbox-image{
+      width:auto;
+      max-width:100%;
+      max-height:82vh;
+      object-fit:contain;
+      border-radius:18px;
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next{
+      position:absolute;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      cursor:pointer;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .lightbox-close{
+      top:-6px;
+      right:0;
+      width:42px;
+      height:42px;
+      font-size:18px;
+    }
+
+    .lightbox-prev,
+    .lightbox-next{
+      top:50%;
+      transform:translateY(-50%);
+      width:42px;
+      height:42px;
+      font-size:18px;
+    }
+
+    .lightbox-prev{left:6px}
+    .lightbox-next{right:6px}
+
+    .lightbox-counter{
+      position:absolute;
+      left:50%;
+      bottom:-38px;
+      transform:translateX(-50%);
+      font-size:11px;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:rgba(255,255,255,.88);
+      color:rgba(255,255,255,.62);
     }
 
     @media (min-width: 721px){
-      .shell{width:min(1220px, calc(100% - 48px))}
-      .topbar-inner{width:min(1220px, calc(100% - 48px))}
+      .shell{width:min(1240px, calc(100% - 48px))}
+      .topbar-inner{width:min(1240px, calc(100% - 48px))}
       .hero{padding:38px 0 14px}
       .hero-copy{padding:44px 38px 34px;border-radius:34px}
-      .hero-text{max-width:420px;font-size:16px}
+      .hero-text{max-width:520px;font-size:16px}
       .tab-bar{display:flex;flex-wrap:wrap;gap:12px}
       .tab-btn{min-height:48px;padding:0 18px;font-size:11px;letter-spacing:.16em;justify-content:center}
-      .section-head{gap:12px;padding:18px 0 24px;margin-bottom:26px}
-      .masonry{grid-template-columns:1fr 1fr;gap:14px}
+      .section-head{gap:8px;padding:18px 0 24px;margin-bottom:26px}
+      .photo-grid{grid-template-columns:repeat(5, 1fr);gap:10px}
+      .thumb{border-radius:16px}
       .video-grid{grid-template-columns:1fr 1fr;gap:14px}
       .empty-state{min-height:280px;font-size:13px}
+      .lightbox-prev{left:16px}
+      .lightbox-next{right:16px}
     }
 
     @media (min-width: 1080px){
       .hero-copy{padding:52px 46px 38px}
       .hero-title{font-size:clamp(60px, 8vw, 120px)}
-      .hero-text{max-width:500px}
+      .hero-text{max-width:560px}
       .section-head{
-        flex-direction:row;
-        align-items:end;
-        justify-content:space-between;
+        padding-top:12px;
       }
-      .section-head p{text-align:right}
-      .masonry{
-        grid-template-columns:1.15fr .85fr .85fr;
-        grid-auto-rows:220px;
-      }
-      .card.large{grid-row:span 2}
-      .card.wide{grid-column:span 2}
+      .photo-grid{grid-template-columns:repeat(6, 1fr);gap:12px}
+      .thumb{border-radius:18px}
     }
   </style>
 </head>
@@ -340,10 +436,10 @@
         <div class="hero-copy">
           <div class="hero-kicker">Unlock Recap</div>
           <h1 class="hero-title">
-            <span>One Night.</span>
-            <span>Still Alive.</span>
+            <span>One Night</span>
+            <span>Still Alive</span>
           </h1>
-          <p class="hero-text">The energy fades. The memory does not.</p>
+          <p class="hero-text">Where nights become memory</p>
         </div>
       </div>
     </section>
@@ -362,24 +458,66 @@
     <section class="shell">
       <article class="panel active" id="milano">
         <div class="section-head">
-          <div>
-            <div class="label">Current Chapter</div>
-            <h2>Milano Recap</h2>
-          </div>
-          <p>A selection of moments from the first chapter.</p>
+          <div class="city">Milano</div>
+          <div class="date">28 March 2026</div>
         </div>
 
-        <div class="label">Photo Selection</div>
-        <div class="masonry">
-          <div class="card large"><img src="images/milano-1.jpg" alt="Mindjset Milano photo 1" loading="lazy"></div>
-          <div class="card"><img src="images/milano-2.jpg" alt="Mindjset Milano photo 2" loading="lazy"></div>
-          <div class="card"><img src="images/milano-3.jpg" alt="Mindjset Milano photo 3" loading="lazy"></div>
-          <div class="card wide"><img src="images/milano-4.jpg" alt="Mindjset Milano photo 4" loading="lazy"></div>
-          <div class="card"><img src="images/milano-5.jpg" alt="Mindjset Milano photo 5" loading="lazy"></div>
-          <div class="card"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></div>
+        <div class="gallery-label">Photo Archive</div>
+        <div class="photo-grid" id="milano-grid">
+          <button class="thumb" type="button" data-index="0"><img src="images/milano-1.jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="1"><img src="images/milano-2.jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="2"><img src="images/milano-3.jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="3"><img src="images/milano-4.jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="4"><img src="images/milano-5.jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="5"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="6"><img src="images/milano-7.jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="7"><img src="images/milano-8.jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="8"><img src="images/milano-9.jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="9"><img src="images/milano-10.jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="10"><img src="images/milano-11.jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="11"><img src="images/milano-12.jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="12"><img src="images/milano-13.jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="13"><img src="images/milano-14.jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="14"><img src="images/milano-15.jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="15"><img src="images/milano-16.jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="16"><img src="images/milano-17.jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="17"><img src="images/milano-18.jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="18"><img src="images/milano-19.jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="19"><img src="images/milano-20.jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="20"><img src="images/milano-21.jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="21"><img src="images/milano-22.jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="22"><img src="images/milano-23.jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="23"><img src="images/milano-24.jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="24"><img src="images/milano-25.jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="25"><img src="images/milano-26.jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="26"><img src="images/milano-27.jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="27"><img src="images/milano-28.jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="28"><img src="images/milano-29.jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="29"><img src="images/milano-30.jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="30"><img src="images/milano-31.jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="31"><img src="images/milano-32.jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="32"><img src="images/milano-33.jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="33"><img src="images/milano-34.jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="34"><img src="images/milano-35.jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="35"><img src="images/milano-36.jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="36"><img src="images/milano-37.jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="37"><img src="images/milano-38.jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="38"><img src="images/milano-39.jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="39"><img src="images/milano-40.jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="40"><img src="images/milano-41.jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="41"><img src="images/milano-42.jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="42"><img src="images/milano-43.jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="43"><img src="images/milano-44.jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="44"><img src="images/milano-45.jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="45"><img src="images/milano-46.jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="46"><img src="images/milano-47.jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="47"><img src="images/milano-48.jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="48"><img src="images/milano-49.jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="49"><img src="images/milano-50.jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="50"><img src="images/milano-51.jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
         </div>
 
-        <div class="label" style="margin-top:28px">Video Moments</div>
+        <div class="video-label" style="margin-top:28px">Video Moments</div>
         <div class="video-grid">
           <div class="video-card">
             <video controls preload="metadata" poster="images/milano-video-poster-1.jpg">
@@ -396,42 +534,45 @@
 
       <article class="panel" id="roma">
         <div class="section-head">
-          <div>
-            <div class="label">Next Chapter</div>
-            <h2>Roma</h2>
-          </div>
-          <p>The next chapter will unlock soon.</p>
+          <div class="city">Roma</div>
+          <div class="date">25 April 2026</div>
         </div>
-        <div class="empty-state">Roma recap will unlock here soon</div>
+        <div class="empty-state">Roma will unlock soon</div>
       </article>
 
       <article class="panel" id="barcellona">
         <div class="section-head">
-          <div>
-            <div class="label">Future Chapter</div>
-            <h2>Barcelona</h2>
-          </div>
-          <p>A new city. A new memory in the making.</p>
+          <div class="city">Barcelona</div>
+          <div class="date">23 May 2026</div>
         </div>
-        <div class="empty-state">Barcelona recap will unlock here soon</div>
+        <div class="empty-state">Barcelona will unlock soon</div>
       </article>
 
       <article class="panel" id="other-moments">
         <div class="section-head">
-          <div>
-            <div class="label">Archive Expansion</div>
-            <h2>Other Moments</h2>
-          </div>
-          <p>More chapters will appear here, quietly and in the right moment.</p>
+          <div class="city">Other Moments</div>
+          <div class="date">Archive</div>
         </div>
-        <div class="empty-state">New memories will be added here soon</div>
+        <div class="empty-state">More will appear here</div>
       </article>
     </section>
 
     <section class="closing shell">
-      <p class="closing-copy">The memory stays.</p>
+      <p class="closing-copy">Some Nights Never Leave</p>
     </section>
   </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">‹</button>
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Expanded photo">
+      </div>
+      <button class="lightbox-next" id="lightbox-next" aria-label="Next">›</button>
+      <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+  </div>
 
   <script>
     const buttons = document.querySelectorAll('.tab-btn');
@@ -449,6 +590,81 @@
 
     const initialEvent = params.get('event');
     if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
+
+    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano-${i + 1}.jpg`);
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const thumbs = document.querySelectorAll('#milano-grid .thumb');
+    let currentIndex = 0;
+
+    function updateLightbox(){
+      lightboxImage.src = milanoImages[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${milanoImages.length}`;
+    }
+
+    function openLightbox(index){
+      currentIndex = index;
+      updateLightbox();
+      lightbox.classList.add('show');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('show');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev(){
+      currentIndex = (currentIndex - 1 + milanoImages.length) % milanoImages.length;
+      updateLightbox();
+    }
+
+    function showNext(){
+      currentIndex = (currentIndex + 1) % milanoImages.length;
+      updateLightbox();
+    }
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        openLightbox(Number(thumb.dataset.index));
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrev);
+    lightboxNext.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('show')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showPrev();
+      if(e.key === 'ArrowRight') showNext();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if(Math.abs(diff) < 40) return;
+      if(diff > 0) showNext();
+      else showPrev();
+    }, { passive: true });
   </script>
 </body>
 </html>
