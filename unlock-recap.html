@@ -4,323 +4,540 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unlock Recap | Mindjset</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #000;
-      color: #fff;
-      line-height: 1.4;
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#000;
+      --panel:rgba(255,255,255,.04);
+      --panel-strong:rgba(255,255,255,.07);
+      --line:rgba(255,255,255,.10);
+      --text:#fff;
+      --muted:rgba(255,255,255,.68);
+      --muted-2:rgba(255,255,255,.45);
+      --accent:#ff2a2a;
+      --shadow:0 24px 60px rgba(0,0,0,.38);
     }
+    html{scroll-behavior:smooth}
+    body{
+      background:#000;
+      color:#fff;
+      font-family:"Inter",sans-serif;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img,video{display:block;width:100%}
+    button{font:inherit}
 
-    a { color: inherit; text-decoration: none; }
-
-    .recap-page {
-      min-height: 100vh;
+    .page{
+      min-height:100vh;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 30%),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 24%),
+        radial-gradient(circle at 15% 20%, rgba(255,42,42,.07), transparent 22%),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.04), transparent 20%),
         #000;
     }
 
-    .hero {
-      padding: 90px 20px 40px;
-      text-align: center;
-      max-width: 1100px;
-      margin: 0 auto;
+    .shell{width:min(1280px, calc(100% - 32px));margin:auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      background:rgba(0,0,0,.55);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
 
-    .eyebrow {
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      font-size: 12px;
-      opacity: 0.7;
-      margin-bottom: 18px;
+    .topbar-inner{
+      width:min(1280px, calc(100% - 32px));
+      margin:auto;
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
     }
 
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(42px, 9vw, 92px);
-      line-height: 0.95;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    .brand{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.9);
     }
 
-    .hero p {
-      max-width: 720px;
-      margin: 20px auto 0;
-      color: rgba(255,255,255,0.72);
-      font-size: 16px;
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.03);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#fff;
+      transition:.25s ease;
     }
 
-    .tabs-wrap {
-      max-width: 1200px;
-      margin: 20px auto 0;
-      padding: 0 20px;
+    .back-link:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
+
+    .hero{
+      padding:72px 0 42px;
     }
 
-    .tabs {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:20px;
+      align-items:stretch;
     }
 
-    .tab-btn {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
-      padding: 12px 18px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: 0.25s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-weight: 700;
+    .hero-copy,
+    .hero-visual{
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      min-height:560px;
     }
 
-    .tab-btn:hover {
-      border-color: rgba(255,255,255,0.5);
-      transform: translateY(-1px);
+    .hero-copy{
+      position:relative;
+      padding:44px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        #050505;
     }
 
-    .tab-btn.active {
-      background: #fff;
-      color: #000;
-      border-color: #fff;
+    .hero-kicker{
+      font-size:11px;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.56);
+      margin-bottom:26px;
     }
 
-    .status {
-      font-size: 10px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      letter-spacing: 0.14em;
+    .hero-title{
+      font-size:clamp(52px, 8vw, 120px);
+      line-height:.9;
+      letter-spacing:-.075em;
+      text-transform:uppercase;
+      font-weight:800;
+      max-width:720px;
+      text-wrap:balance;
     }
 
-    .tab-btn.active .status {
-      background: #000;
-      color: #fff;
+    .hero-title span{
+      display:block;
     }
 
-    .content {
-      max-width: 1240px;
-      margin: 40px auto 0;
-      padding: 0 20px 90px;
+    .hero-text-wrap{
+      max-width:640px;
     }
 
-    .event-panel {
-      display: none;
-      animation: fadeIn 0.35s ease;
+    .hero-text{
+      margin-top:24px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.75;
+      max-width:510px;
     }
 
-    .event-panel.active {
-      display: block;
+    .hero-meta{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:12px;
+      margin-top:34px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .meta-card{
+      padding:16px 16px 18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
     }
 
-    .event-head {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 30px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+    .meta-label{
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      margin-bottom:8px;
     }
 
-    .event-city {
-      margin: 0 0 10px;
-      font-size: clamp(30px, 6vw, 62px);
-      line-height: 0.95;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    .meta-value{
+      font-size:14px;
+      line-height:1.45;
+      color:#fff;
     }
 
-    .event-sub {
-      margin: 0;
-      color: rgba(255,255,255,0.72);
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+    .hero-visual{
+      position:relative;
+      background:#0a0a0a;
     }
 
-    .event-note {
-      color: rgba(255,255,255,0.82);
-      font-size: 15px;
-      text-align: right;
+    .hero-visual img,
+    .hero-visual video{
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.82) contrast(1.04) saturate(.96);
     }
 
-    .section-title {
-      font-size: 13px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      margin: 42px 0 18px;
-      color: rgba(255,255,255,0.7);
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.58)),
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,.10), transparent 28%);
+      pointer-events:none;
     }
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    .hero-stamp{
+      position:absolute;
+      left:28px;
+      right:28px;
+      bottom:26px;
+      z-index:2;
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
     }
 
-    .media-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.08);
-      min-height: 280px;
+    .hero-stamp strong{
+      display:block;
+      font-size:34px;
+      line-height:.95;
+      letter-spacing:-.05em;
+      text-transform:uppercase;
     }
 
-    .media-card img,
-    .media-card video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
+    .hero-stamp span{
+      display:block;
+      margin-top:8px;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
     }
 
-    .media-card.tall { min-height: 420px; }
-    .media-card.wide { min-height: 220px; }
-
-    .placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-      color: rgba(255,255,255,0.45);
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .tab-section{
+      padding:16px 0 20px;
     }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .tab-bar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
     }
 
-    .closing {
-      text-align: center;
-      padding: 90px 20px 30px;
-      max-width: 900px;
-      margin: 0 auto;
+    .tab-btn{
+      min-height:48px;
+      padding:0 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      color:#fff;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:11px;
+      font-weight:800;
+      transition:.25s ease;
     }
 
-    .closing p {
-      margin: 0;
-      font-size: clamp(20px, 4vw, 36px);
-      line-height: 1.2;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .tab-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}
+
+    .tab-btn.active{
+      background:#fff;
+      color:#000;
+      border-color:#fff;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 24px;
-      color: rgba(255,255,255,0.72);
-      border-bottom: 1px solid rgba(255,255,255,0.35);
-      padding-bottom: 4px;
+    .status-pill{
+      min-height:22px;
+      padding:0 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      font-size:9px;
+      letter-spacing:.16em;
+      display:inline-flex;
+      align-items:center;
+      text-transform:uppercase;
     }
 
-    @media (max-width: 900px) {
-      .event-head {
-        grid-template-columns: 1fr;
-      }
+    .tab-btn.active .status-pill{background:#000;color:#fff}
 
-      .event-note {
-        text-align: left;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .panel{
+      display:none;
+      padding:18px 0 90px;
+      animation:fadeIn .32s ease;
     }
 
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 72px;
-      }
+    .panel.active{display:block}
 
-      .gallery-grid,
-      .video-grid {
-        grid-template-columns: 1fr;
-      }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-      .media-card,
-      .media-card.tall,
-      .media-card.wide {
-        min-height: 240px;
-      }
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      padding:16px 0 24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:28px;
+    }
+
+    .section-head h2{
+      font-size:clamp(28px,4vw,52px);
+      line-height:.95;
+      letter-spacing:-.06em;
+      text-transform:uppercase;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+      max-width:400px;
+      text-align:right;
+    }
+
+    .label{
+      margin-bottom:14px;
+      font-size:11px;
+      color:rgba(255,255,255,.54);
+      letter-spacing:.26em;
+      text-transform:uppercase;
+    }
+
+    .masonry{
+      display:grid;
+      grid-template-columns:1.15fr .85fr .85fr;
+      gap:16px;
+      grid-auto-rows:220px;
+    }
+
+    .card{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0a0a0a;
+      box-shadow:0 14px 36px rgba(0,0,0,.24);
+    }
+
+    .card img,
+    .card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .5s ease, filter .35s ease;
+      filter:brightness(.9);
+    }
+
+    .card:hover img,
+    .card:hover video{
+      transform:scale(1.03);
+      filter:brightness(.97);
+    }
+
+    .card.large{grid-row:span 2}
+    .card.wide{grid-column:span 2}
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.18));
+      pointer-events:none;
+    }
+
+    .video-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-top:34px;
+    }
+
+    .video-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:#080808;
+      box-shadow:0 14px 36px rgba(0,0,0,.24);
+    }
+
+    .video-card video{aspect-ratio:16/10;object-fit:cover}
+
+    .empty-state{
+      min-height:420px;
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:32px;
+      color:rgba(255,255,255,.5);
+      font-size:14px;
+      line-height:1.8;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .closing{
+      padding:0 0 90px;
+    }
+
+    .closing-box{
+      border-radius:34px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      padding:38px 28px;
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+
+    .closing-box p{
+      font-size:clamp(20px,3vw,34px);
+      line-height:1.18;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid{grid-template-columns:1fr}
+      .hero-copy,.hero-visual{min-height:auto}
+      .hero-visual{min-height:420px}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .section-head p{text-align:left}
+      .masonry{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
+      .card.wide{grid-column:span 2}
+    }
+
+    @media (max-width: 720px){
+      .topbar-inner{min-height:70px}
+      .hero{padding-top:34px}
+      .hero-copy{padding:28px}
+      .hero-meta{grid-template-columns:1fr}
+      .masonry,.video-grid{grid-template-columns:1fr}
+      .card.large,.card.wide{grid-row:span 1;grid-column:span 1}
+      .hero-stamp{left:18px;right:18px;bottom:18px}
+      .hero-stamp strong{font-size:26px}
     }
   </style>
 </head>
 <body>
-  <main class="recap-page">
-    <section class="hero">
-      <div class="eyebrow">Mindjset Archive</div>
-      <h1>Unlock Recap</h1>
-      <p>
-        A curated archive of Mindjset nights. Select a city and step back into the energy,
-        the people and the moments that shaped each event.
-      </p>
-    </section>
+  <main class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">Mindjset Archive</div>
+        <a class="back-link" href="index.html">Back to site</a>
+      </div>
+    </header>
 
-    <section class="tabs-wrap">
-      <div class="tabs" id="eventTabs">
-        <button class="tab-btn active" data-event="milano">
-          Milano <span class="status">Live</span>
-        </button>
-        <button class="tab-btn" data-event="roma">
-          Roma <span class="status">Soon</span>
-        </button>
-        <button class="tab-btn" data-event="barcellona">
-          Barcelona <span class="status">Soon</span>
-        </button>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <div class="hero-text-wrap">
+            <div class="hero-kicker">Unlock Recap</div>
+            <h1 class="hero-title">
+              <span>One Night.</span>
+              <span>Still Alive.</span>
+            </h1>
+            <p class="hero-text">
+              Mindjset is not only what happened on the dancefloor. It is the energy before,
+              the faces during, the memory after. Enter the archive and unlock each chapter.
+            </p>
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-card">
+              <div class="meta-label">Current Drop</div>
+              <div class="meta-value">Milano recap is now the active chapter.</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Archive Type</div>
+              <div class="meta-value">Photo selections, video moments and future city drops.</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Next Cities</div>
+              <div class="meta-value">Roma and Barcelona will unlock next.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img src="images/milano-cover.jpg" alt="Mindjset Milano cover" loading="eager">
+          <div class="hero-stamp">
+            <div>
+              <strong>Milano</strong>
+              <span>28 March 2026 — Nepentha</span>
+            </div>
+            <span>Live now</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="content">
-      <article class="event-panel active" id="milano">
-        <div class="event-head">
+    <section class="tab-section">
+      <div class="shell">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-event="milano">Milano <span class="status-pill">Live</span></button>
+          <button class="tab-btn" data-event="roma">Roma <span class="status-pill">Soon</span></button>
+          <button class="tab-btn" data-event="barcellona">Barcelona <span class="status-pill">Soon</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell">
+      <article class="panel active" id="milano">
+        <div class="section-head">
           <div>
-            <h2 class="event-city">Milano</h2>
-            <p class="event-sub">Saturday 28 March 2026 — Nepentha</p>
+            <div class="label">Current Chapter</div>
+            <h2>Milano Recap</h2>
           </div>
-          <div class="event-note">
-            The night has ended. The energy is still here.
-          </div>
+          <p>The night has ended. The energy is still here. A selection of frames from the first chapter now lives inside the archive.</p>
         </div>
 
-        <div class="section-title">Photo Selection</div>
-        <div class="gallery-grid">
-          <div class="media-card tall"><img src="images/milano-1.jpg" alt="Mindjset Milano photo 1" loading="lazy"></div>
-          <div class="media-card"><img src="images/milano-2.jpg" alt="Mindjset Milano photo 2" loading="lazy"></div>
-          <div class="media-card"><img src="images/milano-3.jpg" alt="Mindjset Milano photo 3" loading="lazy"></div>
-          <div class="media-card"><img src="images/milano-4.jpg" alt="Mindjset Milano photo 4" loading="lazy"></div>
-          <div class="media-card tall"><img src="images/milano-5.jpg" alt="Mindjset Milano photo 5" loading="lazy"></div>
-          <div class="media-card"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></div>
+        <div class="label">Photo Selection</div>
+        <div class="masonry">
+          <div class="card large"><img src="images/milano-1.jpg" alt="Mindjset Milano photo 1" loading="lazy"></div>
+          <div class="card"><img src="images/milano-2.jpg" alt="Mindjset Milano photo 2" loading="lazy"></div>
+          <div class="card"><img src="images/milano-3.jpg" alt="Mindjset Milano photo 3" loading="lazy"></div>
+          <div class="card wide"><img src="images/milano-4.jpg" alt="Mindjset Milano photo 4" loading="lazy"></div>
+          <div class="card"><img src="images/milano-5.jpg" alt="Mindjset Milano photo 5" loading="lazy"></div>
+          <div class="card"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></div>
         </div>
 
-        <div class="section-title">Video Recap</div>
+        <div class="label" style="margin-top:34px">Video Moments</div>
         <div class="video-grid">
-          <div class="media-card wide">
+          <div class="video-card">
             <video controls preload="metadata" poster="images/milano-video-poster-1.jpg">
               <source src="videos/milano-recap-1.mp4" type="video/mp4">
             </video>
           </div>
-          <div class="media-card wide">
+          <div class="video-card">
             <video controls preload="metadata" poster="images/milano-video-poster-2.jpg">
               <source src="videos/milano-recap-2.mp4" type="video/mp4">
             </video>
@@ -328,75 +545,52 @@
         </div>
       </article>
 
-      <article class="event-panel" id="roma">
-        <div class="event-head">
+      <article class="panel" id="roma">
+        <div class="section-head">
           <div>
-            <h2 class="event-city">Roma</h2>
-            <p class="event-sub">Saturday 25 April 2026 — Notorius Club Roma</p>
+            <div class="label">Next Chapter</div>
+            <h2>Roma</h2>
           </div>
-          <div class="event-note">
-            Details are coming. The next chapter is almost here.
-          </div>
+          <p>The next chapter is already in motion. As soon as the night is over, this section will unlock.</p>
         </div>
-
-        <div class="section-title">Coming Soon</div>
-        <div class="gallery-grid">
-          <div class="media-card tall placeholder">Roma recap will drop here</div>
-          <div class="media-card placeholder">Photo selection coming soon</div>
-          <div class="media-card placeholder">Photo selection coming soon</div>
-        </div>
+        <div class="empty-state">Roma recap will unlock here soon</div>
       </article>
 
-      <article class="event-panel" id="barcellona">
-        <div class="event-head">
+      <article class="panel" id="barcellona">
+        <div class="section-head">
           <div>
-            <h2 class="event-city">Barcelona</h2>
-            <p class="event-sub">Saturday 23 May 2026 — Event details loading</p>
+            <div class="label">Future Chapter</div>
+            <h2>Barcelona</h2>
           </div>
-          <div class="event-note">
-            A new city. A new chapter. A new memory in the making.
-          </div>
+          <p>A new city, a different energy and another memory waiting to happen. This archive will expand soon.</p>
         </div>
-
-        <div class="section-title">Coming Soon</div>
-        <div class="gallery-grid">
-          <div class="media-card tall placeholder">Barcelona recap will drop here</div>
-          <div class="media-card placeholder">Photo selection coming soon</div>
-          <div class="media-card placeholder">Photo selection coming soon</div>
-        </div>
+        <div class="empty-state">Barcelona recap will unlock here soon</div>
       </article>
     </section>
 
-    <section class="closing">
-      <p>THE NIGHT HAS ENDED. THE RECAP IS NOW UNLOCKED.</p>
-      <a class="back-link" href="index.html">Back to Mindjset</a>
+    <section class="closing shell">
+      <div class="closing-box">
+        <p>The night has ended. The recap is now unlocked.</p>
+      </div>
     </section>
   </main>
 
   <script>
     const buttons = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.event-panel');
+    const panels = document.querySelectorAll('.panel');
+    const params = new URLSearchParams(window.location.search);
 
-    function activateEvent(eventName) {
-      buttons.forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.event === eventName);
-      });
-
-      panels.forEach((panel) => {
-        panel.classList.toggle('active', panel.id === eventName);
-      });
+    function activateEvent(name){
+      buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.event === name));
+      panels.forEach(panel => panel.classList.toggle('active', panel.id === name));
     }
 
-    buttons.forEach((button) => {
+    buttons.forEach(button => {
       button.addEventListener('click', () => activateEvent(button.dataset.event));
     });
 
-    const params = new URLSearchParams(window.location.search);
     const initialEvent = params.get('event');
-
-    if (initialEvent && document.getElementById(initialEvent)) {
-      activateEvent(initialEvent);
-    }
+    if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
   </script>
 </body>
 </html>
