@@ -7,26 +7,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior:smooth; }
 
     body{
       background:#000;
       color:#fff;
       font-family:"Inter",sans-serif;
-      overflow-x:hidden;
       -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;
     }
 
-    a{ text-decoration:none; color:inherit; }
-    img,video{ display:block; width:100%; }
+    a { text-decoration:none; color:inherit; }
+    img,video { display:block; width:100%; }
+    button { font:inherit; }
 
     .page{
       min-height:100vh;
       background:
         radial-gradient(circle at 50% 0%, rgba(255,255,255,.04), transparent 24%),
         radial-gradient(circle at 10% 18%, rgba(255,40,40,.06), transparent 18%),
+        radial-gradient(circle at 88% 10%, rgba(255,255,255,.03), transparent 16%),
         #000;
     }
 
@@ -65,11 +69,24 @@
     }
 
     .back-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      color:#fff;
       font-size:11px;
       font-weight:600;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:#fff;
+      transition:background .25s ease, opacity .25s ease, transform .25s ease;
+      white-space:nowrap;
+    }
+
+    .back-link:hover{
+      background:rgba(255,255,255,.05);
+      opacity:.92;
     }
 
     .menu-section{
@@ -92,6 +109,7 @@
       position:relative;
       padding:0;
       border:none;
+      outline:none;
       background:transparent;
       color:rgba(255,255,255,.34);
       cursor:pointer;
@@ -127,9 +145,13 @@
       width:100%;
     }
 
+    .content-section{
+      padding:14px 0 0;
+    }
+
     .panel{
       display:none;
-      padding:18px 0 70px;
+      padding:14px 0 70px;
       animation:fadeIn .28s ease;
     }
 
@@ -138,31 +160,93 @@
     }
 
     @keyframes fadeIn{
-      from{opacity:0; transform:translateY(8px);}
-      to{opacity:1; transform:translateY(0);}
+      from{ opacity:0; transform:translateY(8px); }
+      to{ opacity:1; transform:translateY(0); }
     }
 
     .section-head{
-      padding:12px 0 24px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
+      padding:8px 0 26px;
       border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:24px;
+      margin-bottom:26px;
     }
 
-    .city{
+    .section-head .city{
       font-size:11px;
       color:rgba(255,255,255,.48);
       letter-spacing:.30em;
       text-transform:uppercase;
       font-weight:700;
-      margin-bottom:10px;
     }
 
-    .date{
+    .section-head .date{
       font-size:clamp(30px, 8vw, 56px);
       line-height:.94;
       letter-spacing:-.065em;
       text-transform:uppercase;
       font-weight:800;
+    }
+
+    .milano-actions{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin:0 0 24px;
+    }
+
+    .milano-jump{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:32px;
+      padding:0;
+      border:none;
+      background:transparent;
+      color:#fff;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      transition:.22s ease;
+    }
+
+    .milano-jump:hover{
+      opacity:.72;
+      transform:translateY(-1px);
+    }
+
+    .events-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      color:#fff;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      transition:.25s ease;
+    }
+
+    .events-link:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+    }
+
+    .video-label{
+      margin:0 0 12px;
+      font-size:11px;
+      color:rgba(255,255,255,.52);
+      letter-spacing:.24em;
+      text-transform:uppercase;
     }
 
     .photo-grid{
@@ -172,92 +256,287 @@
     }
 
     .thumb{
-      border:none;
-      padding:0;
+      position:relative;
       overflow:hidden;
-      border-radius:16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.06);
+      background:#0a0a0a;
       aspect-ratio:1/1;
       cursor:pointer;
-      background:#0a0a0a;
+      box-shadow:0 10px 24px rgba(0,0,0,.18);
+      padding:0;
+      appearance:none;
     }
 
     .thumb img{
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:transform .3s ease;
+      transition:transform .32s ease, opacity .32s ease;
+      opacity:1;
     }
 
     .thumb:hover img{
-      transform:scale(1.04);
-    }
-
-    .video-label{
-      margin:28px 0 12px;
-      font-size:11px;
-      color:rgba(255,255,255,.52);
-      letter-spacing:.24em;
-      text-transform:uppercase;
+      transform:scale(1.05);
+      opacity:.94;
     }
 
     .video-grid{
       display:grid;
       grid-template-columns:1fr;
-      gap:14px;
+      gap:12px;
+      margin-top:28px;
     }
 
     .video-card{
+      position:relative;
       overflow:hidden;
       border-radius:20px;
+      border:1px solid rgba(255,255,255,.07);
       background:#0a0a0a;
+      box-shadow:0 12px 32px rgba(0,0,0,.22);
     }
 
     .video-card video{
+      width:100%;
       aspect-ratio:16/10;
       object-fit:cover;
+    }
+
+    .empty-state{
+      padding:4px 0 0;
+      color:rgba(255,255,255,.68);
+    }
+
+    .empty-card{
+      padding:24px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      box-shadow:0 16px 40px rgba(0,0,0,.22);
     }
 
     .empty-meta{
       font-size:14px;
       line-height:1.7;
-      color:rgba(255,255,255,.60);
+      max-width:520px;
       margin-bottom:18px;
-    }
-
-    .events-link{
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      color:rgba(255,255,255,.60);
     }
 
     .closing{
-      padding:0 0 72px;
+      padding:10px 0 72px;
     }
 
     .closing-copy{
       text-align:center;
       font-size:clamp(12px, 3.8vw, 34px);
+      line-height:1.08;
       letter-spacing:.12em;
       text-transform:uppercase;
+      color:rgba(255,255,255,.92);
       font-weight:700;
+      white-space:nowrap;
     }
 
-    @media (min-width:721px){
-      .photo-grid{ grid-template-columns:repeat(5,1fr); gap:10px; }
-      .video-grid{ grid-template-columns:1fr 1fr; }
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.94);
+      z-index:100;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
     }
 
-    @media (min-width:1080px){
-      .photo-grid{ grid-template-columns:repeat(6,1fr); gap:12px; }
+    .lightbox.show{
+      display:flex;
     }
 
-    @media (max-width:520px){
+    .lightbox-inner{
+      position:relative;
+      width:min(100%, 1200px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .lightbox-image-wrap{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .lightbox-image{
+      width:auto;
+      max-width:100%;
+      max-height:82vh;
+      object-fit:contain;
+      border-radius:18px;
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next{
+      position:absolute;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      opacity:.62;
+      transition:.22s ease;
+      width:38px;
+      height:38px;
+      font-size:16px;
+    }
+
+    .lightbox-close{
+      top:-40px;
+      right:0;
+      z-index:120;
+      width:44px;
+      height:44px;
+      font-size:20px;
+    }
+
+    .lightbox-prev,
+    .lightbox-next{
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+    .lightbox-prev{ left:6px; }
+    .lightbox-next{ right:6px; }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover{
+      opacity:1;
+      background:rgba(255,255,255,.10);
+    }
+
+    .lightbox-download{
+      position:absolute;
+      right:0;
+      bottom:-40px;
+      min-height:32px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      opacity:.72;
+      transition:.22s ease;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .lightbox-download:hover{
+      opacity:1;
+      background:rgba(255,255,255,.10);
+    }
+
+    .lightbox-counter{
+      position:absolute;
+      left:0;
+      bottom:-40px;
+      min-height:32px;
+      display:inline-flex;
+      align-items:center;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+    }
+
+    @media (max-width: 720px){
+      .menu-section{
+        padding:16px 0 6px;
+      }
+
+      .menu-wrap{
+        padding:8px 0 14px;
+      }
+
+      .tab-bar{
+        gap:14px 18px;
+      }
+
+      .tab-btn{
+        font-size:11px;
+        letter-spacing:.18em;
+      }
+
+      .tab-btn::after{
+        bottom:-8px;
+      }
+
+      .lightbox-close{
+        top:-34px;
+        right:0;
+        width:42px;
+        height:42px;
+        font-size:18px;
+      }
+
+      .lightbox-counter{
+        left:0;
+        bottom:-34px;
+        font-size:10px;
+      }
+
+      .lightbox-download{
+        right:0;
+        bottom:-34px;
+        min-height:30px;
+        padding:0 10px;
+        font-size:9px;
+      }
+    }
+
+    @media (max-width: 520px){
       .tab-bar{
         display:grid;
         grid-template-columns:1fr 1fr;
         gap:16px 22px;
       }
+
+      .tab-btn{
+        width:max-content;
+        text-align:left;
+      }
+    }
+
+    @media (min-width: 721px){
+      .shell{ width:min(1240px, calc(100% - 48px)); }
+      .topbar-inner{ width:min(1240px, calc(100% - 48px)); }
+      .menu-section{ padding:28px 0 12px; }
+      .menu-wrap{ padding:18px 0 20px; }
+      .tab-bar{ gap:28px; }
+      .tab-btn{ font-size:13px; letter-spacing:.24em; }
+      .section-head{ gap:8px; padding:10px 0 28px; margin-bottom:26px; }
+      .photo-grid{ grid-template-columns:repeat(5, 1fr); gap:10px; }
+      .thumb{ border-radius:16px; }
+      .video-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+      .lightbox-prev{ left:16px; }
+      .lightbox-next{ right:16px; }
+    }
+
+    @media (min-width: 1080px){
+      .photo-grid{ grid-template-columns:repeat(6, 1fr); gap:12px; }
+      .thumb{ border-radius:18px; }
     }
   </style>
 </head>
@@ -273,7 +552,7 @@
     <section class="menu-section">
       <div class="shell">
         <div class="menu-wrap">
-          <nav class="tab-bar">
+          <nav class="tab-bar" aria-label="City selector">
             <button class="tab-btn active" data-event="milano">Milano</button>
             <button class="tab-btn" data-event="roma">Roma</button>
             <button class="tab-btn" data-event="barcellona">Barcellona</button>
@@ -283,52 +562,130 @@
       </div>
     </section>
 
-    <section class="shell">
-      <article class="panel active" id="milano">
-        <div class="section-head">
-          <div class="city">Milano</div>
-          <div class="date">28 March 2026</div>
-        </div>
-
-        <div class="photo-grid" id="milano-photos">
-          <!-- INCOLLA QUI TUTTI I TUOI 51 BUTTON DELLE FOTO MILANO -->
-        </div>
-
-        <div class="video-label">Video Moments</div>
-        <div class="video-grid">
-          <div class="video-card">
-            <video controls preload="metadata" poster="images/milano (8).jpg">
-              <source src="videos/milano-recap-1.mp4" type="video/mp4">
-            </video>
+    <section class="content-section">
+      <div class="shell">
+        <article class="panel active" id="milano">
+          <div class="section-head">
+            <div class="city">Milano</div>
+            <div class="date">28 March 2026</div>
           </div>
-          <div class="video-card">
-            <video controls preload="metadata" poster="images/milano (1).jpg">
-              <source src="videos/milano-recap-2.mp4" type="video/mp4">
-            </video>
+
+          <div class="milano-actions">
+            <a class="milano-jump" href="#milano-photos">Photos</a>
+            <a class="milano-jump" href="#milano-videos">Videos</a>
           </div>
-        </div>
-      </article>
 
-      <article class="panel" id="roma">
-        <div class="section-head">
-          <div class="city">Roma</div>
-          <div class="date">25 April 2026</div>
-        </div>
-        <div class="empty-meta">
-          Notorious Club Roma - Piazza Barberini<br>
-          Via di S. Nicola da Tolentino, 22
-        </div>
-        <a class="events-link" href="index.html#events">More Details</a>
-      </article>
+          <div class="photo-grid" id="milano-photos">
+            <button class="thumb" type="button" data-index="0"><img src="images/milano (1).jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="1"><img src="images/milano (2).jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="2"><img src="images/milano (3).jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="3"><img src="images/milano (4).jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="4"><img src="images/milano (5).jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="5"><img src="images/milano (6).jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="6"><img src="images/milano (7).jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="7"><img src="images/milano (8).jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="8"><img src="images/milano (9).jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="9"><img src="images/milano (10).jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="10"><img src="images/milano (11).jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="11"><img src="images/milano (12).jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="12"><img src="images/milano (13).jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="13"><img src="images/milano (14).jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="14"><img src="images/milano (15).jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="15"><img src="images/milano (16).jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="16"><img src="images/milano (17).jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="17"><img src="images/milano (18).jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="18"><img src="images/milano (19).jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="19"><img src="images/milano (20).jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="20"><img src="images/milano (21).jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="21"><img src="images/milano (22).jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="22"><img src="images/milano (23).jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="23"><img src="images/milano (24).jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="24"><img src="images/milano (25).jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="25"><img src="images/milano (26).jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="26"><img src="images/milano (27).jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="27"><img src="images/milano (28).jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="28"><img src="images/milano (29).jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="29"><img src="images/milano (30).jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="30"><img src="images/milano (31).jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="31"><img src="images/milano (32).jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="32"><img src="images/milano (33).jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="33"><img src="images/milano (34).jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="34"><img src="images/milano (35).jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="35"><img src="images/milano (36).jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="36"><img src="images/milano (37).jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="37"><img src="images/milano (38).jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="38"><img src="images/milano (39).jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="39"><img src="images/milano (40).jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="40"><img src="images/milano (41).jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="41"><img src="images/milano (42).jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="42"><img src="images/milano (43).jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="43"><img src="images/milano (44).jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="44"><img src="images/milano (45).jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="45"><img src="images/milano (46).jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="46"><img src="images/milano (47).jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="47"><img src="images/milano (48).jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="48"><img src="images/milano (49).jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="49"><img src="images/milano (50).jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="50"><img src="images/milano (51).jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
+          </div>
 
-      <article class="panel" id="barcellona">
-        <div class="section-head">
-          <div class="city">Barcellona</div>
-          <div class="date">23 May 2026</div>
-        </div>
-        <div class="empty-meta">The next European stop will be announced soon</div>
-        <a class="events-link" href="index.html#events">More Details</a>
-      </article>
+          <div class="video-label" id="milano-videos" style="margin-top:28px">Video Moments</div>
+          <div class="video-grid">
+            <div class="video-card">
+              <video controls preload="metadata" poster="images/milano (1).jpg">
+                <source src="videos/milano-recap-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-card">
+              <video controls preload="metadata" poster="images/milano (18).jpg">
+                <source src="videos/milano-recap-2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="roma">
+          <div class="section-head">
+            <div class="city">Roma</div>
+            <div class="date">25 April 2026</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">
+                Notorious Club Roma - Piazza Barberini<br>
+                Via di S. Nicola da Tolentino, 22
+              </div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="barcellona">
+          <div class="section-head">
+            <div class="city">Barcellona</div>
+            <div class="date">23 May 2026</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">The next European stop will be announced soon</div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="other-moments">
+          <div class="section-head">
+            <div class="city">Other Cities</div>
+            <div class="date">Coming Soon</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">More cities are coming soon</div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="closing shell">
@@ -336,18 +693,115 @@
     </section>
   </main>
 
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close">×</button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous">‹</button>
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="Expanded photo" loading="eager">
+      </div>
+      <button class="lightbox-next" id="lightbox-next" aria-label="Next">›</button>
+      <div class="lightbox-counter" id="lightbox-counter"></div>
+      <a class="lightbox-download" id="lightbox-download" href="" download>Save Photo</a>
+    </div>
+  </div>
+
   <script>
     const buttons = document.querySelectorAll('.tab-btn');
     const panels = document.querySelectorAll('.panel');
+    const params = new URLSearchParams(window.location.search);
 
     function activateEvent(name){
       buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.event === name));
       panels.forEach(panel => panel.classList.toggle('active', panel.id === name));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     buttons.forEach(button => {
       button.addEventListener('click', () => activateEvent(button.dataset.event));
     });
+
+    const initialEvent = params.get('event');
+    if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
+
+    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano (${i + 1}).jpg`);
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxDownload = document.getElementById('lightbox-download');
+    const thumbs = document.querySelectorAll('#milano-photos .thumb');
+    let currentIndex = 0;
+
+    function updateLightbox(){
+      const currentSrc = milanoImages[currentIndex];
+      lightboxImage.src = currentSrc;
+      lightboxImage.alt = `Mindjset Milano photo ${currentIndex + 1}`;
+      lightboxDownload.href = currentSrc;
+      lightboxCounter.textContent = `${currentIndex + 1} / ${milanoImages.length}`;
+    }
+
+    function openLightbox(index){
+      currentIndex = index;
+      updateLightbox();
+      lightbox.classList.add('show');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('show');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev(){
+      currentIndex = (currentIndex - 1 + milanoImages.length) % milanoImages.length;
+      updateLightbox();
+    }
+
+    function showNext(){
+      currentIndex = (currentIndex + 1) % milanoImages.length;
+      updateLightbox();
+    }
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        openLightbox(Number(thumb.dataset.index));
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrev);
+    lightboxNext.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('show')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showPrev();
+      if(e.key === 'ArrowRight') showNext();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if(Math.abs(diff) < 40) return;
+      if(diff > 0) showNext();
+      else showPrev();
+    }, { passive: true });
   </script>
 </body>
 </html>
