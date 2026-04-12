@@ -191,6 +191,44 @@
       color:#fff;
     }
 
+    
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:8px;
+    }
+
+    
+    .gallery-label{
+      min-height:20px;
+      padding:0 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      font-size:9px;
+      letter-spacing:.14em;
+      display:inline-flex;
+      align-items:center;
+      text-transform:uppercase;
+      flex-shrink:0;
+    }
+
+    .tab-btn.active .status-pill{
+      background:#000;
+      color:#fff;
+    }
+
+    .panel{
+      display:none;
+      padding:12px 0 70px;
+      animation:fadeIn .28s ease;
+    }
+
+    .panel.active{display:block}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
     .section-head{
       display:flex;
       flex-direction:column;
@@ -231,7 +269,6 @@
       aspect-ratio:1/1;
       cursor:pointer;
       box-shadow:0 10px 24px rgba(0,0,0,.18);
-      padding:0;
     }
 
     .thumb img{
@@ -239,7 +276,6 @@
       height:100%;
       object-fit:cover;
       transition:transform .32s ease, opacity .32s ease;
-      opacity:1;
     }
 
     .thumb:hover img{
@@ -248,44 +284,6 @@
     }
 
     .video-label,
-    .gallery-label{
-      min-height:20px;
-      padding:0 8px;
-      border-radius:999px;
-      background:rgba(255,255,255,.10);
-      font-size:9px;
-      letter-spacing:.14em;
-      display:inline-flex;
-      align-items:center;
-      text-transform:uppercase;
-      flex-shrink:0;
-    }
-
-    .tab-btn.active .status-pill{
-      background:#000;
-      color:#fff;
-    }
-
-    .panel{
-      display:none;
-      padding:12px 0 70px;
-      animation:fadeIn .28s ease;
-    }
-
-    .panel.active{display:block}
-
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(8px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-
-    
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:8px;
-    }
-
-    
     .gallery-label{
       margin:0 0 12px;
       font-size:11px;
@@ -485,9 +483,9 @@
       <div class="shell">
         <div class="tab-bar">
           <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill">Live</span></button>
-          <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span clas
-          <button class="tab-btn" data-event="barcellona">Barcelona <span class="status-pill">Soon</span></button>
-          <button class="tab-btn" data-event="other-moments">Other Moments <span class="status-pill">Archive</span></button>
+          <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span class="status-pill">Soon</span></button>
+          <button class="tab-btn" data-event="barcellona"><span class="tab-city">Barcelona</span><span class="status-pill">Soon</span></button>
+          <button class="tab-btn" data-event="other-moments"><span class="tab-city">Other Moments</span><span class="status-pill">Archive</span></button>
         </div>
       </div>
     </section>
@@ -499,59 +497,59 @@
           <div class="date">28 March 2026</div>
         </div>
 
-        <div class="gallery-label">Photo Archive</div>
+        <div class="gallery-label">Photo Archive — still frames above, moving memories below</div>
         <div class="photo-grid" id="milano-grid">
-          <button class="thumb" type="button" data-index="0"><img src="images/milano-1.jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="1"><img src="images/milano-2.jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="2"><img src="images/milano-3.jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="3"><img src="images/milano-4.jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="4"><img src="images/milano-5.jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="5"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="6"><img src="images/milano-7.jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="7"><img src="images/milano-8.jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="8"><img src="images/milano-9.jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="9"><img src="images/milano-10.jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="10"><img src="images/milano-11.jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="11"><img src="images/milano-12.jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="12"><img src="images/milano-13.jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="13"><img src="images/milano-14.jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="14"><img src="images/milano-15.jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="15"><img src="images/milano-16.jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="16"><img src="images/milano-17.jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="17"><img src="images/milano-18.jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="18"><img src="images/milano-19.jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="19"><img src="images/milano-20.jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="20"><img src="images/milano-21.jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="21"><img src="images/milano-22.jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="22"><img src="images/milano-23.jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="23"><img src="images/milano-24.jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="24"><img src="images/milano-25.jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="25"><img src="images/milano-26.jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="26"><img src="images/milano-27.jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="27"><img src="images/milano-28.jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="28"><img src="images/milano-29.jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="29"><img src="images/milano-30.jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="30"><img src="images/milano-31.jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="31"><img src="images/milano-32.jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="32"><img src="images/milano-33.jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="33"><img src="images/milano-34.jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="34"><img src="images/milano-35.jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="35"><img src="images/milano-36.jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="36"><img src="images/milano-37.jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="37"><img src="images/milano-38.jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="38"><img src="images/milano-39.jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="39"><img src="images/milano-40.jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="40"><img src="images/milano-41.jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="41"><img src="images/milano-42.jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="42"><img src="images/milano-43.jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="43"><img src="images/milano-44.jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="44"><img src="images/milano-45.jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="45"><img src="images/milano-46.jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="46"><img src="images/milano-47.jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="47"><img src="images/milano-48.jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="48"><img src="images/milano-49.jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="49"><img src="images/milano-50.jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="50"><img src="images/milano-51.jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="0"><img src="images/milano (1).jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="1"><img src="images/milano (2).jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="2"><img src="images/milano (3).jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="3"><img src="images/milano (4).jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="4"><img src="images/milano (5).jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="5"><img src="images/milano (6).jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="6"><img src="images/milano (7).jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="7"><img src="images/milano (8).jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="8"><img src="images/milano (9).jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="9"><img src="images/milano (10).jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="10"><img src="images/milano (11).jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="11"><img src="images/milano (12).jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="12"><img src="images/milano (13).jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="13"><img src="images/milano (14).jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="14"><img src="images/milano (15).jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="15"><img src="images/milano (16).jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="16"><img src="images/milano (17).jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="17"><img src="images/milano (18).jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="18"><img src="images/milano (19).jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="19"><img src="images/milano (20).jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="20"><img src="images/milano (21).jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="21"><img src="images/milano (22).jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="22"><img src="images/milano (23).jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="23"><img src="images/milano (24).jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="24"><img src="images/milano (25).jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="25"><img src="images/milano (26).jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="26"><img src="images/milano (27).jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="27"><img src="images/milano (28).jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="28"><img src="images/milano (29).jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="29"><img src="images/milano (30).jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="30"><img src="images/milano (31).jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="31"><img src="images/milano (32).jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="32"><img src="images/milano (33).jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="33"><img src="images/milano (34).jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="34"><img src="images/milano (35).jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="35"><img src="images/milano (36).jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="36"><img src="images/milano (37).jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="37"><img src="images/milano (38).jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="38"><img src="images/milano (39).jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="39"><img src="images/milano (40).jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="40"><img src="images/milano (41).jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="41"><img src="images/milano (42).jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="42"><img src="images/milano (43).jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="43"><img src="images/milano (44).jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="44"><img src="images/milano (45).jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="45"><img src="images/milano (46).jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="46"><img src="images/milano (47).jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="47"><img src="images/milano (48).jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="48"><img src="images/milano (49).jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="49"><img src="images/milano (50).jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
+          <button class="thumb" type="button" data-index="50"><img src="images/milano (51).jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
         </div>
 
         <div class="video-label" style="margin-top:28px">Video Moments</div>
