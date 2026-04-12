@@ -855,7 +855,7 @@
       <div class="bottom-nav">
         <nav class="bottom-menu">
           <a href="#events" class="nav-link">Events</a>
-          <a href="javascript:void(0)" class="nav-link" id="gallery-toggle">Gallery</a>
+          <a href="unlock-recap.html" class="nav-link">Gallery</a>
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
@@ -882,7 +882,7 @@
             </div>
 
             <div class="event-actions">
-              <button type="button" class="ticket-link" data-modal="milano-recap">Unlock Recap</button>
+              <a href="unlock-recap.html?event=milano" class="ticket-link">Unlock Recap</a>
             </div>
           </article>
 
@@ -974,22 +974,6 @@
     </div>
   </aside>
 
-  <aside class="contact-panel" id="gallery-panel" aria-hidden="true">
-    <div class="contact-head">
-      <div class="contact-title">Gallery</div>
-      <button class="contact-close" id="gallery-close" aria-label="Chiudi gallery">×</button>
-    </div>
-
-    <div class="contact-list">
-      <div class="contact-item">
-        <div class="contact-label">Update</div>
-        <div class="contact-value">
-          Gallery live soon
-        </div>
-      </div>
-    </div>
-  </aside>
-
   <div class="info-modal" id="info-modal" aria-hidden="true">
     <div class="info-modal-box" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
       <button class="info-modal-close" id="info-modal-close" aria-label="Chiudi popup">×</button>
@@ -1031,10 +1015,6 @@
     const contactPanel = document.getElementById("contact-panel");
     const contactClose = document.getElementById("contact-close");
 
-    const galleryToggle = document.getElementById("gallery-toggle");
-    const galleryPanel = document.getElementById("gallery-panel");
-    const galleryClose = document.getElementById("gallery-close");
-
     const infoModal = document.getElementById("info-modal");
     const infoModalClose = document.getElementById("info-modal-close");
     const infoModalKicker = document.getElementById("info-modal-kicker");
@@ -1043,12 +1023,6 @@
     const infoModalFooter = document.getElementById("info-modal-footer");
 
     const modalContent = {
-      "milano-recap": {
-        kicker: "",
-        title: "Milano Recap",
-        text: "Photo & video from the last Mindjset night will be live soon.",
-        footer: "Stay tuned for the drop"
-      },
       "roma-tickets": {
         kicker: "",
         title: "Roma Tickets",
@@ -1073,16 +1047,6 @@
       contactPanel.setAttribute("aria-hidden", "true");
     }
 
-    function openGalleryPanel(){
-      galleryPanel.classList.add("show");
-      galleryPanel.setAttribute("aria-hidden", "false");
-    }
-
-    function closeGalleryPanel(){
-      galleryPanel.classList.remove("show");
-      galleryPanel.setAttribute("aria-hidden", "true");
-    }
-
     function openInfoModal(key){
       const content = modalContent[key];
       if(!content) return;
@@ -1104,7 +1068,6 @@
     contactToggle.addEventListener("click", function(e){
       e.preventDefault();
       const isOpen = contactPanel.classList.contains("show");
-      closeGalleryPanel();
       closeInfoModal();
 
       if(isOpen){
@@ -1118,27 +1081,9 @@
       closeContactPanel();
     });
 
-    galleryToggle.addEventListener("click", function(e){
-      e.preventDefault();
-      const isOpen = galleryPanel.classList.contains("show");
-      closeContactPanel();
-      closeInfoModal();
-
-      if(isOpen){
-        closeGalleryPanel();
-      } else {
-        openGalleryPanel();
-      }
-    });
-
-    galleryClose.addEventListener("click", function(){
-      closeGalleryPanel();
-    });
-
     document.querySelectorAll("[data-modal]").forEach(button => {
       button.addEventListener("click", function(){
         closeContactPanel();
-        closeGalleryPanel();
         openInfoModal(this.dataset.modal);
       });
     });
@@ -1157,22 +1102,14 @@
       const clickedInsideContact = contactPanel.contains(e.target);
       const clickedContactToggle = contactToggle.contains(e.target);
 
-      const clickedInsideGallery = galleryPanel.contains(e.target);
-      const clickedGalleryToggle = galleryToggle.contains(e.target);
-
       if(!clickedInsideContact && !clickedContactToggle){
         closeContactPanel();
-      }
-
-      if(!clickedInsideGallery && !clickedGalleryToggle){
-        closeGalleryPanel();
       }
     });
 
     document.addEventListener("keydown", function(e){
       if(e.key === "Escape"){
         closeContactPanel();
-        closeGalleryPanel();
         closeInfoModal();
       }
     });
