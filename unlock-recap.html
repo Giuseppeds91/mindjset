@@ -136,26 +136,28 @@
     }
 
     .tab-btn{
-      min-height:46px;
-      padding:0 12px;
-      border-radius:999px;
+      min-height:72px;
+      padding:14px 16px;
+      border-radius:22px;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       color:#fff;
       cursor:pointer;
       display:flex;
-      align-items:center;
+      flex-direction:column;
+      align-items:flex-start;
       justify-content:space-between;
       gap:10px;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      font-size:10px;
-      font-weight:800;
-      transition:.25s ease;
-      white-space:nowrap;
+      transition:.28s ease;
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+      text-align:left;
     }
 
-    .tab-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}
+    .tab-btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+    }
 
     .tab-btn.active{
       background:#fff;
@@ -163,13 +165,21 @@
       border-color:#fff;
     }
 
+    .tab-city{
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-weight:800;
+      line-height:1;
+    }
+
     .status-pill{
-      min-height:20px;
-      padding:0 8px;
+      min-height:22px;
+      padding:0 10px;
       border-radius:999px;
       background:rgba(255,255,255,.10);
       font-size:9px;
-      letter-spacing:.14em;
+      letter-spacing:.16em;
       display:inline-flex;
       align-items:center;
       text-transform:uppercase;
@@ -179,19 +189,6 @@
     .tab-btn.active .status-pill{
       background:#000;
       color:#fff;
-    }
-
-    .panel{
-      display:none;
-      padding:12px 0 70px;
-      animation:fadeIn .28s ease;
-    }
-
-    .panel.active{display:block}
-
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(8px)}
-      to{opacity:1;transform:translateY(0)}
     }
 
     .section-head{
@@ -234,6 +231,7 @@
       aspect-ratio:1/1;
       cursor:pointer;
       box-shadow:0 10px 24px rgba(0,0,0,.18);
+      padding:0;
     }
 
     .thumb img{
@@ -241,6 +239,7 @@
       height:100%;
       object-fit:cover;
       transition:transform .32s ease, opacity .32s ease;
+      opacity:1;
     }
 
     .thumb:hover img{
@@ -249,6 +248,44 @@
     }
 
     .video-label,
+    .gallery-label{
+      min-height:20px;
+      padding:0 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      font-size:9px;
+      letter-spacing:.14em;
+      display:inline-flex;
+      align-items:center;
+      text-transform:uppercase;
+      flex-shrink:0;
+    }
+
+    .tab-btn.active .status-pill{
+      background:#000;
+      color:#fff;
+    }
+
+    .panel{
+      display:none;
+      padding:12px 0 70px;
+      animation:fadeIn .28s ease;
+    }
+
+    .panel.active{display:block}
+
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:8px;
+    }
+
+    
     .gallery-label{
       margin:0 0 12px;
       font-size:11px;
@@ -393,26 +430,20 @@
     @media (min-width: 721px){
       .shell{width:min(1240px, calc(100% - 48px))}
       .topbar-inner{width:min(1240px, calc(100% - 48px))}
-      .hero{padding:38px 0 10px}
-      .hero-copy{padding:18px 0 8px}
+      .hero{padding:38px 0 14px}
+      .hero-copy{padding:44px 38px 34px;border-radius:34px}
       .hero-text{max-width:520px;font-size:16px}
-      .tab-bar{
-        display:grid;
-        grid-template-columns:repeat(4, 1fr);
-        gap:12px;
-      }
-      .tab-btn{
-        min-height:48px;
-        padding:0 16px;
-        font-size:11px;
-        letter-spacing:.16em;
-        justify-content:space-between;
-      }
+      .tab-bar{grid-template-columns:repeat(4, 1fr);gap:12px}
+      .tab-btn{min-height:86px;padding:16px 18px}
+      .tab-city{font-size:12px}
       .section-head{gap:8px;padding:18px 0 24px;margin-bottom:26px}
       .photo-grid{grid-template-columns:repeat(5, 1fr);gap:10px}
       .thumb{border-radius:16px}
       .video-grid{grid-template-columns:1fr 1fr;gap:14px}
       .empty-state{min-height:280px;font-size:13px}
+      .lightbox-prev{left:16px}
+      .lightbox-next{right:16px}
+    }
       .lightbox-prev{left:16px}
       .lightbox-next{right:16px}
     }
@@ -453,8 +484,8 @@
     <section class="tab-section">
       <div class="shell">
         <div class="tab-bar">
-          <button class="tab-btn active" data-event="milano">Milano <span class="status-pill">Live</span></button>
-          <button class="tab-btn" data-event="roma">Roma <span class="status-pill">Soon</span></button>
+          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill">Live</span></button>
+          <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span clas
           <button class="tab-btn" data-event="barcellona">Barcelona <span class="status-pill">Soon</span></button>
           <button class="tab-btn" data-event="other-moments">Other Moments <span class="status-pill">Archive</span></button>
         </div>
@@ -597,7 +628,7 @@
     const initialEvent = params.get('event');
     if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
 
-    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano (${i + 1}).jpg`);
+    const milanoImages = Array.from({ length: 51 }, (_, i) => `images/milano-${i + 1}.jpg`);
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxClose = document.getElementById('lightbox-close');
