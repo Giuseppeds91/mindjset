@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -16,6 +17,9 @@
       --muted:rgba(255,255,255,.68);
       --muted-2:rgba(255,255,255,.46);
       --line:rgba(255,255,255,.08);
+      --line-strong:rgba(255,255,255,.14);
+      --card:rgba(255,255,255,.03);
+      --card-2:rgba(255,255,255,.05);
       --shadow:0 18px 48px rgba(0,0,0,.34);
     }
 
@@ -37,8 +41,9 @@
     .page{
       min-height:100vh;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 24%),
-        radial-gradient(circle at 10% 20%, rgba(255,40,40,.07), transparent 20%),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.04), transparent 24%),
+        radial-gradient(circle at 10% 18%, rgba(255,40,40,.06), transparent 18%),
+        radial-gradient(circle at 88% 10%, rgba(255,255,255,.03), transparent 16%),
         #000;
     }
 
@@ -50,114 +55,99 @@
     .topbar{
       position:sticky;
       top:0;
-      z-index:40;
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      background:rgba(0,0,0,.56);
+      z-index:50;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      background:rgba(0,0,0,.62);
       border-bottom:1px solid rgba(255,255,255,.05);
     }
 
     .topbar-inner{
-  width:min(1240px, calc(100% - 28px));
-  margin:auto;
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-}
+      width:min(1240px, calc(100% - 28px));
+      margin:auto;
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand-mark{
+      font-size:11px;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:rgba(255,255,255,.88);
+      white-space:nowrap;
+    }
 
     .back-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:0 16px;
-  border-radius:999px;
-  color:#fff;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  transition:background .25s ease, opacity .25s ease, transform .25s ease;
-  white-space:nowrap;
-}
-
-.back-link:hover{
-  background:rgba(255,255,255,.05);
-  opacity:.92;
-}
-
-    .hero{
-      position:relative;
-      padding:26px 0 8px;
-      overflow:hidden;
-    }
-
-    .hero-copy{
-      position:relative;
-      z-index:1;
-      padding:40px 2px 8px;
-    }
-
-    .hero-title{
-      font-size:clamp(44px, 13vw, 110px);
-      line-height:1.02;
-      letter-spacing:-.075em;
-      text-transform:uppercase;
-      font-weight:800;
-      max-width:980px;
-    }
-
-    .hero-title span{
-      display:block;
-    }
-
-    .hero-title span + span{
-      margin-top:.12em;
-    }
-
-    .hero-text{
-      margin-top:20px;
-      margin-bottom:64px;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.6;
-      max-width:420px;
-      text-transform:uppercase;
-      letter-spacing:.12em;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:999px;
+      color:#fff;
+      font-size:11px;
       font-weight:600;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      transition:background .25s ease, opacity .25s ease, transform .25s ease;
+      white-space:nowrap;
     }
 
-    .tab-section{
-      padding:18px 0 14px;
+    .back-link:hover{
+      background:rgba(255,255,255,.05);
+      opacity:.92;
+    }
+
+    .menu-section{
+      padding:28px 0 14px;
+    }
+
+    .menu-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      padding:18px 0 8px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .menu-label{
+      font-size:10px;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.42);
+      font-weight:700;
     }
 
     .tab-bar{
-      display:grid;
-      grid-template-columns:1fr 1fr;
+      display:flex;
+      flex-wrap:wrap;
       gap:10px;
+      align-items:center;
     }
 
     .tab-btn{
-      min-height:72px;
-      padding:14px 16px;
-      border-radius:22px;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
       color:#fff;
       cursor:pointer;
-      display:flex;
-      flex-direction:column;
-      align-items:flex-start;
-      justify-content:space-between;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       gap:10px;
       transition:.28s ease;
-      box-shadow:0 12px 28px rgba(0,0,0,.18);
-      text-align:left;
+      box-shadow:0 10px 28px rgba(0,0,0,.16);
+      text-align:center;
     }
 
     .tab-btn:hover{
-      transform:translateY(-2px);
+      transform:translateY(-1px);
       border-color:rgba(255,255,255,.18);
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
     }
@@ -169,20 +159,21 @@
     }
 
     .tab-city{
-      font-size:12px;
-      letter-spacing:.22em;
+      font-size:11px;
+      letter-spacing:.24em;
       text-transform:uppercase;
       font-weight:800;
       line-height:1;
+      white-space:nowrap;
     }
 
     .status-pill{
-      min-height:22px;
-      padding:0 10px;
+      min-height:20px;
+      padding:0 9px;
       border-radius:999px;
       background:rgba(255,255,255,.10);
-      font-size:9px;
-      letter-spacing:.16em;
+      font-size:8px;
+      letter-spacing:.18em;
       display:inline-flex;
       align-items:center;
       text-transform:uppercase;
@@ -207,9 +198,13 @@
       100%{opacity:.38; box-shadow:0 0 0 rgba(0,0,0,0)}
     }
 
+    .content-section{
+      padding:14px 0 0;
+    }
+
     .panel{
       display:none;
-      padding:12px 0 70px;
+      padding:14px 0 70px;
       animation:fadeIn .28s ease;
     }
 
@@ -226,23 +221,24 @@
       display:flex;
       flex-direction:column;
       align-items:flex-start;
-      gap:6px;
-      padding:14px 0 22px;
-      border-bottom:1px solid rgba(255,255,255,.07);
-      margin-bottom:22px;
+      gap:8px;
+      padding:8px 0 26px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      margin-bottom:26px;
     }
 
     .section-head .city{
-      font-size:12px;
-      color:rgba(255,255,255,.52);
-      letter-spacing:.28em;
+      font-size:11px;
+      color:rgba(255,255,255,.48);
+      letter-spacing:.30em;
       text-transform:uppercase;
+      font-weight:700;
     }
 
     .section-head .date{
-      font-size:clamp(28px, 9vw, 52px);
-      line-height:.95;
-      letter-spacing:-.06em;
+      font-size:clamp(30px, 8vw, 56px);
+      line-height:.94;
+      letter-spacing:-.065em;
       text-transform:uppercase;
       font-weight:800;
     }
@@ -251,7 +247,7 @@
       display:flex;
       gap:16px;
       flex-wrap:wrap;
-      margin:18px 0 22px;
+      margin:0 0 24px;
     }
 
     .milano-jump{
@@ -365,16 +361,24 @@
       color:rgba(255,255,255,.68);
     }
 
+    .empty-card{
+      padding:24px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      box-shadow:0 16px 40px rgba(0,0,0,.22);
+    }
+
     .empty-meta{
       font-size:14px;
       line-height:1.7;
-      max-width:460px;
+      max-width:520px;
       margin-bottom:18px;
       color:rgba(255,255,255,.60);
     }
 
     .closing{
-      padding:8px 0 72px;
+      padding:10px 0 72px;
     }
 
     .closing-copy{
@@ -511,6 +515,33 @@
     }
 
     @media (max-width: 720px){
+      .topbar-inner{
+        min-height:72px;
+      }
+
+      .brand-mark{
+        font-size:10px;
+        letter-spacing:.20em;
+      }
+
+      .tab-bar{
+        gap:8px;
+      }
+
+      .tab-btn{
+        min-height:44px;
+        padding:0 14px;
+      }
+
+      .tab-city{
+        font-size:10px;
+        letter-spacing:.18em;
+      }
+
+      .status-pill{
+        font-size:7px;
+      }
+
       .lightbox-close{
         top:-34px;
         right:0;
@@ -537,12 +568,10 @@
     @media (min-width: 721px){
       .shell{ width:min(1240px, calc(100% - 48px)); }
       .topbar-inner{ width:min(1240px, calc(100% - 48px)); }
-      .hero{ padding:38px 0 14px; }
-      .hero-copy{ padding:58px 0 12px; }
-      .hero-text{ max-width:520px; font-size:16px; }
-      .tab-bar{ grid-template-columns:repeat(4, 1fr); gap:12px; }
-      .tab-btn{ min-height:86px; padding:16px 18px; }
-      .section-head{ gap:8px; padding:18px 0 24px; margin-bottom:26px; }
+      .menu-section{ padding:34px 0 16px; }
+      .menu-wrap{ padding:22px 0 10px; }
+      .tab-btn{ min-height:50px; padding:0 20px; }
+      .section-head{ gap:8px; padding:10px 0 28px; margin-bottom:26px; }
       .photo-grid{ grid-template-columns:repeat(5, 1fr); gap:10px; }
       .thumb{ border-radius:16px; }
       .video-grid{ grid-template-columns:1fr 1fr; gap:14px; }
@@ -551,10 +580,6 @@
     }
 
     @media (min-width: 1080px){
-      .hero-copy{ padding:76px 0 14px; }
-      .hero-title{ font-size:clamp(60px, 8vw, 120px); }
-      .hero-text{ max-width:560px; }
-      .section-head{ padding-top:12px; }
       .photo-grid{ grid-template-columns:repeat(6, 1fr); gap:12px; }
       .thumb{ border-radius:18px; }
     }
@@ -564,152 +589,164 @@
   <main class="page">
     <header class="topbar">
       <div class="topbar-inner">
+        <div class="brand-mark">Mindjset Recap</div>
         <a class="back-link" href="index.html">Back to home</a>
       </div>
     </header>
 
-    <section class="hero">
+    <section class="menu-section">
       <div class="shell">
-        <div class="hero-copy">
-          <h1 class="hero-title">
-            <span>One Night</span>
-            <span>In Our Minds</span>
-          </h1>
-          <p class="hero-text">Where nights become memory</p>
+        <div class="menu-wrap">
+          <div class="menu-label">Select City</div>
+          <div class="tab-bar">
+            <button class="tab-btn active" data-event="milano">
+              <span class="tab-city">Milano</span>
+              <span class="status-pill live-pill">Live</span>
+            </button>
+
+            <button class="tab-btn" data-event="roma">
+              <span class="tab-city">Roma</span>
+              <span class="status-pill">Soon</span>
+            </button>
+
+            <button class="tab-btn" data-event="barcellona">
+              <span class="tab-city">Barcellona</span>
+              <span class="status-pill">Soon</span>
+            </button>
+
+            <button class="tab-btn" data-event="other-moments">
+              <span class="tab-city">Other Cities</span>
+              <span class="status-pill">Coming Soon</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="tab-section">
+    <section class="content-section">
       <div class="shell">
-        <div class="tab-bar">
-          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill live-pill">Live</span></button>
-          <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span class="status-pill">Soon</span></button>
-          <button class="tab-btn" data-event="barcellona"><span class="tab-city">Barcellona</span><span class="status-pill">Soon</span></button>
-          <button class="tab-btn" data-event="other-moments"><span class="tab-city">Other Cities</span><span class="status-pill">Coming Soon</span></button>
-        </div>
+        <article class="panel active" id="milano">
+          <div class="section-head">
+            <div class="city">Milano</div>
+            <div class="date">28 March 2026</div>
+          </div>
+
+          <div class="milano-actions">
+            <a class="milano-jump" href="#milano-photos">Photos</a>
+            <a class="milano-jump" href="#milano-videos">Videos</a>
+          </div>
+
+          <div class="photo-grid" id="milano-photos">
+            <button class="thumb" type="button" data-index="0"><img src="images/milano (1).jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="1"><img src="images/milano (2).jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="2"><img src="images/milano (3).jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="3"><img src="images/milano (4).jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="4"><img src="images/milano (5).jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="5"><img src="images/milano (6).jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="6"><img src="images/milano (7).jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="7"><img src="images/milano (8).jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="8"><img src="images/milano (9).jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="9"><img src="images/milano (10).jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="10"><img src="images/milano (11).jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="11"><img src="images/milano (12).jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="12"><img src="images/milano (13).jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="13"><img src="images/milano (14).jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="14"><img src="images/milano (15).jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="15"><img src="images/milano (16).jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="16"><img src="images/milano (17).jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="17"><img src="images/milano (18).jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="18"><img src="images/milano (19).jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="19"><img src="images/milano (20).jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="20"><img src="images/milano (21).jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="21"><img src="images/milano (22).jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="22"><img src="images/milano (23).jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="23"><img src="images/milano (24).jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="24"><img src="images/milano (25).jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="25"><img src="images/milano (26).jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="26"><img src="images/milano (27).jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="27"><img src="images/milano (28).jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="28"><img src="images/milano (29).jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="29"><img src="images/milano (30).jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="30"><img src="images/milano (31).jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="31"><img src="images/milano (32).jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="32"><img src="images/milano (33).jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="33"><img src="images/milano (34).jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="34"><img src="images/milano (35).jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="35"><img src="images/milano (36).jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="36"><img src="images/milano (37).jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="37"><img src="images/milano (38).jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="38"><img src="images/milano (39).jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="39"><img src="images/milano (40).jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="40"><img src="images/milano (41).jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="41"><img src="images/milano (42).jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="42"><img src="images/milano (43).jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="43"><img src="images/milano (44).jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="44"><img src="images/milano (45).jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="45"><img src="images/milano (46).jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="46"><img src="images/milano (47).jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="47"><img src="images/milano (48).jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="48"><img src="images/milano (49).jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="49"><img src="images/milano (50).jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
+            <button class="thumb" type="button" data-index="50"><img src="images/milano (51).jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
+          </div>
+
+          <div class="video-label" id="milano-videos" style="margin-top:28px">Video Moments</div>
+          <div class="video-grid">
+            <div class="video-card">
+              <video controls preload="metadata" poster="images/milano (1).jpg">
+                <source src="videos/milano-recap-1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-card">
+              <video controls preload="metadata" poster="images/milano (18).jpg">
+                <source src="videos/milano-recap-2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="roma">
+          <div class="section-head">
+            <div class="city">Roma</div>
+            <div class="date">25 April 2026</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">
+                Notorious Club Roma - Piazza Barberini<br>
+                Via di S. Nicola da Tolentino, 22
+              </div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="barcellona">
+          <div class="section-head">
+            <div class="city">Barcellona</div>
+            <div class="date">23 May 2026</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">The next European stop will be announced soon</div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" id="other-moments">
+          <div class="section-head">
+            <div class="city">Other Cities</div>
+            <div class="date">Coming Soon</div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-card">
+              <div class="empty-meta">More cities are coming soon</div>
+              <a class="events-link" href="index.html#events">More Details</a>
+            </div>
+          </div>
+        </article>
       </div>
-    </section>
-
-    <section class="shell">
-      <article class="panel active" id="milano">
-        <div class="section-head">
-          <div class="city">Milano</div>
-          <div class="date">28 March 2026</div>
-        </div>
-
-        <div class="milano-actions">
-          <a class="milano-jump" href="#milano-photos">Photos</a>
-          <a class="milano-jump" href="#milano-videos">Videos</a>
-        </div>
-
-        <div class="photo-grid" id="milano-photos">
-          <button class="thumb" type="button" data-index="0"><img src="images/milano (1).jpg" alt="Mindjset Milano photo 1" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="1"><img src="images/milano (2).jpg" alt="Mindjset Milano photo 2" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="2"><img src="images/milano (3).jpg" alt="Mindjset Milano photo 3" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="3"><img src="images/milano (4).jpg" alt="Mindjset Milano photo 4" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="4"><img src="images/milano (5).jpg" alt="Mindjset Milano photo 5" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="5"><img src="images/milano (6).jpg" alt="Mindjset Milano photo 6" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="6"><img src="images/milano (7).jpg" alt="Mindjset Milano photo 7" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="7"><img src="images/milano (8).jpg" alt="Mindjset Milano photo 8" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="8"><img src="images/milano (9).jpg" alt="Mindjset Milano photo 9" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="9"><img src="images/milano (10).jpg" alt="Mindjset Milano photo 10" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="10"><img src="images/milano (11).jpg" alt="Mindjset Milano photo 11" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="11"><img src="images/milano (12).jpg" alt="Mindjset Milano photo 12" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="12"><img src="images/milano (13).jpg" alt="Mindjset Milano photo 13" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="13"><img src="images/milano (14).jpg" alt="Mindjset Milano photo 14" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="14"><img src="images/milano (15).jpg" alt="Mindjset Milano photo 15" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="15"><img src="images/milano (16).jpg" alt="Mindjset Milano photo 16" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="16"><img src="images/milano (17).jpg" alt="Mindjset Milano photo 17" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="17"><img src="images/milano (18).jpg" alt="Mindjset Milano photo 18" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="18"><img src="images/milano (19).jpg" alt="Mindjset Milano photo 19" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="19"><img src="images/milano (20).jpg" alt="Mindjset Milano photo 20" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="20"><img src="images/milano (21).jpg" alt="Mindjset Milano photo 21" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="21"><img src="images/milano (22).jpg" alt="Mindjset Milano photo 22" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="22"><img src="images/milano (23).jpg" alt="Mindjset Milano photo 23" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="23"><img src="images/milano (24).jpg" alt="Mindjset Milano photo 24" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="24"><img src="images/milano (25).jpg" alt="Mindjset Milano photo 25" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="25"><img src="images/milano (26).jpg" alt="Mindjset Milano photo 26" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="26"><img src="images/milano (27).jpg" alt="Mindjset Milano photo 27" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="27"><img src="images/milano (28).jpg" alt="Mindjset Milano photo 28" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="28"><img src="images/milano (29).jpg" alt="Mindjset Milano photo 29" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="29"><img src="images/milano (30).jpg" alt="Mindjset Milano photo 30" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="30"><img src="images/milano (31).jpg" alt="Mindjset Milano photo 31" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="31"><img src="images/milano (32).jpg" alt="Mindjset Milano photo 32" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="32"><img src="images/milano (33).jpg" alt="Mindjset Milano photo 33" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="33"><img src="images/milano (34).jpg" alt="Mindjset Milano photo 34" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="34"><img src="images/milano (35).jpg" alt="Mindjset Milano photo 35" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="35"><img src="images/milano (36).jpg" alt="Mindjset Milano photo 36" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="36"><img src="images/milano (37).jpg" alt="Mindjset Milano photo 37" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="37"><img src="images/milano (38).jpg" alt="Mindjset Milano photo 38" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="38"><img src="images/milano (39).jpg" alt="Mindjset Milano photo 39" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="39"><img src="images/milano (40).jpg" alt="Mindjset Milano photo 40" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="40"><img src="images/milano (41).jpg" alt="Mindjset Milano photo 41" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="41"><img src="images/milano (42).jpg" alt="Mindjset Milano photo 42" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="42"><img src="images/milano (43).jpg" alt="Mindjset Milano photo 43" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="43"><img src="images/milano (44).jpg" alt="Mindjset Milano photo 44" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="44"><img src="images/milano (45).jpg" alt="Mindjset Milano photo 45" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="45"><img src="images/milano (46).jpg" alt="Mindjset Milano photo 46" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="46"><img src="images/milano (47).jpg" alt="Mindjset Milano photo 47" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="47"><img src="images/milano (48).jpg" alt="Mindjset Milano photo 48" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="48"><img src="images/milano (49).jpg" alt="Mindjset Milano photo 49" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="49"><img src="images/milano (50).jpg" alt="Mindjset Milano photo 50" loading="lazy"></button>
-          <button class="thumb" type="button" data-index="50"><img src="images/milano (51).jpg" alt="Mindjset Milano photo 51" loading="lazy"></button>
-        </div>
-
-        <div class="video-label" id="milano-videos" style="margin-top:28px">Video Moments</div>
-<div class="video-grid">
-  <div class="video-card">
-    <video controls preload="metadata" poster="images/milano (8).jpg">
-      <source src="videos/milano-recap-1.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="video-card">
-    <video controls preload="metadata" poster="images/milano (1).jpg">
-      <source src="videos/milano-recap-2.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-      </article>
-
-      <article class="panel" id="roma">
-        <div class="section-head">
-          <div class="city">Roma</div>
-          <div class="date">25 April 2026</div>
-        </div>
-        <div class="empty-state">
-          <div>
-            <div class="empty-meta">Notorious Club Roma - Piazza Barberini<br>Via di S. Nicola da Tolentino, 22</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="panel" id="barcellona">
-        <div class="section-head">
-          <div class="city">Barcellona</div>
-          <div class="date">23 May 2026</div>
-        </div>
-        <div class="empty-state">
-          <div>
-            <div class="empty-meta">The next European stop will be announced soon</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="panel" id="other-moments">
-        <div class="section-head">
-          <div class="city">Other Cities</div>
-          <div class="date">Coming Soon</div>
-        </div>
-        <div class="empty-state">
-          <div>
-            <div class="empty-meta">More cities are coming soon</div>
-            <a class="events-link" href="index.html#events">More Details</a>
-          </div>
-        </div>
-      </article>
     </section>
 
     <section class="closing shell">
@@ -738,6 +775,7 @@
     function activateEvent(name){
       buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.event === name));
       panels.forEach(panel => panel.classList.toggle('active', panel.id === name));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     buttons.forEach(button => {
