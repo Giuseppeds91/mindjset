@@ -60,7 +60,7 @@
       min-height:78px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
       gap:18px;
     }
 
@@ -92,28 +92,33 @@
     .back-link:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
 
     .hero{
-      padding:72px 0 42px;
+      padding:34px 0 18px;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1fr;
       gap:20px;
       align-items:stretch;
     }
 
-    .hero-copy,
-    .hero-visual{
-      border-radius:34px;
+    .hero-copy{
+      border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow);
-      min-height:560px;
+      min-height:auto;
     }
 
     .hero-copy{
       position:relative;
-      padding:44px;
+      padding:28px 22px 24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
+        #050505;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
@@ -127,7 +132,7 @@
       letter-spacing:.34em;
       text-transform:uppercase;
       color:rgba(255,255,255,.56);
-      margin-bottom:26px;
+      margin-bottom:18px;
     }
 
     .hero-title{
@@ -451,7 +456,7 @@
   <main class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        <div class="brand">Mindjset Archive</div>
+        
         <a class="back-link" href="index.html">Back to site</a>
       </div>
     </header>
@@ -466,26 +471,16 @@
               <span>Still Alive.</span>
             </h1>
             <p class="hero-text">
-              Mindjset is not only what happened on the dancefloor. It is the energy before,
-              the faces during, the memory after. Enter the archive and unlock each chapter.
+              The energy fades slowly. The memory does not.
             </p>
           </div>
-
-          <div class="hero-meta">
-            <div class="meta-card">
-              <div class="meta-label">Current Drop</div>
-              <div class="meta-value">Milano recap is now the active chapter.</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Archive Type</div>
-              <div class="meta-value">Photo selections, video moments and future city drops.</div>
-            </div>
-            <div class="meta-card">
-              <div class="meta-label">Next Cities</div>
-              <div class="meta-value">Roma and Barcelona will unlock next.</div>
-            </div>
-          </div>
         </div>
+
+        <div class="hero-visual" style="display:none"></div>
+      </div>
+    </section>
+
+    <section class="tab-sectionv>
 
         <div class="hero-visual">
           <img src="images/milano-cover.jpg" alt="Mindjset Milano cover" loading="eager">
@@ -562,9 +557,20 @@
             <div class="label">Future Chapter</div>
             <h2>Barcelona</h2>
           </div>
-          <p>A new city, a different energy and another memory waiting to happen. This archive will expand soon.</p>
+          <p>A new city, a different energy and another memory waiting to happen.</p>
         </div>
         <div class="empty-state">Barcelona recap will unlock here soon</div>
+      </article>
+
+      <article class="panel" id="other-moments">
+        <div class="section-head">
+          <div>
+            <div class="label">Archive Expansion</div>
+            <h2>Other Moments</h2>
+          </div>
+          <p>More chapters will appear here over time, quietly and in the right moment.</p>
+        </div>
+        <div class="empty-state">New memories will be added here soon</div>
       </article>
     </section>
 
