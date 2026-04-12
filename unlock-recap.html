@@ -90,10 +90,38 @@
     }
 
     .hero{
+      position:relative;
       padding:26px 0 8px;
+      overflow:hidden;
+    }
+
+    .hero-bg-logo{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .hero-bg-logo img{
+      width:min(760px, 92vw);
+      opacity:.055;
+      filter:grayscale(1) brightness(1.2);
+      animation:heroPulse 5s ease-in-out infinite;
+      transform:translateY(-8px);
+    }
+
+    @keyframes heroPulse{
+      0%{opacity:.03; transform:translateY(-8px) scale(.98)}
+      50%{opacity:.085; transform:translateY(-8px) scale(1)}
+      100%{opacity:.03; transform:translateY(-8px) scale(.98)}
     }
 
     .hero-copy{
+      position:relative;
+      z-index:1;
       padding:40px 2px 8px;
     }
 
@@ -200,6 +228,16 @@
       color:#fff;
     }
 
+    .live-pill{
+      animation:liveBlink 1.15s ease-in-out infinite;
+    }
+
+    @keyframes liveBlink{
+      0%{opacity:.38; box-shadow:0 0 0 rgba(0,0,0,0)}
+      50%{opacity:1; box-shadow:0 0 14px rgba(0,0,0,.22)}
+      100%{opacity:.38; box-shadow:0 0 0 rgba(0,0,0,0)}
+    }
+
     .panel{
       display:none;
       padding:12px 0 70px;
@@ -242,12 +280,32 @@
 
     .milano-actions{
       display:flex;
-      gap:10px;
+      gap:16px;
       flex-wrap:wrap;
       margin:18px 0 22px;
     }
 
-    .milano-jump,
+    .milano-jump{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:32px;
+      padding:0;
+      border:none;
+      background:transparent;
+      color:#fff;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      transition:.22s ease;
+    }
+
+    .milano-jump:hover{
+      opacity:.72;
+      transform:translateY(-1px);
+    }
+
     .events-link{
       display:inline-flex;
       align-items:center;
@@ -265,7 +323,6 @@
       transition:.25s ease;
     }
 
-    .milano-jump:hover,
     .events-link:hover{
       transform:translateY(-1px);
       border-color:rgba(255,255,255,.18);
@@ -343,9 +400,18 @@
     .empty-copy{
       font-size:14px;
       line-height:1.7;
-      max-width:420px;
-      margin-bottom:18px;
+      max-width:460px;
+      margin-bottom:8px;
       color:rgba(255,255,255,.60);
+    }
+
+    .empty-meta{
+      font-size:11px;
+      color:rgba(255,255,255,.46);
+      line-height:1.8;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      margin-bottom:18px;
     }
 
     .closing{
@@ -512,6 +578,9 @@
     </header>
 
     <section class="hero">
+      <div class="hero-bg-logo">
+        <img src="logo-mindjset.png" alt="Mindjset logo background">
+      </div>
       <div class="shell">
         <div class="hero-copy">
           <div class="hero-kicker">Unlock Recap</div>
@@ -527,7 +596,7 @@
     <section class="tab-section">
       <div class="shell">
         <div class="tab-bar">
-          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill">Live</span></button>
+          <button class="tab-btn active" data-event="milano"><span class="tab-city">Milano</span><span class="status-pill live-pill">Live</span></button>
           <button class="tab-btn" data-event="roma"><span class="tab-city">Roma</span><span class="status-pill">Soon</span></button>
           <button class="tab-btn" data-event="barcellona"><span class="tab-city">Barcellona</span><span class="status-pill">Soon</span></button>
           <button class="tab-btn" data-event="other-moments"><span class="tab-city">Other Cities</span><span class="status-pill">Coming Soon</span></button>
@@ -625,8 +694,9 @@
         </div>
         <div class="empty-state">
           <div>
-            <p class="empty-copy">The next chapter will unlock soon.</p>
-            <a class="events-link" href="index.html#events">View events</a>
+            <p class="empty-copy">The next chapter is almost here.</p>
+            <div class="empty-meta">Notorious Club Roma — Piazza Barberini — Via di S. Nicola da Tolentino, 22</div>
+            <a class="events-link" href="index.html#events">More Details</a>
           </div>
         </div>
       </article>
@@ -638,8 +708,9 @@
         </div>
         <div class="empty-state">
           <div>
-            <p class="empty-copy">A new city. A new memory in the making.</p>
-            <a class="events-link" href="index.html#events">View events</a>
+            <p class="empty-copy">The next European stop will be announced soon.</p>
+            <div class="empty-meta">International stop — more details coming soon</div>
+            <a class="events-link" href="index.html#events">More Details</a>
           </div>
         </div>
       </article>
@@ -652,7 +723,8 @@
         <div class="empty-state">
           <div>
             <p class="empty-copy">More cities are coming soon.</p>
-            <a class="events-link" href="index.html#events">View events</a>
+            <div class="empty-meta">New chapters will be added over time</div>
+            <a class="events-link" href="index.html#events">More Details</a>
           </div>
         </div>
       </article>
