@@ -396,8 +396,18 @@
       .hero{padding:38px 0 10px}
       .hero-copy{padding:18px 0 8px}
       .hero-text{max-width:520px;font-size:16px}
-      .tab-bar{display:flex;flex-wrap:wrap;gap:12px}
-      .tab-btn{min-height:48px;padding:0 18px;font-size:11px;letter-spacing:.16em;justify-content:center}
+      .tab-bar{
+        display:grid;
+        grid-template-columns:repeat(4, 1fr);
+        gap:12px;
+      }
+      .tab-btn{
+        min-height:48px;
+        padding:0 16px;
+        font-size:11px;
+        letter-spacing:.16em;
+        justify-content:space-between;
+      }
       .section-head{gap:8px;padding:18px 0 24px;margin-bottom:26px}
       .photo-grid{grid-template-columns:repeat(5, 1fr);gap:10px}
       .thumb{border-radius:16px}
@@ -423,7 +433,7 @@
   <main class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="back-link" href="index.html">Back to site</a>
+        <a class="back-link" href="/">Back to site</a>
       </div>
     </header>
 
