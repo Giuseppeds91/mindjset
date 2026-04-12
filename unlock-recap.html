@@ -11,15 +11,15 @@
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
       --bg:#000;
-      --panel:rgba(255,255,255,.04);
-      --panel-strong:rgba(255,255,255,.07);
-      --line:rgba(255,255,255,.10);
       --text:#fff;
-      --muted:rgba(255,255,255,.68);
-      --muted-2:rgba(255,255,255,.45);
-      --accent:#ff2a2a;
-      --shadow:0 24px 60px rgba(0,0,0,.38);
+      --muted:rgba(255,255,255,.70);
+      --muted-2:rgba(255,255,255,.46);
+      --line:rgba(255,255,255,.08);
+      --panel:rgba(255,255,255,.03);
+      --panel-2:rgba(255,255,255,.05);
+      --shadow:0 18px 48px rgba(0,0,0,.34);
     }
+
     html{scroll-behavior:smooth}
     body{
       background:#000;
@@ -29,6 +29,7 @@
       text-rendering:optimizeLegibility;
       overflow-x:hidden;
     }
+
     a{text-decoration:none;color:inherit}
     img,video{display:block;width:100%}
     button{font:inherit}
@@ -36,236 +37,123 @@
     .page{
       min-height:100vh;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 24%),
-        radial-gradient(circle at 15% 20%, rgba(255,42,42,.07), transparent 22%),
-        radial-gradient(circle at 80% 18%, rgba(255,255,255,.04), transparent 20%),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 24%),
+        radial-gradient(circle at 10% 20%, rgba(255,40,40,.07), transparent 20%),
         #000;
     }
 
-    .shell{width:min(1280px, calc(100% - 32px));margin:auto}
+    .shell{
+      width:min(1180px, calc(100% - 28px));
+      margin:auto;
+    }
 
     .topbar{
       position:sticky;
       top:0;
       z-index:30;
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      background:rgba(0,0,0,.55);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      background:rgba(0,0,0,.56);
+      border-bottom:1px solid rgba(255,255,255,.05);
     }
 
     .topbar-inner{
-      width:min(1280px, calc(100% - 32px));
+      width:min(1180px, calc(100% - 28px));
       margin:auto;
-      min-height:78px;
+      min-height:76px;
       display:flex;
       align-items:center;
       justify-content:flex-end;
-      gap:18px;
-    }
-
-    .brand{
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.34em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.9);
     }
 
     .back-link{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      min-height:42px;
-      padding:0 16px;
+      justify-content:center;
+      min-height:44px;
+      padding:0 18px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
       font-size:11px;
       font-weight:700;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:#fff;
       transition:.25s ease;
     }
 
-    .back-link:hover{transform:translateY(-1px);background:rgba(255,255,255,.06)}
+    .back-link:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.05);
+    }
 
     .hero{
-      padding:34px 0 18px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:20px;
-      align-items:stretch;
+      padding:22px 0 12px;
     }
 
     .hero-copy{
+      padding:28px 20px 22px;
       border-radius:30px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
       box-shadow:var(--shadow);
-      min-height:auto;
-    }
-
-    .hero-copy{
-      position:relative;
-      padding:28px 22px 24px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)),
-        #050505;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
-        #050505;
     }
 
     .hero-kicker{
       font-size:11px;
-      letter-spacing:.34em;
+      letter-spacing:.32em;
       text-transform:uppercase;
       color:rgba(255,255,255,.56);
       margin-bottom:18px;
     }
 
     .hero-title{
-      font-size:clamp(52px, 8vw, 120px);
+      font-size:clamp(44px, 13vw, 110px);
       line-height:.9;
       letter-spacing:-.075em;
       text-transform:uppercase;
       font-weight:800;
-      max-width:720px;
-      text-wrap:balance;
+      max-width:780px;
     }
 
-    .hero-title span{
-      display:block;
-    }
-
-    .hero-text-wrap{
-      max-width:640px;
-    }
+    .hero-title span{display:block}
 
     .hero-text{
-      margin-top:24px;
+      margin-top:18px;
       color:var(--muted);
       font-size:15px;
-      line-height:1.75;
-      max-width:510px;
-    }
-
-    .hero-meta{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:12px;
-      margin-top:34px;
-    }
-
-    .meta-card{
-      padding:16px 16px 18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.07);
-    }
-
-    .meta-label{
-      font-size:10px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.45);
-      margin-bottom:8px;
-    }
-
-    .meta-value{
-      font-size:14px;
-      line-height:1.45;
-      color:#fff;
-    }
-
-    .hero-visual{
-      position:relative;
-      background:#0a0a0a;
-    }
-
-    .hero-visual img,
-    .hero-visual video{
-      height:100%;
-      object-fit:cover;
-      filter:brightness(.82) contrast(1.04) saturate(.96);
-    }
-
-    .hero-visual::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.58)),
-        radial-gradient(circle at 50% 18%, rgba(255,255,255,.10), transparent 28%);
-      pointer-events:none;
-    }
-
-    .hero-stamp{
-      position:absolute;
-      left:28px;
-      right:28px;
-      bottom:26px;
-      z-index:2;
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .hero-stamp strong{
-      display:block;
-      font-size:34px;
-      line-height:.95;
-      letter-spacing:-.05em;
-      text-transform:uppercase;
-    }
-
-    .hero-stamp span{
-      display:block;
-      margin-top:8px;
-      color:rgba(255,255,255,.72);
-      font-size:12px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
+      line-height:1.6;
+      max-width:360px;
     }
 
     .tab-section{
-      padding:16px 0 20px;
+      padding:10px 0 14px;
     }
 
     .tab-bar{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
     }
 
     .tab-btn{
-      min-height:48px;
-      padding:0 18px;
+      min-height:46px;
+      padding:0 12px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
       color:#fff;
       cursor:pointer;
-      display:inline-flex;
+      display:flex;
       align-items:center;
+      justify-content:space-between;
       gap:10px;
       text-transform:uppercase;
-      letter-spacing:.16em;
-      font-size:11px;
+      letter-spacing:.14em;
+      font-size:10px;
       font-weight:800;
       transition:.25s ease;
+      white-space:nowrap;
     }
 
     .tab-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}
@@ -277,41 +165,55 @@
     }
 
     .status-pill{
-      min-height:22px;
+      min-height:20px;
       padding:0 8px;
       border-radius:999px;
       background:rgba(255,255,255,.10);
       font-size:9px;
-      letter-spacing:.16em;
+      letter-spacing:.14em;
       display:inline-flex;
       align-items:center;
       text-transform:uppercase;
+      flex-shrink:0;
     }
 
-    .tab-btn.active .status-pill{background:#000;color:#fff}
+    .tab-btn.active .status-pill{
+      background:#000;
+      color:#fff;
+    }
 
     .panel{
       display:none;
-      padding:18px 0 90px;
-      animation:fadeIn .32s ease;
+      padding:12px 0 70px;
+      animation:fadeIn .28s ease;
     }
 
     .panel.active{display:block}
 
-    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
 
     .section-head{
       display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:18px;
-      padding:16px 0 24px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:28px;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px 0 22px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      margin-bottom:22px;
+    }
+
+    .label{
+      font-size:11px;
+      color:rgba(255,255,255,.52);
+      letter-spacing:.24em;
+      text-transform:uppercase;
     }
 
     .section-head h2{
-      font-size:clamp(28px,4vw,52px);
+      font-size:clamp(24px, 8vw, 48px);
       line-height:.95;
       letter-spacing:-.06em;
       text-transform:uppercase;
@@ -320,135 +222,108 @@
     .section-head p{
       color:var(--muted);
       font-size:14px;
-      line-height:1.65;
-      max-width:400px;
-      text-align:right;
-    }
-
-    .label{
-      margin-bottom:14px;
-      font-size:11px;
-      color:rgba(255,255,255,.54);
-      letter-spacing:.26em;
-      text-transform:uppercase;
+      line-height:1.6;
+      max-width:420px;
     }
 
     .masonry{
       display:grid;
-      grid-template-columns:1.15fr .85fr .85fr;
-      gap:16px;
-      grid-auto-rows:220px;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .card,
+    .video-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.07);
+      background:#0a0a0a;
+      box-shadow:0 12px 32px rgba(0,0,0,.22);
     }
 
     .card{
-      position:relative;
-      overflow:hidden;
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.08);
-      background:#0a0a0a;
-      box-shadow:0 14px 36px rgba(0,0,0,.24);
+      aspect-ratio:4/5;
     }
 
     .card img,
-    .card video{
+    .video-card video{
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:transform .5s ease, filter .35s ease;
-      filter:brightness(.9);
-    }
-
-    .card:hover img,
-    .card:hover video{
-      transform:scale(1.03);
-      filter:brightness(.97);
-    }
-
-    .card.large{grid-row:span 2}
-    .card.wide{grid-column:span 2}
-
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.18));
-      pointer-events:none;
     }
 
     .video-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:34px;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:28px;
     }
 
-    .video-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.08);
-      background:#080808;
-      box-shadow:0 14px 36px rgba(0,0,0,.24);
+    .video-card video{
+      aspect-ratio:16/10;
     }
-
-    .video-card video{aspect-ratio:16/10;object-fit:cover}
 
     .empty-state{
-      min-height:420px;
-      border-radius:30px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      min-height:220px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:32px;
-      color:rgba(255,255,255,.5);
-      font-size:14px;
+      padding:28px;
+      color:rgba(255,255,255,.52);
+      font-size:12px;
       line-height:1.8;
-      letter-spacing:.14em;
+      letter-spacing:.16em;
       text-transform:uppercase;
     }
 
     .closing{
-      padding:0 0 90px;
+      padding:8px 0 72px;
     }
 
-    .closing-box{
-      border-radius:34px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
-      padding:38px 28px;
+    .closing-copy{
       text-align:center;
-      box-shadow:var(--shadow);
-    }
-
-    .closing-box p{
-      font-size:clamp(20px,3vw,34px);
+      font-size:clamp(18px, 5.8vw, 30px);
       line-height:1.18;
-      letter-spacing:.08em;
+      letter-spacing:.18em;
       text-transform:uppercase;
+      color:rgba(255,255,255,.88);
     }
 
-    @media (max-width: 1080px){
-      .hero-grid{grid-template-columns:1fr}
-      .hero-copy,.hero-visual{min-height:auto}
-      .hero-visual{min-height:420px}
-      .section-head{flex-direction:column;align-items:flex-start}
-      .section-head p{text-align:left}
-      .masonry{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
+    @media (min-width: 721px){
+      .shell{width:min(1220px, calc(100% - 48px))}
+      .topbar-inner{width:min(1220px, calc(100% - 48px))}
+      .hero{padding:38px 0 14px}
+      .hero-copy{padding:44px 38px 34px;border-radius:34px}
+      .hero-text{max-width:420px;font-size:16px}
+      .tab-bar{display:flex;flex-wrap:wrap;gap:12px}
+      .tab-btn{min-height:48px;padding:0 18px;font-size:11px;letter-spacing:.16em;justify-content:center}
+      .section-head{gap:12px;padding:18px 0 24px;margin-bottom:26px}
+      .masonry{grid-template-columns:1fr 1fr;gap:14px}
+      .video-grid{grid-template-columns:1fr 1fr;gap:14px}
+      .empty-state{min-height:280px;font-size:13px}
+    }
+
+    @media (min-width: 1080px){
+      .hero-copy{padding:52px 46px 38px}
+      .hero-title{font-size:clamp(60px, 8vw, 120px)}
+      .hero-text{max-width:500px}
+      .section-head{
+        flex-direction:row;
+        align-items:end;
+        justify-content:space-between;
+      }
+      .section-head p{text-align:right}
+      .masonry{
+        grid-template-columns:1.15fr .85fr .85fr;
+        grid-auto-rows:220px;
+      }
+      .card.large{grid-row:span 2}
       .card.wide{grid-column:span 2}
-    }
-
-    @media (max-width: 720px){
-      .topbar-inner{min-height:70px}
-      .hero{padding-top:34px}
-      .hero-copy{padding:28px}
-      .hero-meta{grid-template-columns:1fr}
-      .masonry,.video-grid{grid-template-columns:1fr}
-      .card.large,.card.wide{grid-row:span 1;grid-column:span 1}
-      .hero-stamp{left:18px;right:18px;bottom:18px}
-      .hero-stamp strong{font-size:26px}
     }
   </style>
 </head>
@@ -456,41 +331,19 @@
   <main class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        
         <a class="back-link" href="index.html">Back to site</a>
       </div>
     </header>
 
     <section class="hero">
-      <div class="shell hero-grid">
+      <div class="shell">
         <div class="hero-copy">
-          <div class="hero-text-wrap">
-            <div class="hero-kicker">Unlock Recap</div>
-            <h1 class="hero-title">
-              <span>One Night.</span>
-              <span>Still Alive.</span>
-            </h1>
-            <p class="hero-text">
-              The energy fades slowly. The memory does not.
-            </p>
-          </div>
-        </div>
-
-        <div class="hero-visual" style="display:none"></div>
-      </div>
-    </section>
-
-    <section class="tab-sectionv>
-
-        <div class="hero-visual">
-          <img src="images/milano-cover.jpg" alt="Mindjset Milano cover" loading="eager">
-          <div class="hero-stamp">
-            <div>
-              <strong>Milano</strong>
-              <span>28 March 2026 — Nepentha</span>
-            </div>
-            <span>Live now</span>
-          </div>
+          <div class="hero-kicker">Unlock Recap</div>
+          <h1 class="hero-title">
+            <span>One Night.</span>
+            <span>Still Alive.</span>
+          </h1>
+          <p class="hero-text">The energy fades. The memory does not.</p>
         </div>
       </div>
     </section>
@@ -501,6 +354,7 @@
           <button class="tab-btn active" data-event="milano">Milano <span class="status-pill">Live</span></button>
           <button class="tab-btn" data-event="roma">Roma <span class="status-pill">Soon</span></button>
           <button class="tab-btn" data-event="barcellona">Barcelona <span class="status-pill">Soon</span></button>
+          <button class="tab-btn" data-event="other-moments">Other Moments <span class="status-pill">Archive</span></button>
         </div>
       </div>
     </section>
@@ -512,7 +366,7 @@
             <div class="label">Current Chapter</div>
             <h2>Milano Recap</h2>
           </div>
-          <p>The night has ended. The energy is still here. A selection of frames from the first chapter now lives inside the archive.</p>
+          <p>A selection of moments from the first chapter.</p>
         </div>
 
         <div class="label">Photo Selection</div>
@@ -525,7 +379,7 @@
           <div class="card"><img src="images/milano-6.jpg" alt="Mindjset Milano photo 6" loading="lazy"></div>
         </div>
 
-        <div class="label" style="margin-top:34px">Video Moments</div>
+        <div class="label" style="margin-top:28px">Video Moments</div>
         <div class="video-grid">
           <div class="video-card">
             <video controls preload="metadata" poster="images/milano-video-poster-1.jpg">
@@ -546,7 +400,7 @@
             <div class="label">Next Chapter</div>
             <h2>Roma</h2>
           </div>
-          <p>The next chapter is already in motion. As soon as the night is over, this section will unlock.</p>
+          <p>The next chapter will unlock soon.</p>
         </div>
         <div class="empty-state">Roma recap will unlock here soon</div>
       </article>
@@ -557,7 +411,7 @@
             <div class="label">Future Chapter</div>
             <h2>Barcelona</h2>
           </div>
-          <p>A new city, a different energy and another memory waiting to happen.</p>
+          <p>A new city. A new memory in the making.</p>
         </div>
         <div class="empty-state">Barcelona recap will unlock here soon</div>
       </article>
@@ -568,16 +422,14 @@
             <div class="label">Archive Expansion</div>
             <h2>Other Moments</h2>
           </div>
-          <p>More chapters will appear here over time, quietly and in the right moment.</p>
+          <p>More chapters will appear here, quietly and in the right moment.</p>
         </div>
         <div class="empty-state">New memories will be added here soon</div>
       </article>
     </section>
 
     <section class="closing shell">
-      <div class="closing-box">
-        <p>The night has ended. The recap is now unlocked.</p>
-      </div>
+      <p class="closing-copy">The memory stays.</p>
     </section>
   </main>
 
