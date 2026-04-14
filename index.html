@@ -673,48 +673,48 @@
     }
 
     .cookie-banner-box{
-      width:min(640px, 100%);
-      padding:18px 18px 16px;
-      border-radius:24px;
-      background:rgba(8,8,8,.92);
-      border:1px solid rgba(255,255,255,.12);
+      width:min(560px, 100%);
+      padding:16px 16px 14px;
+      border-radius:22px;
+      background:rgba(8,8,8,.88);
+      border:1px solid rgba(255,255,255,.10);
       backdrop-filter:blur(18px);
       -webkit-backdrop-filter:blur(18px);
-      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      box-shadow:0 20px 60px rgba(0,0,0,.40);
       pointer-events:auto;
     }
 
     .cookie-title{
-      font-size:14px;
+      font-size:12px;
       font-weight:800;
       letter-spacing:.16em;
       text-transform:uppercase;
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
 
     .cookie-text{
-      color:rgba(255,255,255,.74);
-      font-size:13px;
-      line-height:1.65;
+      color:rgba(255,255,255,.70);
+      font-size:12px;
+      line-height:1.55;
     }
 
     .cookie-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:16px;
+      margin-top:14px;
     }
 
     .cookie-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:44px;
-      padding:0 18px;
+      min-height:40px;
+      padding:0 16px;
       border-radius:999px;
       border:none;
       cursor:pointer;
-      font-size:11px;
+      font-size:10px;
       font-weight:800;
       letter-spacing:.16em;
       text-transform:uppercase;
@@ -734,7 +734,7 @@
     .cookie-btn.reject{
       background:rgba(255,255,255,.04);
       color:#fff;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.10);
     }
 
     /* ---------------- MOBILE ---------------- */
@@ -809,13 +809,6 @@
         width:auto;
         bottom:108px;
       }
-
-      .cookie-manage-link{
-  left:50%;
-  right:auto;
-  bottom:10px;
-  transform:translateX(-50%);
-}
     }
 
     @media (max-width: 520px){
@@ -872,8 +865,8 @@
       }
 
       .cookie-banner-box{
-        padding:16px;
-        border-radius:20px;
+        padding:14px;
+        border-radius:18px;
       }
 
       .cookie-actions{
@@ -1068,15 +1061,14 @@
     <div class="cookie-banner-box">
       <div class="cookie-title">Cookie Preferences</div>
       <div class="cookie-text">
-  We use cookies for analytics and marketing only with your consent.
-</div>
+        We use cookies for analytics and marketing only with your consent.
+      </div>
       <div class="cookie-actions">
         <button type="button" class="cookie-btn accept" id="cookie-accept">Accept</button>
         <button type="button" class="cookie-btn reject" id="cookie-reject">Reject</button>
       </div>
     </div>
   </div>
-
 
   <script>
     const progress = document.getElementById("loading-progress");
@@ -1297,16 +1289,10 @@
       }
     }
 
-    function resetCookieConsent() {
-      localStorage.removeItem(COOKIE_STORAGE_KEY);
-      location.reload();
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
       const consent = localStorage.getItem(COOKIE_STORAGE_KEY);
       const acceptBtn = document.getElementById("cookie-accept");
       const rejectBtn = document.getElementById("cookie-reject");
-      const manageBtn = document.getElementById("cookie-manage-link");
 
       acceptBtn.addEventListener("click", function () {
         applyCookieConsent("accepted");
@@ -1314,10 +1300,6 @@
 
       rejectBtn.addEventListener("click", function () {
         applyCookieConsent("rejected");
-      });
-
-      manageBtn.addEventListener("click", function () {
-        resetCookieConsent();
       });
 
       if (!consent) {
