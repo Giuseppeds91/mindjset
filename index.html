@@ -6,34 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MINDJSET</title>
 
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vuhvc39uln");
-  </script>
-
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '692051010631641');
-    fbq('track', 'PageView');
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=692051010631641&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- End Meta Pixel Code -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -683,6 +655,117 @@
       color:rgba(255,255,255,.48);
     }
 
+    /* ---------------- COOKIE BANNER ---------------- */
+
+    .cookie-banner{
+      position:fixed;
+      left:16px;
+      right:16px;
+      bottom:16px;
+      z-index:99999;
+      display:none;
+      justify-content:center;
+      pointer-events:none;
+    }
+
+    .cookie-banner.show{
+      display:flex;
+    }
+
+    .cookie-banner-box{
+      width:min(640px, 100%);
+      padding:18px 18px 16px;
+      border-radius:24px;
+      background:rgba(8,8,8,.92);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      pointer-events:auto;
+    }
+
+    .cookie-title{
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .cookie-text{
+      color:rgba(255,255,255,.74);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .cookie-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .cookie-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 18px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      transition:transform .2s ease, opacity .2s ease, background .2s ease;
+    }
+
+    .cookie-btn:hover{
+      transform:translateY(-1px);
+      opacity:.94;
+    }
+
+    .cookie-btn.accept{
+      background:#fff;
+      color:#000;
+    }
+
+    .cookie-btn.reject{
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .cookie-manage-link{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:99998;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(8,8,8,.82);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:opacity .2s ease, transform .2s ease;
+    }
+
+    .cookie-manage-link:hover{
+      opacity:.94;
+      transform:translateY(-1px);
+    }
+
     /* ---------------- MOBILE ---------------- */
 
     @media (max-width: 1080px){
@@ -755,6 +838,11 @@
         width:auto;
         bottom:108px;
       }
+
+      .cookie-manage-link{
+        bottom:12px;
+        right:12px;
+      }
     }
 
     @media (max-width: 520px){
@@ -802,6 +890,25 @@
 
       .info-modal-title{
         font-size:20px;
+      }
+
+      .cookie-banner{
+        left:12px;
+        right:12px;
+        bottom:12px;
+      }
+
+      .cookie-banner-box{
+        padding:16px;
+        border-radius:20px;
+      }
+
+      .cookie-actions{
+        flex-direction:column;
+      }
+
+      .cookie-btn{
+        width:100%;
       }
     }
   </style>
@@ -984,6 +1091,21 @@
     </div>
   </div>
 
+  <div class="cookie-banner" id="cookie-banner" aria-hidden="true">
+    <div class="cookie-banner-box">
+      <div class="cookie-title">Cookie Preferences</div>
+      <div class="cookie-text">
+        Usiamo cookie tecnici e, solo con il tuo consenso, strumenti di analisi e marketing come Microsoft Clarity e Meta Pixel per migliorare l’esperienza sul sito e misurare le campagne.
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-btn accept" id="cookie-accept">Accept</button>
+        <button type="button" class="cookie-btn reject" id="cookie-reject">Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="cookie-manage-link" id="cookie-manage-link">Manage Cookies</button>
+
   <script>
     const progress = document.getElementById("loading-progress");
     const number = document.getElementById("loading-number");
@@ -1136,6 +1258,103 @@
     });
 
     document.addEventListener("click", forcePlayVideo);
+  </script>
+
+  <script>
+    const META_PIXEL_ID = "692051010631641";
+    const CLARITY_ID = "vuhvc39uln";
+    const COOKIE_STORAGE_KEY = "mindjset_cookie_consent";
+
+    function loadMetaPixel() {
+      if (window.__metaPixelLoaded) return;
+      window.__metaPixelLoaded = true;
+
+      !(function(f,b,e,v,n,t,s){
+        if(f.fbq)return;
+        n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;
+        n.push=n;
+        n.loaded=!0;
+        n.version='2.0';
+        n.queue=[];
+        t=b.createElement(e);
+        t.async=!0;
+        t.src=v;
+        s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s);
+      })(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+
+    function loadClarity() {
+      if (window.__clarityLoaded) return;
+      window.__clarityLoaded = true;
+
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);
+        t.async=1;
+        t.src="https://www.clarity.ms/tag/" + i;
+        y=l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", CLARITY_ID);
+    }
+
+    function showCookieBanner() {
+      const banner = document.getElementById("cookie-banner");
+      banner.classList.add("show");
+      banner.setAttribute("aria-hidden", "false");
+    }
+
+    function hideCookieBanner() {
+      const banner = document.getElementById("cookie-banner");
+      banner.classList.remove("show");
+      banner.setAttribute("aria-hidden", "true");
+    }
+
+    function applyCookieConsent(value) {
+      localStorage.setItem(COOKIE_STORAGE_KEY, value);
+      hideCookieBanner();
+
+      if (value === "accepted") {
+        loadMetaPixel();
+        loadClarity();
+      }
+    }
+
+    function resetCookieConsent() {
+      localStorage.removeItem(COOKIE_STORAGE_KEY);
+      location.reload();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const consent = localStorage.getItem(COOKIE_STORAGE_KEY);
+      const acceptBtn = document.getElementById("cookie-accept");
+      const rejectBtn = document.getElementById("cookie-reject");
+      const manageBtn = document.getElementById("cookie-manage-link");
+
+      acceptBtn.addEventListener("click", function () {
+        applyCookieConsent("accepted");
+      });
+
+      rejectBtn.addEventListener("click", function () {
+        applyCookieConsent("rejected");
+      });
+
+      manageBtn.addEventListener("click", function () {
+        resetCookieConsent();
+      });
+
+      if (!consent) {
+        showCookieBanner();
+      } else if (consent === "accepted") {
+        loadMetaPixel();
+        loadClarity();
+      }
+    });
   </script>
 </body>
 </html>
