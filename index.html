@@ -738,33 +738,30 @@
     }
 
     .cookie-manage-link{
-      position:fixed;
-      right:16px;
-      bottom:16px;
-      z-index:99998;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:40px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(8,8,8,.82);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      cursor:pointer;
-      transition:opacity .2s ease, transform .2s ease;
-    }
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:18px;
+  z-index:69;
+  color:rgba(255,255,255,.48);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:opacity .2s ease;
+  background:none;
+  border:none;
+  padding:0;
+  min-height:auto;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:none;
+}
 
-    .cookie-manage-link:hover{
-      opacity:.94;
-      transform:translateY(-1px);
-    }
+.cookie-manage-link:hover{
+  opacity:.9;
+}
 
     /* ---------------- MOBILE ---------------- */
 
@@ -840,9 +837,11 @@
       }
 
       .cookie-manage-link{
-        bottom:12px;
-        right:12px;
-      }
+  left:50%;
+  right:auto;
+  bottom:10px;
+  transform:translateX(-50%);
+}
     }
 
     @media (max-width: 520px){
@@ -1095,8 +1094,8 @@
     <div class="cookie-banner-box">
       <div class="cookie-title">Cookie Preferences</div>
       <div class="cookie-text">
-        Usiamo cookie tecnici e, solo con il tuo consenso, strumenti di analisi e marketing come Microsoft Clarity e Meta Pixel per migliorare l’esperienza sul sito e misurare le campagne.
-      </div>
+  Usiamo cookie per analytics e marketing solo con il tuo consenso.
+</div>
       <div class="cookie-actions">
         <button type="button" class="cookie-btn accept" id="cookie-accept">Accept</button>
         <button type="button" class="cookie-btn reject" id="cookie-reject">Reject</button>
@@ -1104,7 +1103,7 @@
     </div>
   </div>
 
-  <button type="button" class="cookie-manage-link" id="cookie-manage-link">Manage Cookies</button>
+  <div class="cookie-manage-link" id="cookie-manage-link">Cookie</div>
 
   <script>
     const progress = document.getElementById("loading-progress");
