@@ -1044,6 +1044,13 @@
           <a href="https://www.instagram.com/mindjset/" target="_blank" rel="noopener noreferrer">@mindjset</a>
         </div>
       </div>
+
+      <div class="contact-item">
+        <div class="contact-label">Privacy</div>
+        <div class="contact-value">
+          <a href="privacy-cookie.html">Privacy & Cookies</a>
+        </div>
+      </div>
     </div>
   </aside>
 
@@ -1288,6 +1295,7 @@
         loadClarity();
       }
     }
+
     document.addEventListener("DOMContentLoaded", function () {
       const consent = localStorage.getItem(COOKIE_STORAGE_KEY);
       const acceptBtn = document.getElementById("cookie-accept");
@@ -1309,59 +1317,6 @@
       }
     });
   </script>
-
-  <footer id="legal-footer">
-    <a href="privacy-cookie.html">Privacy & Cookies</a>
-  </footer>
-
-  <style>
-    #legal-footer{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:88px;
-      text-align:center;
-      z-index:75;
-      pointer-events:none;
-    }
-
-    #legal-footer a{
-      pointer-events:auto;
-      font-family:"Inter",sans-serif;
-      font-size:11px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.68);
-      text-decoration:none;
-      transition:opacity .2s ease;
-    }
-
-    #legal-footer a:hover{
-      opacity:.9;
-    }
-
-    @media (max-width: 820px){
-      #legal-footer{
-        bottom:96px;
-      }
-
-      #legal-footer a{
-        font-size:10px;
-        color:rgba(255,255,255,.72);
-      }
-    }
-
-    @media (max-width: 520px){
-      #legal-footer{
-        bottom:110px;
-      }
-
-      #legal-footer a{
-        font-size:10px;
-        letter-spacing:.14em;
-      }
-    }
-  </style>
 
 </body>
 </html>
