@@ -1068,7 +1068,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <button type="button" class="btn-ticket" data-modal="tickets-coming">Get Tickets</button>
+        <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="btn-ticket" target="_blank" rel="noopener noreferrer">Get Tickets</a>
       </div>
     </div>
 
@@ -1118,7 +1118,7 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Barcelona</div>
-                <span class="live-badge">Launching Soon</span>
+                <span class="live-badge">Live</span>
               </div>
               <div class="event-status">International Stop</div>
 
@@ -1129,7 +1129,7 @@
             </div>
 
             <div class="event-actions">
-              <button type="button" class="soon-badge" data-modal="barcelona-tickets">Ticket Drop Soon</button>
+              <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="ticket-link" target="_blank" rel="noopener noreferrer">Get Tickets</a>
             </div>
           </article>
 
@@ -1251,20 +1251,7 @@
     const infoModalText = document.getElementById("info-modal-text");
     const infoModalFooter = document.getElementById("info-modal-footer");
 
-    const modalContent = {
-      "tickets-coming": {
-        kicker: "",
-        title: "Tickets Coming Soon",
-        text: "New tickets will be available soon. Stay close.",
-        footer: "Stay tuned for the next drop"
-      },
-      "barcelona-tickets": {
-        kicker: "",
-        title: "Barcelona Tickets",
-        text: "Tickets for the Barcelona Mindjset night will be live soon.",
-        footer: "Stay tuned for the drop"
-      }
-    };
+    const modalContent = {};
 
     function openContactPanel(){
       contactPanel.classList.add("show");
