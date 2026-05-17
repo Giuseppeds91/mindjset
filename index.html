@@ -595,29 +595,31 @@
     }
 
     .ticket-blink{
-      animation:ticketBlinkMindjset 1.05s ease-in-out infinite;
-    }
+  animation:ticketBlinkMindjset 1.05s ease-in-out infinite;
+}
 
-    @keyframes ticketBlinkMindjset{
-      0%{
-        background:#fff;
-        color:#000;
-        box-shadow:0 8px 22px rgba(255,255,255,.08), 0 0 0 rgba(255,42,42,0);
-        transform:scale(1);
-      }
-      50%{
-        background:#ff2a2a;
-        color:#fff;
-        box-shadow:0 10px 30px rgba(255,42,42,.35), 0 0 26px rgba(255,42,42,.45);
-        transform:scale(1.035);
-      }
-      100%{
-        background:#fff;
-        color:#000;
-        box-shadow:0 8px 22px rgba(255,255,255,.08), 0 0 0 rgba(255,42,42,0);
-        transform:scale(1);
-      }
-    }
+@keyframes ticketBlinkMindjset{
+  0%{
+    background:rgba(255,255,255,.92);
+    color:#000;
+    box-shadow:0 8px 22px rgba(255,255,255,.06);
+    transform:scale(1);
+  }
+  50%{
+    background:#fff;
+    color:#000;
+    box-shadow:
+      0 10px 34px rgba(255,255,255,.34),
+      0 0 30px rgba(255,255,255,.42);
+    transform:scale(1.035);
+  }
+  100%{
+    background:rgba(255,255,255,.92);
+    color:#000;
+    box-shadow:0 8px 22px rgba(255,255,255,.06);
+    transform:scale(1);
+  }
+}
 
     .soon-badge{
       display:inline-flex;
