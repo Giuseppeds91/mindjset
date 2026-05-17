@@ -594,6 +594,31 @@
       opacity:1;
     }
 
+    .ticket-blink{
+      animation:ticketBlinkMindjset 1.05s ease-in-out infinite;
+    }
+
+    @keyframes ticketBlinkMindjset{
+      0%{
+        background:#fff;
+        color:#000;
+        box-shadow:0 8px 22px rgba(255,255,255,.08), 0 0 0 rgba(255,42,42,0);
+        transform:scale(1);
+      }
+      50%{
+        background:#ff2a2a;
+        color:#fff;
+        box-shadow:0 10px 30px rgba(255,42,42,.35), 0 0 26px rgba(255,42,42,.45);
+        transform:scale(1.035);
+      }
+      100%{
+        background:#fff;
+        color:#000;
+        box-shadow:0 8px 22px rgba(255,255,255,.08), 0 0 0 rgba(255,42,42,0);
+        transform:scale(1);
+      }
+    }
+
     .soon-badge{
       display:inline-flex;
       align-items:center;
@@ -1068,7 +1093,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="btn-ticket" target="_blank" rel="noopener noreferrer">Get Tickets</a>
+        <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="btn-ticket ticket-blink" target="_blank" rel="noopener noreferrer">Get Tickets</a>
       </div>
     </div>
 
@@ -1129,7 +1154,7 @@
             </div>
 
             <div class="event-actions">
-              <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="ticket-link" target="_blank" rel="noopener noreferrer">Get Tickets</a>
+              <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="ticket-link ticket-blink" target="_blank" rel="noopener noreferrer">Get Tickets</a>
             </div>
           </article>
 
