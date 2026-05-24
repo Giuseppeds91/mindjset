@@ -1118,7 +1118,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <a href="#portofino-event" class="btn-ticket">Portofino Tickets Coming Soon</a>
+        <a href="javascript:void(0)" class="btn-ticket" data-modal="portofino-details">Tickets Soon</a>
       </div>
     </div>
 
@@ -1199,7 +1199,7 @@
             </div>
 
             <div class="event-actions">
-              <a href="#portofino-event" class="btn-ticket">Portofino Tickets Coming Soon</a>
+              <a href="javascript:void(0)" class="btn-ticket" data-modal="portofino-details">Tickets Soon</a>
             </div>
           </article>
 
@@ -1302,7 +1302,14 @@
     const infoModalText = document.getElementById("info-modal-text");
     const infoModalFooter = document.getElementById("info-modal-footer");
 
-    const modalContent = {};
+    const modalContent = {
+      "portofino-details": {
+        kicker: "Portofino",
+        title: "Details Soon",
+        text: "More details will be live soon. Stay tuned for the next Mindjset chapter.",
+        footer: "Coming soon"
+      }
+    };
 
     function openContactPanel(){
       contactPanel.classList.add("show");
