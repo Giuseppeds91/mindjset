@@ -495,6 +495,14 @@
       box-shadow:0 0 16px rgba(255,42,42,.16);
     }
 
+    .live-badge.soon-white{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.34);
+      color:#fff;
+      box-shadow:0 0 16px rgba(255,255,255,.16);
+      animation:soonBlinkMindjset 1.2s ease-in-out infinite;
+    }
+
     @keyframes liveBlinkMindjset{
       0%{
         opacity:.45;
@@ -507,6 +515,21 @@
       100%{
         opacity:.45;
         box-shadow:0 0 10px rgba(255,42,42,.08);
+      }
+    }
+
+    @keyframes soonBlinkMindjset{
+      0%{
+        opacity:.45;
+        box-shadow:0 0 10px rgba(255,255,255,.08);
+      }
+      50%{
+        opacity:1;
+        box-shadow:0 0 22px rgba(255,255,255,.28);
+      }
+      100%{
+        opacity:.45;
+        box-shadow:0 0 10px rgba(255,255,255,.08);
       }
     }
 
@@ -1090,12 +1113,12 @@
     <div class="bottom-nav-wrap">
       <div class="bottom-nav">
         <nav class="bottom-menu">
-          <a href="#barcelona-event" class="nav-link">Events</a>
+          <a href="#portofino-event" class="nav-link">Events</a>
           <a href="unlock-recap.html" class="nav-link">Gallery</a>
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="btn-ticket ticket-blink" target="_blank" rel="noopener noreferrer">Get Tickets</a>
+        <a href="#portofino-event" class="btn-ticket">Portofino Tickets Coming Soon</a>
       </div>
     </div>
 
@@ -1145,9 +1168,9 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Barcelona</div>
-                <span class="live-badge">Live</span>
+                <span class="recap-badge">Gallery Soon</span>
               </div>
-              <div class="event-status">International Stop</div>
+              <div class="event-status">The Night Has Ended</div>
 
               <div class="event-body">
                 <div class="event-date">Saturday 23 May 2026</div>
@@ -1156,14 +1179,15 @@
             </div>
 
             <div class="event-actions">
-              <a href="https://site.fourvenues.com/en/chica-club1/events/midsjset-x-chica-club--the-embssy-23-05-2026-2HK2" class="ticket-link ticket-blink" target="_blank" rel="noopener noreferrer">Get Tickets</a>
+              <a href="unlock-recap.html?event=barcelona" class="ticket-link ticket-link-soft">Photos & Videos Soon Live</a>
             </div>
           </article>
 
-          <article class="event-card">
+          <article class="event-card featured" id="portofino-event">
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Portofino</div>
+                <span class="live-badge soon-white">Soon</span>
               </div>
               <div class="event-status">Summer Signature</div>
 
@@ -1175,7 +1199,7 @@
             </div>
 
             <div class="event-actions">
-              <span class="soon-badge">More details soon</span>
+              <a href="#portofino-event" class="btn-ticket">Portofino Tickets Coming Soon</a>
             </div>
           </article>
 
