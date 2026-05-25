@@ -671,6 +671,20 @@
       border-color:rgba(255,255,255,.16);
     }
 
+
+
+    .past-event .event-city,
+    .past-event .event-date,
+    .past-event .event-location{
+      opacity:.78;
+    }
+
+    .past-event .recap-badge{
+      color:rgba(255,255,255,.62);
+      font-size:10px;
+      letter-spacing:.16em;
+    }
+
     .contact-panel{
       position:fixed;
       right:20px;
@@ -999,7 +1013,21 @@
         margin-top:14px;
       }
 
-      .contact-panel{
+  
+
+    .past-event .event-city,
+    .past-event .event-date,
+    .past-event .event-location{
+      opacity:.78;
+    }
+
+    .past-event .recap-badge{
+      color:rgba(255,255,255,.62);
+      font-size:10px;
+      letter-spacing:.16em;
+    }
+
+    .contact-panel{
         left:12px;
         right:12px;
         width:auto;
@@ -1137,63 +1165,6 @@
       <div class="container">
         <div class="events-list">
 
-          <article class="event-card featured">
-            <div class="event-top">
-              <div class="event-city-row">
-                <div class="event-city">Milano</div>
-                <span class="recap-badge">Gallery Live</span>
-              </div>
-              <div class="event-status">The Night Has Ended</div>
-
-              <div class="event-body">
-                <div class="event-date">Saturday 28 March 2026</div>
-                <div class="event-location">Nepentha Club — Piazza Armando Diaz, Milano</div>
-              </div>
-            </div>
-
-            <div class="event-actions">
-              <a href="unlock-recap.html?event=milano" class="ticket-link ticket-link-soft">Unlock Recap</a>
-            </div>
-          </article>
-
-          <article class="event-card">
-            <div class="event-top">
-              <div class="event-city-row">
-                <div class="event-city">Roma</div>
-                <span class="recap-badge">Gallery Soon</span>
-              </div>
-              <div class="event-status">The Night Has Ended</div>
-
-              <div class="event-body">
-                <div class="event-date">Saturday 25 April 2026</div>
-                <div class="event-location">Notorious Club Roma - Piazza Barberini - Via di S. Nicola da Tolentino, 22, Roma</div>
-              </div>
-            </div>
-
-            <div class="event-actions">
-              <a href="unlock-recap.html?event=roma" class="ticket-link ticket-link-soft">Photos & Videos Soon Live</a>
-            </div>
-          </article>
-
-          <article class="event-card" id="barcelona-event">
-            <div class="event-top">
-              <div class="event-city-row">
-                <div class="event-city">Barcelona</div>
-                <span class="recap-badge">Gallery Soon</span>
-              </div>
-              <div class="event-status">The Night Has Ended</div>
-
-              <div class="event-body">
-                <div class="event-date">Saturday 23 May 2026</div>
-                <div class="event-location">Chica Club — Carrer Rosselló 217, Barcelona</div>
-              </div>
-            </div>
-
-            <div class="event-actions">
-              <a href="unlock-recap.html?event=barcelona" class="ticket-link ticket-link-soft">Photos & Videos Soon Live</a>
-            </div>
-          </article>
-
           <article class="event-card featured" id="portofino-event">
             <div class="event-top">
               <div class="event-city-row">
@@ -1211,6 +1182,63 @@
 
             <div class="event-actions">
               <a href="javascript:void(0)" class="btn-ticket" data-modal="portofino-details">Tickets Soon</a>
+            </div>
+          </article>
+
+          <article class="event-card past-event">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Milano</div>
+                <span class="recap-badge">↗ Past Event</span>
+              </div>
+              <div class="event-status">The Night Has Ended</div>
+
+              <div class="event-body">
+                <div class="event-date">Saturday 28 March 2026</div>
+                <div class="event-location">Nepentha Club — Piazza Armando Diaz, Milano</div>
+              </div>
+            </div>
+
+            <div class="event-actions">
+              <a href="unlock-recap.html?event=milano" class="ticket-link ticket-link-soft">Unlock Recap</a>
+            </div>
+          </article>
+
+          <article class="event-card past-event">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Roma</div>
+                <span class="recap-badge">↗ Past Event</span>
+              </div>
+              <div class="event-status">The Night Has Ended</div>
+
+              <div class="event-body">
+                <div class="event-date">Saturday 25 April 2026</div>
+                <div class="event-location">Notorious Club Roma - Piazza Barberini - Via di S. Nicola da Tolentino, 22, Roma</div>
+              </div>
+            </div>
+
+            <div class="event-actions">
+              <a href="unlock-recap.html?event=roma" class="ticket-link ticket-link-soft">Photos & Videos Soon</a>
+            </div>
+          </article>
+
+          <article class="event-card past-event" id="barcelona-event">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Barcelona</div>
+                <span class="recap-badge">↗ Past Event</span>
+              </div>
+              <div class="event-status">The Night Has Ended</div>
+
+              <div class="event-body">
+                <div class="event-date">Saturday 23 May 2026</div>
+                <div class="event-location">Chica Club — Carrer Rosselló 217, Barcelona</div>
+              </div>
+            </div>
+
+            <div class="event-actions">
+              <a href="unlock-recap.html?event=barcelona" class="ticket-link ticket-link-soft">Photos & Videos Soon</a>
             </div>
           </article>
 
