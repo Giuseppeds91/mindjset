@@ -1202,7 +1202,25 @@
         width:100%;
       }
     }
-  </style>
+  
+#portofino-event::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      padding:3px;
+      background:linear-gradient(135deg,#8b0000 0%,#b30000 25%,#d40000 50%,#ff2a2a 75%,#8b0000 100%);
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:1;
+      pointer-events:none;
+}
+#portofino-event{
+ box-shadow:0 0 28px rgba(255,42,42,.28),0 22px 52px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+</style>
 </head>
 
 <body>
@@ -1257,7 +1275,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <a href="https://events.clubbingapp.it/e/10229?pc=U0I%3D" class="btn-ticket ticket-blink" target="_blank" rel="noopener noreferrer">Get Ticket</a>
+        <a href="https://events.clubbingapp.it/e/10229?pc=U0I%3D" class="btn-ticket" target="_blank" rel="noopener noreferrer">Get Ticket</a>
       </div>
     </div>
 
@@ -1269,13 +1287,13 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Portofino</div>
-                <span class="live-badge">Live</span>
+                
               </div>
               <div class="event-status">Summer Signature</div>
 
               <div class="event-body">
                 <div class="event-date">Friday 19 June 2026</div>
-                <div class="event-location">Covo di Nord-Est — Via Lungomare Raffaele Rossetti, 1, Santa Margherita Ligure GE</div>
+                <div class="event-location">Covo di Nord-Est — Santa Margherita Ligure GE</div>
               </div>
             </div>
 
