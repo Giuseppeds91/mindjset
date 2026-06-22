@@ -1308,7 +1308,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Next Events Soon</button>
+        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Next Drop</button>
       </div>
     </div>
 
@@ -1493,9 +1493,9 @@
     const modalContent = {
       "next-events": {
         kicker: "Mindjset",
-        title: "New Events Soon",
-        text: "New Mindjset destinations will be revealed soon.",
-        footer: "Stay tuned"
+        title: "Next Drop",
+        text: "The next Mindjset destination will be revealed soon.",
+        footer: "Stay close"
       },
       "portofino-recap": {
         kicker: "Portofino",
@@ -1548,6 +1548,26 @@
     contactClose.addEventListener("click", function(){
       closeContactPanel();
     });
+
+
+    const eventsNavLink = document.querySelector('a.nav-link[href="#portofino-event"]');
+    const portofinoEventCard = document.getElementById("portofino-event");
+
+    if(eventsNavLink && portofinoEventCard){
+      eventsNavLink.addEventListener("click", function(e){
+        e.preventDefault();
+        closeContactPanel();
+        closeInfoModal();
+
+        const navOffset = window.innerWidth <= 820 ? 160 : 110;
+        const targetTop = portofinoEventCard.getBoundingClientRect().top + window.pageYOffset - navOffset;
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: "smooth"
+        });
+      });
+    }
 
     document.querySelectorAll("[data-modal]").forEach(button => {
       button.addEventListener("click", function(){
