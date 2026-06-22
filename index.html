@@ -1209,21 +1209,6 @@
       }
     }
   
-#portofino-event::before{
-content:"";
-position:absolute;
-inset:0;
-border-radius:inherit;
-padding:1px;
-background:linear-gradient(135deg,rgba(255,42,42,.95) 0%,rgba(210,0,35,.85) 35%,rgba(150,0,20,.75) 70%,rgba(255,42,42,.95) 100%);
--webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
--webkit-mask-composite:xor;
-mask-composite:exclude;
-pointer-events:none;
-}
-#portofino-event{
-box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 12px rgba(255,42,42,.08);
-}
 
 </style>
 </head>
@@ -1275,12 +1260,12 @@ box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 12px rgba(255,42,42,.08);
     <div class="bottom-nav-wrap">
       <div class="bottom-nav">
         <nav class="bottom-menu">
-          <a href="#portofino-event" class="nav-link">Events</a>
+          <a href="#events" class="nav-link">Events</a>
           <a href="unlock-recap.html" class="nav-link">Gallery</a>
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <a href="https://events.clubbingapp.it/e/19-06-mindjset-la-grotta-10229?referral=47423" class="btn-ticket nav-ticket" target="_blank" rel="noopener noreferrer">Get Ticket</a>
+        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Next Events Soon</button>
       </div>
     </div>
 
@@ -1288,22 +1273,22 @@ box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 12px rgba(255,42,42,.08);
       <div class="container">
         <div class="events-list">
 
-          <article class="event-card featured" id="portofino-event">
+          <article class="event-card featured" id="next-events-card">
             <div class="event-top">
               <div class="event-city-row">
-                <div class="event-city">Portofino</div>
-                
+                <div class="event-city">Next Drop</div>
+                <span class="live-badge soon-white">Soon</span>
               </div>
-              <div class="event-status">Summer Signature</div>
+              <div class="event-status">New Events Coming</div>
 
               <div class="event-body">
-                <div class="event-date">Friday 19 June 2026</div>
-                <div class="event-location">Covo di Nord-Est — Santa Margherita Ligure GE</div>
+                <div class="event-date">More cities. More nights.</div>
+                <div class="event-location">The next Mindjset dates will be announced soon.</div>
               </div>
             </div>
 
             <div class="event-actions">
-              <a href="https://events.clubbingapp.it/e/19-06-mindjset-la-grotta-10229?referral=47423" class="btn-ticket ticket-blink" target="_blank" rel="noopener noreferrer">Get Ticket</a>
+              <button type="button" class="soon-badge" data-modal="next-events">New Events Soon</button>
             </div>
           </article>
 
@@ -1361,10 +1346,28 @@ box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 12px rgba(255,42,42,.08);
             </div>
 
             <div class="event-actions">
-              <a href="unlock-recap.html?event=barcelona" class="ticket-link ticket-link-soft">UNLOCK RECAP</a>
+              <a href="unlock-recap.html?event=barcelona" class="ticket-link ticket-link-soft">Unlock Recap</a>
             </div>
           </article>
 
+          <article class="event-card past-event" id="portofino-event">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Portofino</div>
+                <span class="recap-badge">Recap Soon</span>
+              </div>
+              <div class="event-status">The Night Has Ended</div>
+
+              <div class="event-body">
+                <div class="event-date">Friday 19 June 2026</div>
+                <div class="event-location">Covo di Nord-Est — Santa Margherita Ligure GE</div>
+              </div>
+            </div>
+
+            <div class="event-actions">
+              <button type="button" class="ticket-link ticket-link-soft" data-modal="portofino-recap">Recap Soon</button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1465,10 +1468,16 @@ box-shadow:0 20px 50px rgba(0,0,0,.18),0 0 12px rgba(255,42,42,.08);
     const infoModalFooter = document.getElementById("info-modal-footer");
 
     const modalContent = {
-      "portofino-details": {
+      "next-events": {
+        kicker: "Mindjset",
+        title: "New Events Soon",
+        text: "The Portofino night has ended. New Mindjset events are coming soon: dates and cities will be announced here first.",
+        footer: "Stay tuned"
+      },
+      "portofino-recap": {
         kicker: "Portofino",
-        title: "Details Soon",
-        text: "More details will be live soon. Stay tuned for the next Mindjset chapter.",
+        title: "Recap Soon",
+        text: "Photos and videos from the Portofino night will be available soon. Stay tuned for the drop.",
         footer: "Coming soon"
       }
     };
