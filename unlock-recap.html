@@ -803,25 +803,25 @@
 
           <div class="video-grid">
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-1.jpeg" data-mobile-src="videos/portofino-video-1.mp4#t=0.3" data-desktop-src="videos/portofino-video-1-desk.mp4#t=0.3">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpeg" data-mobile-src="videos/portofino-video-1.mp4#t=0.3" data-desktop-src="videos/portofino-video-1-desk.mp4#t=0.3">
                 <source src="videos/portofino-video-1-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-2.jpeg" data-mobile-src="videos/portofino-video-2.mp4#t=0.3" data-desktop-src="videos/portofino-video-2-desk.mp4#t=0.3">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpeg" data-mobile-src="videos/portofino-video-2.mp4#t=0.3" data-desktop-src="videos/portofino-video-2-desk.mp4#t=0.3">
                 <source src="videos/portofino-video-2-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-3.jpeg" data-mobile-src="videos/portofino-video-3.mp4#t=0.3" data-desktop-src="videos/portofino-video-3-desk.mp4#t=0.3">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpeg" data-mobile-src="videos/portofino-video-3.mp4#t=0.3" data-desktop-src="videos/portofino-video-3-desk.mp4#t=0.3">
                 <source src="videos/portofino-video-3-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-4.jpeg" data-mobile-src="videos/portofino-video-4.mp4#t=0.3" data-desktop-src="videos/portofino-video-4-desk.mp4#t=0.3">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpeg" data-mobile-src="videos/portofino-video-4.mp4#t=0.3" data-desktop-src="videos/portofino-video-4-desk.mp4#t=0.3">
                 <source src="videos/portofino-video-4-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
@@ -861,16 +861,21 @@
       const mobileSrc = video.dataset.mobileSrc;
       if(!desktopSrc && !mobileSrc) return;
 
-      const selectedSrc = window.matchMedia('(min-width: 721px)').matches ? desktopSrc : mobileSrc;
+      const isDesktop = window.matchMedia('(min-width: 721px)').matches;
+      const selectedSrc = isDesktop ? desktopSrc : mobileSrc;
       if(!selectedSrc) return;
 
       const source = video.querySelector('source');
+
       if(source && source.getAttribute('src') !== selectedSrc){
         source.setAttribute('src', selectedSrc);
-        video.setAttribute('src', selectedSrc);
         try{ video.load(); }catch(e){}
-      }else if(!source && video.getAttribute('src') !== selectedSrc){
-        video.setAttribute('src', selectedSrc);
+      }
+
+      video.preload = isDesktop ? 'auto' : 'metadata';
+
+      if(isDesktop){
+        video.setAttribute('data-forced-desktop', 'true');
         try{ video.load(); }catch(e){}
       }
     }
@@ -881,7 +886,7 @@
       panel.querySelectorAll('video').forEach(video => {
         try{
           setResponsiveVideoSource(video);
-          video.preload = 'auto';
+          video.preload = 'metadata';
           video.load();
         }catch(e){}
       });
@@ -989,55 +994,17 @@
 
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
-      const poster = card.querySelector('.video-poster');
-
       if(!video) return;
 
-      function showPoster(){
-        card.classList.remove('is-playing');
-      }
-
-      function hidePoster(){
-        card.classList.add('is-playing');
-      }
-
-      if(poster){
-        poster.addEventListener('click', async () => {
-          try{
-            hidePoster();
-            await video.play();
-          }catch(err){
-            showPoster();
-            video.controls = true;
-          }
-        });
-      }
-
-      card.addEventListener('click', async (e) => {
-        if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'video') return;
-        if(e.target && e.target.classList && e.target.classList.contains('video-poster')) return;
-
-        try{
-          if(video.paused){
-            hidePoster();
-            await video.play();
-          }else{
-            video.pause();
-            showPoster();
-          }
-        }catch(err){
-          showPoster();
-          video.controls = true;
-        }
+      video.addEventListener('click', () => {
+        setResponsiveVideoSource(video);
       });
 
-      video.addEventListener('play', hidePoster);
-      video.addEventListener('playing', hidePoster);
-      video.addEventListener('pause', showPoster);
-      video.addEventListener('ended', showPoster);
       video.addEventListener('error', () => {
-        showPoster();
-        try{ video.load(); }catch(e){}
+        try{
+          setResponsiveVideoSource(video);
+          video.load();
+        }catch(e){}
       });
     });
 
