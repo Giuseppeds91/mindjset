@@ -711,6 +711,36 @@
   }
 }
 
+.ticket-link-soft.ticket-blink{
+  animation:softTicketBlinkMindjset 1.05s ease-in-out infinite;
+}
+
+@keyframes softTicketBlinkMindjset{
+  0%{
+    background:rgba(255,255,255,.10);
+    color:rgba(255,255,255,.92);
+    border-color:rgba(255,255,255,.14);
+    box-shadow:0 8px 22px rgba(0,0,0,.14);
+    transform:scale(1);
+  }
+  50%{
+    background:rgba(255,255,255,.18);
+    color:#fff;
+    border-color:rgba(255,255,255,.34);
+    box-shadow:
+      0 10px 34px rgba(255,255,255,.16),
+      0 0 30px rgba(255,255,255,.22);
+    transform:scale(1.035);
+  }
+  100%{
+    background:rgba(255,255,255,.10);
+    color:rgba(255,255,255,.92);
+    border-color:rgba(255,255,255,.14);
+    box-shadow:0 8px 22px rgba(0,0,0,.14);
+    transform:scale(1);
+  }
+}
+
     .soon-badge{
       display:inline-flex;
       align-items:center;
@@ -1344,7 +1374,6 @@
             <div class="event-top">
               <div class="event-city-row">
                 <div class="event-city">Portofino</div>
-                <span class="recap-badge">Recap Soon</span>
               </div>
               <div class="event-status">The Night Has Ended</div>
 
@@ -1355,7 +1384,7 @@
             </div>
 
             <div class="event-actions">
-              <button type="button" class="ticket-link ticket-link-soft" data-modal="portofino-recap">Recap Soon</button>
+              <a href="unlock-recap.html?event=portofino" class="ticket-link ticket-link-soft ticket-blink">Unlock Recap</a>
             </div>
           </article>
         </div>
