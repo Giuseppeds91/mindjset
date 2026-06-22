@@ -302,6 +302,7 @@
       width:100%;
       aspect-ratio:16/10;
       object-fit:cover;
+      cursor:pointer;
     }
 
     .empty-state{
@@ -730,30 +731,34 @@
 
           <div class="video-grid">
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline poster="images/portofino-1.jpg">
-                <source src="videos/portofino-video-1-desk.mp4#t=0.3" type="video/mp4">
-                <source src="videos/portofino-video-1.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpg">
+                <source src="videos/portofino-video-1-desk.mp4" type="video/mp4" media="(min-width: 721px)">
+                <source src="videos/portofino-video-1.mp4" type="video/mp4" media="(max-width: 720px)">
+                <source src="videos/portofino-video-1.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline poster="images/portofino-2.jpg">
-                <source src="videos/portofino-video-2-desk.mp4#t=0.3" type="video/mp4">
-                <source src="videos/portofino-video-2.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpg">
+                <source src="videos/portofino-video-2-desk.mp4" type="video/mp4" media="(min-width: 721px)">
+                <source src="videos/portofino-video-2.mp4" type="video/mp4" media="(max-width: 720px)">
+                <source src="videos/portofino-video-2.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline poster="images/portofino-3.jpg">
-                <source src="videos/portofino-video-3-desk.mp4#t=0.3" type="video/mp4">
-                <source src="videos/portofino-video-3.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpg">
+                <source src="videos/portofino-video-3-desk.mp4" type="video/mp4" media="(min-width: 721px)">
+                <source src="videos/portofino-video-3.mp4" type="video/mp4" media="(max-width: 720px)">
+                <source src="videos/portofino-video-3.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline poster="images/portofino-4.jpg">
-                <source src="videos/portofino-video-4-desk.mp4#t=0.3" type="video/mp4">
-                <source src="videos/portofino-video-4.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpg">
+                <source src="videos/portofino-video-4-desk.mp4" type="video/mp4" media="(min-width: 721px)">
+                <source src="videos/portofino-video-4.mp4" type="video/mp4" media="(max-width: 720px)">
+                <source src="videos/portofino-video-4.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
@@ -785,9 +790,24 @@
     const panels = document.querySelectorAll('.panel');
     const params = new URLSearchParams(window.location.search);
 
+    function forceVideos(panel){
+      if(!panel) return;
+
+      panel.querySelectorAll('video').forEach(video => {
+        try{
+          video.pause();
+          video.load();
+        }catch(e){}
+      });
+    }
+
     function activateEvent(name){
       buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.event === name));
-      panels.forEach(panel => panel.classList.toggle('active', panel.id === name));
+      panels.forEach(panel => {
+        const isActive = panel.id === name;
+        panel.classList.toggle('active', isActive);
+        if(isActive) forceVideos(panel);
+      });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -873,6 +893,35 @@
       if(e.key === 'Escape') closeLightbox();
       if(e.key === 'ArrowLeft') showPrev();
       if(e.key === 'ArrowRight') showNext();
+    });
+
+
+    document.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', async (e) => {
+        const video = card.querySelector('video');
+        if(!video) return;
+
+        if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'video'){
+          return;
+        }
+
+        try{
+          if(video.paused){
+            await video.play();
+          }else{
+            video.pause();
+          }
+        }catch(err){
+          video.controls = true;
+          video.load();
+        }
+      });
+    });
+
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('error', () => {
+        try{ video.load(); }catch(e){}
+      });
     });
 
     let touchStartX = 0;
