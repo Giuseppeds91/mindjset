@@ -302,6 +302,7 @@
       width:100%;
       aspect-ratio:16/10;
       object-fit:cover;
+      background:#000;
     }
 
     .empty-state{
@@ -730,30 +731,30 @@
 
           <div class="video-grid">
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline>
-                <source src="videos/portofino-video-1-desk.mp4" type="video/mp4">
-                <source src="videos/portofino-video-1.mp4" type="video/mp4">
+              <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpg">
+                <source src="videos/portofino-video-1-desk.mp4#t=0.1" type="video/mp4">
+                <source src="videos/portofino-video-1.mp4#t=0.1" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline>
-                <source src="videos/portofino-video-2-desk.mp4" type="video/mp4">
-                <source src="videos/portofino-video-2.mp4" type="video/mp4">
+              <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpg">
+                <source src="videos/portofino-video-2-desk.mp4#t=0.1" type="video/mp4">
+                <source src="videos/portofino-video-2.mp4#t=0.1" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline>
-                <source src="videos/portofino-video-3-desk.mp4" type="video/mp4">
-                <source src="videos/portofino-video-3.mp4" type="video/mp4">
+              <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpg">
+                <source src="videos/portofino-video-3-desk.mp4#t=0.1" type="video/mp4">
+                <source src="videos/portofino-video-3.mp4#t=0.1" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video controls preload="none" playsinline webkit-playsinline>
-                <source src="videos/portofino-video-4-desk.mp4" type="video/mp4">
-                <source src="videos/portofino-video-4.mp4" type="video/mp4">
+              <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpg">
+                <source src="videos/portofino-video-4-desk.mp4#t=0.1" type="video/mp4">
+                <source src="videos/portofino-video-4.mp4#t=0.1" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
@@ -889,6 +890,10 @@
       if(diff > 0) showNext();
       else showPrev();
     }, { passive: true });
+
+    document.querySelectorAll('video').forEach(video => {
+      video.load();
+    });
   </script>
 </body>
 </html>
