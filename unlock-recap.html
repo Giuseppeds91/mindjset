@@ -803,26 +803,26 @@
 
           <div class="video-grid">
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpeg" data-mobile-src="videos/portofino-video-1.mp4#t=0.3" data-desktop-src="videos/portofino-video-1-desk.mp4#t=0.3">
-                <source src="videos/portofino-video-1-desk.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-1.jpeg" data-poster="images/portofino-1.jpeg" data-mobile-src="videos/portofino-video-1.mp4#t=0.3" data-desktop-src="videos/portofino-video-1-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-1.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpeg" data-mobile-src="videos/portofino-video-2.mp4#t=0.3" data-desktop-src="videos/portofino-video-2-desk.mp4#t=0.3">
-                <source src="videos/portofino-video-2-desk.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-2.jpeg" data-poster="images/portofino-2.jpeg" data-mobile-src="videos/portofino-video-2.mp4#t=0.3" data-desktop-src="videos/portofino-video-2-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-2.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpeg" data-mobile-src="videos/portofino-video-3.mp4#t=0.3" data-desktop-src="videos/portofino-video-3-desk.mp4#t=0.3">
-                <source src="videos/portofino-video-3-desk.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-3.jpeg" data-poster="images/portofino-3.jpeg" data-mobile-src="videos/portofino-video-3.mp4#t=0.3" data-desktop-src="videos/portofino-video-3-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-3.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
-              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpeg" data-mobile-src="videos/portofino-video-4.mp4#t=0.3" data-desktop-src="videos/portofino-video-4-desk.mp4#t=0.3">
-                <source src="videos/portofino-video-4-desk.mp4#t=0.3" type="video/mp4">
+              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-4.jpeg" data-poster="images/portofino-4.jpeg" data-mobile-src="videos/portofino-video-4.mp4#t=0.3" data-desktop-src="videos/portofino-video-4-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-4.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
@@ -859,6 +859,7 @@
 
       const desktopSrc = video.dataset.desktopSrc;
       const mobileSrc = video.dataset.mobileSrc;
+      const posterSrc = video.dataset.poster || video.getAttribute('poster');
       if(!desktopSrc && !mobileSrc) return;
 
       const isDesktop = window.matchMedia('(min-width: 721px)').matches;
@@ -866,17 +867,32 @@
       if(!selectedSrc) return;
 
       const source = video.querySelector('source');
+      const currentSrc = source ? source.getAttribute('src') : video.getAttribute('src');
 
-      if(source && source.getAttribute('src') !== selectedSrc){
-        source.setAttribute('src', selectedSrc);
-        try{ video.load(); }catch(e){}
+      if(posterSrc){
+        video.setAttribute('poster', posterSrc);
       }
 
-      video.preload = isDesktop ? 'auto' : 'metadata';
+      if(currentSrc !== selectedSrc){
+        if(source){
+          source.setAttribute('src', selectedSrc);
+        }else{
+          video.setAttribute('src', selectedSrc);
+        }
 
-      if(isDesktop){
-        video.setAttribute('data-forced-desktop', 'true');
+        /*
+          FIX MOBILE:
+          Su mobile NON forziamo preload/load continuo, perché alcuni browser
+          sostituiscono subito il poster con il primo frame nero o vuoto.
+          Su desktop invece carichiamo i file -desk per forzare il video corretto.
+        */
+        video.preload = isDesktop ? 'metadata' : 'none';
         try{ video.load(); }catch(e){}
+      }else{
+        video.preload = isDesktop ? 'metadata' : 'none';
+        if(isDesktop){
+          try{ video.load(); }catch(e){}
+        }
       }
     }
 
@@ -886,8 +902,6 @@
       panel.querySelectorAll('video').forEach(video => {
         try{
           setResponsiveVideoSource(video);
-          video.preload = 'metadata';
-          video.load();
         }catch(e){}
       });
     }
