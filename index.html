@@ -368,7 +368,7 @@
 
     .events-list{
       display:grid;
-      grid-template-columns:minmax(0, 1fr) 42px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns:repeat(4, minmax(0, 1fr));
       gap:18px;
       align-items:stretch;
     }
@@ -1005,6 +1005,19 @@
       border:1px solid rgba(255,255,255,.10);
     }
 
+
+    .upcoming-notice{
+      text-align:center;
+      padding:46px 20px 0;
+      color:rgba(255,255,255,.55);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.30em;
+      text-transform:uppercase;
+      position:relative;
+      z-index:1;
+    }
+
     @media (max-width: 1080px){
       .events-list{
         grid-template-columns:1fr 1fr;
@@ -1273,29 +1286,6 @@
       <div class="container">
         <div class="events-list">
 
-          <article class="event-card featured" id="next-events-card">
-            <div class="event-top">
-              <div class="event-city-row">
-                <div class="event-city">Next Drop</div>
-                <span class="live-badge soon-white">Soon</span>
-              </div>
-              <div class="event-status">New Events Coming</div>
-
-              <div class="event-body">
-                <div class="event-date">More cities. More nights.</div>
-                <div class="event-location">The next Mindjset dates will be announced soon.</div>
-              </div>
-            </div>
-
-            <div class="event-actions">
-              <button type="button" class="soon-badge" data-modal="next-events">New Events Soon</button>
-            </div>
-          </article>
-
-          <div class="past-events-divider" aria-hidden="true">
-            <span>Past Events</span>
-          </div>
-
           <article class="event-card past-event">
             <div class="event-top">
               <div class="event-city-row">
@@ -1368,6 +1358,10 @@
               <button type="button" class="ticket-link ticket-link-soft" data-modal="portofino-recap">Recap Soon</button>
             </div>
           </article>
+        </div>
+
+        <div class="upcoming-notice">
+          NEXT CITY DROPPING SOON
         </div>
       </div>
     </section>
