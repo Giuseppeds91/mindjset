@@ -305,6 +305,55 @@
       background:#000;
     }
 
+    .video-cover{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      border:none;
+      padding:0;
+      cursor:pointer;
+      background:#0a0a0a;
+      appearance:none;
+    }
+
+    .video-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .35s ease, opacity .35s ease;
+    }
+
+    .video-cover::after{
+      content:"▶";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      width:54px;
+      height:54px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding-left:4px;
+      background:rgba(0,0,0,.52);
+      border:1px solid rgba(255,255,255,.24);
+      color:#fff;
+      font-size:18px;
+      box-shadow:0 14px 34px rgba(0,0,0,.36);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .video-cover:hover img{
+      transform:scale(1.04);
+      opacity:.88;
+    }
+
+    .video-card.playing .video-cover{
+      display:none;
+    }
+
     .empty-state{
       padding:4px 0 0;
       color:rgba(255,255,255,.68);
@@ -731,6 +780,9 @@
 
           <div class="video-grid">
             <div class="video-card">
+              <button class="video-cover" type="button" aria-label="Play Portofino video 1">
+                <img src="images/portofino-1.jpg" data-preview-index="1" alt="Anteprima Portofino video 1" loading="lazy">
+              </button>
               <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpg">
                 <source src="videos/portofino-video-1-desk.mp4#t=0.1" type="video/mp4">
                 <source src="videos/portofino-video-1.mp4#t=0.1" type="video/mp4">
@@ -738,6 +790,9 @@
               </video>
             </div>
             <div class="video-card">
+              <button class="video-cover" type="button" aria-label="Play Portofino video 2">
+                <img src="images/portofino-2.jpg" data-preview-index="2" alt="Anteprima Portofino video 2" loading="lazy">
+              </button>
               <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpg">
                 <source src="videos/portofino-video-2-desk.mp4#t=0.1" type="video/mp4">
                 <source src="videos/portofino-video-2.mp4#t=0.1" type="video/mp4">
@@ -745,6 +800,9 @@
               </video>
             </div>
             <div class="video-card">
+              <button class="video-cover" type="button" aria-label="Play Portofino video 3">
+                <img src="images/portofino-3.jpg" data-preview-index="3" alt="Anteprima Portofino video 3" loading="lazy">
+              </button>
               <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpg">
                 <source src="videos/portofino-video-3-desk.mp4#t=0.1" type="video/mp4">
                 <source src="videos/portofino-video-3.mp4#t=0.1" type="video/mp4">
@@ -752,6 +810,9 @@
               </video>
             </div>
             <div class="video-card">
+              <button class="video-cover" type="button" aria-label="Play Portofino video 4">
+                <img src="images/portofino-4.jpg" data-preview-index="4" alt="Anteprima Portofino video 4" loading="lazy">
+              </button>
               <video controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpg">
                 <source src="videos/portofino-video-4-desk.mp4#t=0.1" type="video/mp4">
                 <source src="videos/portofino-video-4.mp4#t=0.1" type="video/mp4">
@@ -891,9 +952,49 @@
       else showPrev();
     }, { passive: true });
 
-    document.querySelectorAll('video').forEach(video => {
-      video.load();
+    const previewExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+    const previewNameVariants = ['portofino', 'portifino', 'portino'];
+
+    document.querySelectorAll('.video-cover img[data-preview-index]').forEach((img) => {
+      let attempt = 0;
+      const index = img.dataset.previewIndex;
+      const candidates = [];
+
+      previewNameVariants.forEach(name => {
+        previewExtensions.forEach(ext => {
+          candidates.push(`images/${name}-${index}.${ext}`);
+        });
+      });
+
+      img.addEventListener('error', () => {
+        attempt += 1;
+        if(attempt < candidates.length){
+          img.src = candidates[attempt];
+        }
+      });
     });
+
+    document.querySelectorAll('.video-card').forEach((card) => {
+      const cover = card.querySelector('.video-cover');
+      const video = card.querySelector('video');
+      if(!cover || !video) return;
+
+      video.load();
+
+      cover.addEventListener('click', () => {
+        card.classList.add('playing');
+        video.play().catch(() => {});
+      });
+
+      video.addEventListener('play', () => {
+        card.classList.add('playing');
+      });
+
+      video.addEventListener('ended', () => {
+        card.classList.remove('playing');
+      });
+    });
+
   </script>
 </body>
 </html>
