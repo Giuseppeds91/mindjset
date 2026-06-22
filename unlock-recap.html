@@ -805,40 +805,32 @@
             <div class="video-card">
               <img class="video-poster" src="images/portofino-1.jpg" alt="Mindjset Portofino video preview 1" loading="eager">
               <span class="video-play" aria-hidden="true"></span>
-              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-1.jpg">
-                <source src="videos/portofino-video-1-desk.mp4" type="video/mp4" media="(min-width: 721px)">
-                <source src="videos/portofino-video-1.mp4" type="video/mp4" media="(max-width: 720px)">
-                <source src="videos/portofino-video-1.mp4" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpg" data-mobile-src="videos/portofino-video-1.mp4#t=0.3" data-desktop-src="videos/portofino-video-1-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-1-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
               <img class="video-poster" src="images/portofino-2.jpg" alt="Mindjset Portofino video preview 2" loading="eager">
               <span class="video-play" aria-hidden="true"></span>
-              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-2.jpg">
-                <source src="videos/portofino-video-2-desk.mp4" type="video/mp4" media="(min-width: 721px)">
-                <source src="videos/portofino-video-2.mp4" type="video/mp4" media="(max-width: 720px)">
-                <source src="videos/portofino-video-2.mp4" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpg" data-mobile-src="videos/portofino-video-2.mp4#t=0.3" data-desktop-src="videos/portofino-video-2-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-2-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
               <img class="video-poster" src="images/portofino-3.jpg" alt="Mindjset Portofino video preview 3" loading="eager">
               <span class="video-play" aria-hidden="true"></span>
-              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-3.jpg">
-                <source src="videos/portofino-video-3-desk.mp4" type="video/mp4" media="(min-width: 721px)">
-                <source src="videos/portofino-video-3.mp4" type="video/mp4" media="(max-width: 720px)">
-                <source src="videos/portofino-video-3.mp4" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpg" data-mobile-src="videos/portofino-video-3.mp4#t=0.3" data-desktop-src="videos/portofino-video-3-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-3-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
             <div class="video-card">
               <img class="video-poster" src="images/portofino-4.jpg" alt="Mindjset Portofino video preview 4" loading="eager">
               <span class="video-play" aria-hidden="true"></span>
-              <video class="force-desktop-video" controls preload="none" playsinline webkit-playsinline poster="images/portofino-4.jpg">
-                <source src="videos/portofino-video-4-desk.mp4" type="video/mp4" media="(min-width: 721px)">
-                <source src="videos/portofino-video-4.mp4" type="video/mp4" media="(max-width: 720px)">
-                <source src="videos/portofino-video-4.mp4" type="video/mp4">
+              <video class="force-desktop-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpg" data-mobile-src="videos/portofino-video-4.mp4#t=0.3" data-desktop-src="videos/portofino-video-4-desk.mp4#t=0.3">
+                <source src="videos/portofino-video-4-desk.mp4#t=0.3" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
             </div>
@@ -870,12 +862,34 @@
     const panels = document.querySelectorAll('.panel');
     const params = new URLSearchParams(window.location.search);
 
+    function setResponsiveVideoSource(video){
+      if(!video) return;
+
+      const desktopSrc = video.dataset.desktopSrc;
+      const mobileSrc = video.dataset.mobileSrc;
+      if(!desktopSrc && !mobileSrc) return;
+
+      const selectedSrc = window.matchMedia('(min-width: 721px)').matches ? desktopSrc : mobileSrc;
+      if(!selectedSrc) return;
+
+      const source = video.querySelector('source');
+      if(source && source.getAttribute('src') !== selectedSrc){
+        source.setAttribute('src', selectedSrc);
+        video.setAttribute('src', selectedSrc);
+        try{ video.load(); }catch(e){}
+      }else if(!source && video.getAttribute('src') !== selectedSrc){
+        video.setAttribute('src', selectedSrc);
+        try{ video.load(); }catch(e){}
+      }
+    }
+
     function forceVideos(panel){
       if(!panel) return;
 
       panel.querySelectorAll('video').forEach(video => {
         try{
-          video.pause();
+          setResponsiveVideoSource(video);
+          video.preload = 'metadata';
           video.load();
         }catch(e){}
       });
@@ -897,6 +911,11 @@
 
     const initialEvent = params.get('event');
     if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
+
+    window.addEventListener('resize', () => {
+      const activePanel = document.querySelector('.panel.active');
+      forceVideos(activePanel);
+    });
 
     const galleries = {
       milano: Array.from({ length: 43 }, (_, i) => `images/milano (${i + 1}).jpg`),
