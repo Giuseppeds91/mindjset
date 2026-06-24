@@ -854,7 +854,26 @@
     const panels = document.querySelectorAll('.panel');
     const params = new URLSearchParams(window.location.search);
 
-    function setResponsiveVideoSource(video, shouldLoad = false){
+    function setVideoSrc(video, src){
+      if(!video || !src) return;
+      const source = video.querySelector('source');
+      const currentSrc = source ? source.getAttribute('src') : video.getAttribute('src');
+
+      if(currentSrc === src) return;
+
+      video.pause();
+      video.removeAttribute('src');
+
+      if(source){
+        source.setAttribute('src', src);
+      }else{
+        video.setAttribute('src', src);
+      }
+
+      try{ video.load(); }catch(e){}
+    }
+
+    function setResponsiveVideoSource(video){
       if(!video) return;
 
       const desktopSrc = video.dataset.desktopSrc;
@@ -863,38 +882,22 @@
       if(!desktopSrc && !mobileSrc) return;
 
       const isDesktop = window.matchMedia('(min-width: 721px)').matches;
-      const selectedSrc = isDesktop ? desktopSrc : mobileSrc;
-      if(!selectedSrc) return;
-
-      const source = video.querySelector('source');
-      const currentSrc = source ? source.getAttribute('src') : video.getAttribute('src');
+      const preferredSrc = isDesktop ? (desktopSrc || mobileSrc) : (mobileSrc || desktopSrc);
+      if(!preferredSrc) return;
 
       if(posterSrc){
         video.setAttribute('poster', posterSrc);
       }
 
-      /*
-        FIX DESKTOP PORTOFINO:
-        - Desktop: forza i file convertiti -desk.mp4
-        - Mobile: lascia i file mobile già funzionanti
-        - Su desktop togliamo #t=0.3 dai file -desk perché su alcuni browser/server
-          può bloccare il play se il range request non viene gestito bene.
-      */
       video.preload = isDesktop ? 'auto' : 'none';
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
 
-      if(currentSrc !== selectedSrc){
-        if(source){
-          source.setAttribute('src', selectedSrc);
-        }else{
-          video.setAttribute('src', selectedSrc);
-        }
-        try{ video.load(); }catch(e){}
-        return;
-      }
+      video.dataset.currentPreferredSrc = preferredSrc;
+      video.dataset.fallbackSrc = isDesktop && mobileSrc ? mobileSrc : '';
+      video.dataset.usedFallback = '0';
 
-      if(isDesktop || shouldLoad){
-        try{ video.load(); }catch(e){}
-      }
+      setVideoSrc(video, preferredSrc);
     }
 
     function forceVideos(panel){
@@ -902,17 +905,7 @@
 
       panel.querySelectorAll('video').forEach(video => {
         try{
-          setResponsiveVideoSource(video, true);
-        }catch(e){}
-      });
-    }
-
-    function forceAllDesktopVideos(){
-      if(!window.matchMedia('(min-width: 721px)').matches) return;
-
-      document.querySelectorAll('video.force-desktop-video').forEach(video => {
-        try{
-          setResponsiveVideoSource(video, true);
+          setResponsiveVideoSource(video);
         }catch(e){}
       });
     }
@@ -933,9 +926,6 @@
 
     const initialEvent = params.get('event');
     if(initialEvent && document.getElementById(initialEvent)) activateEvent(initialEvent);
-
-    // Prepara subito i video desktop anche se Portofino non è ancora il tab attivo.
-    forceAllDesktopVideos();
 
     window.addEventListener('resize', () => {
       const activePanel = document.querySelector('.panel.active');
@@ -1024,36 +1014,32 @@
       const video = card.querySelector('video');
       if(!video) return;
 
-      const prepareVideo = () => {
-        try{
-          setResponsiveVideoSource(video, true);
-        }catch(e){}
-      };
-
-      video.addEventListener('pointerdown', prepareVideo);
-      video.addEventListener('click', prepareVideo);
-
-      video.addEventListener('play', () => {
-        try{
-          setResponsiveVideoSource(video, true);
-        }catch(e){}
+      video.addEventListener('click', () => {
+        setResponsiveVideoSource(video);
       });
 
       video.addEventListener('error', () => {
-        try{
-          const isDesktop = window.matchMedia('(min-width: 721px)').matches;
-          const source = video.querySelector('source');
+        const fallbackSrc = video.dataset.fallbackSrc;
+        const usedFallback = video.dataset.usedFallback === '1';
 
-          /*
-            Se per qualsiasi motivo il file -desk non viene servito dal server,
-            su desktop facciamo fallback al file mobile così il video parte comunque.
-          */
-          if(isDesktop && video.dataset.mobileSrc && source && source.getAttribute('src') !== video.dataset.mobileSrc){
-            source.setAttribute('src', video.dataset.mobileSrc);
+        /*
+          FIX DESKTOP DEFINITIVO:
+          Se il file -desk.mp4 non parte su desktop, il browser passa automaticamente
+          al file .mp4 normale, che su mobile già funziona. Così non resta bloccato.
+        */
+        if(fallbackSrc && !usedFallback){
+          video.dataset.usedFallback = '1';
+          setVideoSrc(video, fallbackSrc);
+          return;
+        }
+      });
+
+      video.addEventListener('play', () => {
+        document.querySelectorAll('video').forEach(otherVideo => {
+          if(otherVideo !== video){
+            try{ otherVideo.pause(); }catch(e){}
           }
-
-          video.load();
-        }catch(e){}
+        });
       });
     });
 
