@@ -303,30 +303,6 @@
       aspect-ratio:16/10;
       object-fit:cover;
       cursor:pointer;
-      background:#000;
-    }
-
-    .video-fallback-link{
-      display:inline-flex;
-      margin:10px 12px 12px;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.72);
-      border-bottom:1px solid rgba(255,255,255,.28);
-    }
-
-    .video-error-note{
-      display:none;
-      margin:0 12px 12px;
-      font-size:11px;
-      line-height:1.5;
-      color:rgba(255,255,255,.68);
-    }
-
-    .video-card.has-error .video-error-note{
-      display:block;
     }
 
 
@@ -558,6 +534,14 @@
       text-transform:uppercase;
       color:rgba(255,255,255,.62);
     }
+
+
+    .portofino-clean-card::after{ display:none !important; }
+    .portofino-clean-card .video-play,
+    .portofino-clean-card .video-poster{ display:none !important; }
+    .portofino-clean-card video{ position:relative; z-index:5; background:#000; }
+    .video-error-msg{ display:none; padding:10px 12px 12px; font-size:11px; line-height:1.45; color:rgba(255,255,255,.62); }
+    .portofino-clean-card.video-has-error .video-error-msg{ display:block; }
 
     @media (max-width: 720px){
       .menu-section{
@@ -825,38 +809,34 @@
 
           <div class="video-label" id="portofino-videos" style="margin-top:28px">Video Moments</div>
 
-          <div class="video-grid">
-            <div class="video-card">
-              <video class="reliable-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpeg" data-srcs="videos/portofino-video-1.mp4|./videos/portofino-video-1.mp4|/videos/portofino-video-1.mp4">
+          <div class="video-grid portofino-video-grid">
+            <div class="video-card portofino-clean-card">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-1.jpeg">
                 <source src="videos/portofino-video-1.mp4" type="video/mp4">
-                Il tuo browser non supporta il video.
+                Il tuo browser non riesce a riprodurre questo file video.
               </video>
-              <a class="video-fallback-link" href="videos/portofino-video-1.mp4" target="_blank" rel="noopener">Open video</a>
-              <div class="video-error-note">Se non parte nel player, clicca “Open video”: così verifichiamo se il file è raggiungibile anche da desktop.</div>
+              <div class="video-error-msg">Se da desktop non parte, il file è quasi certamente codificato in HEVC/H.265: mobile lo legge, Chrome/Windows spesso no.</div>
             </div>
-            <div class="video-card">
-              <video class="reliable-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpeg" data-srcs="videos/portofino-video-2.mp4|./videos/portofino-video-2.mp4|/videos/portofino-video-2.mp4">
+            <div class="video-card portofino-clean-card">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-3.jpeg">
                 <source src="videos/portofino-video-2.mp4" type="video/mp4">
-                Il tuo browser non supporta il video.
+                Il tuo browser non riesce a riprodurre questo file video.
               </video>
-              <a class="video-fallback-link" href="videos/portofino-video-2.mp4" target="_blank" rel="noopener">Open video</a>
-              <div class="video-error-note">Se non parte nel player, clicca “Open video”: così verifichiamo se il file è raggiungibile anche da desktop.</div>
+              <div class="video-error-msg">Se da desktop non parte, il file è quasi certamente codificato in HEVC/H.265: mobile lo legge, Chrome/Windows spesso no.</div>
             </div>
-            <div class="video-card">
-              <video class="reliable-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpeg" data-srcs="videos/portofino-video-3.mp4|./videos/portofino-video-3.mp4|/videos/portofino-video-3.mp4">
+            <div class="video-card portofino-clean-card">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-2.jpeg">
                 <source src="videos/portofino-video-3.mp4" type="video/mp4">
-                Il tuo browser non supporta il video.
+                Il tuo browser non riesce a riprodurre questo file video.
               </video>
-              <a class="video-fallback-link" href="videos/portofino-video-3.mp4" target="_blank" rel="noopener">Open video</a>
-              <div class="video-error-note">Se non parte nel player, clicca “Open video”: così verifichiamo se il file è raggiungibile anche da desktop.</div>
+              <div class="video-error-msg">Se da desktop non parte, il file è quasi certamente codificato in HEVC/H.265: mobile lo legge, Chrome/Windows spesso no.</div>
             </div>
-            <div class="video-card">
-              <video class="reliable-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpeg" data-srcs="videos/portofino-video-4.mp4|./videos/portofino-video-4.mp4|/videos/portofino-video-4.mp4">
+            <div class="video-card portofino-clean-card">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline poster="images/portofino-4.jpeg">
                 <source src="videos/portofino-video-4.mp4" type="video/mp4">
-                Il tuo browser non supporta il video.
+                Il tuo browser non riesce a riprodurre questo file video.
               </video>
-              <a class="video-fallback-link" href="videos/portofino-video-4.mp4" target="_blank" rel="noopener">Open video</a>
-              <div class="video-error-note">Se non parte nel player, clicca “Open video”: così verifichiamo se il file è raggiungibile anche da desktop.</div>
+              <div class="video-error-msg">Se da desktop non parte, il file è quasi certamente codificato in HEVC/H.265: mobile lo legge, Chrome/Windows spesso no.</div>
             </div>
           </div>
         </article>
@@ -886,45 +866,11 @@
     const panels = document.querySelectorAll('.panel');
     const params = new URLSearchParams(window.location.search);
 
-    function setReliableVideoSource(video, autoplay = false){
-      if(!video || !video.classList.contains('reliable-video')) return;
-
-      const candidates = (video.dataset.srcs || '')
-        .split('|')
-        .map(src => src.trim())
-        .filter(Boolean);
-
-      if(!candidates.length) return;
-
-      let index = Number(video.dataset.srcIndex || '0');
-      if(index < 0 || index >= candidates.length) index = 0;
-
-      const selectedSrc = candidates[index];
-      const currentSrc = video.currentSrc || video.getAttribute('src') || (video.querySelector('source') ? video.querySelector('source').getAttribute('src') : '');
-
-      if(!currentSrc || !currentSrc.includes(selectedSrc.replace('./',''))){
-        video.pause();
-        video.removeAttribute('src');
-        video.querySelectorAll('source').forEach(source => source.remove());
-        const source = document.createElement('source');
-        source.src = selectedSrc;
-        source.type = 'video/mp4';
-        video.appendChild(source);
-        video.load();
-      }
-
-      if(autoplay){
-        const playPromise = video.play();
-        if(playPromise && typeof playPromise.catch === 'function'){
-          playPromise.catch(() => {});
-        }
-      }
-    }
-
     function forceVideos(panel){
       if(!panel) return;
-      panel.querySelectorAll('video.reliable-video').forEach(video => {
-        setReliableVideoSource(video, false);
+      panel.querySelectorAll('video').forEach(video => {
+        video.preload = 'auto';
+        try{ video.load(); }catch(e){}
       });
     }
 
@@ -950,8 +896,6 @@
       forceVideos(activePanel);
     });
 
-
-    forceVideos(document.querySelector('.panel.active'));
     const galleries = {
       milano: Array.from({ length: 43 }, (_, i) => `images/milano (${i + 1}).jpg`),
       roma: Array.from({ length: 41 }, (_, i) => `images/roma (${i + 1}).jpg`)
@@ -1030,33 +974,12 @@
     });
 
 
-    document.querySelectorAll('.video-card').forEach(card => {
+    document.querySelectorAll('.portofino-clean-card').forEach(card => {
       const video = card.querySelector('video');
       if(!video) return;
-
-      video.addEventListener('click', () => {
-        if(video.classList.contains('reliable-video')){
-          setReliableVideoSource(video, true);
-        }
-      });
-
-      video.addEventListener('error', () => {
-        if(!video.classList.contains('reliable-video')) return;
-
-        const candidates = (video.dataset.srcs || '').split('|').filter(Boolean);
-        let index = Number(video.dataset.srcIndex || '0');
-
-        if(index < candidates.length - 1){
-          video.dataset.srcIndex = String(index + 1);
-          setReliableVideoSource(video, false);
-        }else{
-          card.classList.add('has-error');
-        }
-      });
-
-      video.addEventListener('loadedmetadata', () => {
-        card.classList.remove('has-error');
-      });
+      video.addEventListener('error', () => card.classList.add('video-has-error'));
+      video.addEventListener('stalled', () => card.classList.add('video-has-error'));
+      video.addEventListener('loadeddata', () => card.classList.remove('video-has-error'));
     });
 
     let touchStartX = 0;
