@@ -377,25 +377,6 @@
       transform:translate(-50%, -50%) scale(.92);
     }
 
-    .video-card.video-error::before{
-      content:"Video non caricato: controlla nome file/percorso";
-      position:absolute;
-      left:14px;
-      right:14px;
-      bottom:14px;
-      z-index:5;
-      padding:10px 12px;
-      border-radius:999px;
-      background:rgba(0,0,0,.70);
-      color:rgba(255,255,255,.86);
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      text-align:center;
-      pointer-events:none;
-    }
-
     .empty-state{
       padding:4px 0 0;
       color:rgba(255,255,255,.68);
@@ -554,6 +535,38 @@
       color:rgba(255,255,255,.62);
     }
 
+
+
+    .desktop-play-btn{
+      display:none;
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      z-index:6;
+      width:62px;
+      height:62px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.34);
+      background:rgba(0,0,0,.34);
+      color:#fff;
+      cursor:pointer;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .video-card.is-playing .desktop-play-btn{
+      display:none;
+    }
+
+    @media (min-width: 721px){
+      .desktop-play-btn{ display:flex; align-items:center; justify-content:center; }
+      .video-card:hover .desktop-play-btn{ background:rgba(0,0,0,.48); }
+    }
     @media (max-width: 720px){
       .menu-section{
         padding:16px 0 6px;
@@ -820,30 +833,34 @@
 
           <div class="video-label" id="portofino-videos" style="margin-top:28px">Video Moments</div>
 
-          <div class="video-grid">
+          <div class="video-grid portofino-video-grid">
             <div class="video-card">
-              <video class="portofino-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-1.jpeg">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline muted poster="images/portofino-1.jpeg" data-src="videos/portofino-video-1.mp4">
                 <source src="videos/portofino-video-1.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
+              <button class="desktop-play-btn" type="button" aria-label="Play video">Play</button>
             </div>
             <div class="video-card">
-              <video class="portofino-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-3.jpeg">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline muted poster="images/portofino-3.jpeg" data-src="videos/portofino-video-2.mp4">
                 <source src="videos/portofino-video-2.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
+              <button class="desktop-play-btn" type="button" aria-label="Play video">Play</button>
             </div>
             <div class="video-card">
-              <video class="portofino-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-2.jpeg">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline muted poster="images/portofino-2.jpeg" data-src="videos/portofino-video-3.mp4">
                 <source src="videos/portofino-video-3.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
+              <button class="desktop-play-btn" type="button" aria-label="Play video">Play</button>
             </div>
             <div class="video-card">
-              <video class="portofino-video" controls preload="metadata" playsinline webkit-playsinline poster="images/portofino-4.jpeg">
+              <video class="portofino-video" controls preload="auto" playsinline webkit-playsinline muted poster="images/portofino-4.jpeg" data-src="videos/portofino-video-4.mp4">
                 <source src="videos/portofino-video-4.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
               </video>
+              <button class="desktop-play-btn" type="button" aria-label="Play video">Play</button>
             </div>
           </div>
         </article>
@@ -873,27 +890,34 @@
     const panels = document.querySelectorAll('.panel');
     const params = new URLSearchParams(window.location.search);
 
-    function prepareVideos(panel){
-      if(!panel) return;
-
-      panel.querySelectorAll('video').forEach(video => {
+    function prepareVideo(video){
+      if(!video) return;
+      const src = video.dataset.src;
+      if(src){
         const source = video.querySelector('source');
-        if(!source) return;
-
-        /*
-          FIX DESKTOP PORTOFINO:
-          desktop e mobile usano lo stesso MP4 che già funziona da mobile.
-          Non viene più caricata nessuna versione alternativa desktop.
-        */
-        video.preload = 'metadata';
-        video.setAttribute('playsinline', '');
-        video.setAttribute('webkit-playsinline', '');
-
-        if(!video.dataset.prepared){
-          video.dataset.prepared = 'true';
+        if(source && source.getAttribute('src') !== src){
+          source.setAttribute('src', src);
           try{ video.load(); }catch(e){}
         }
-      });
+      }
+      video.preload = 'auto';
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+    }
+
+    function playVideo(video){
+      if(!video) return;
+      prepareVideo(video);
+      try{
+        video.muted = true;
+        const p = video.play();
+        if(p && typeof p.catch === 'function') p.catch(() => {});
+      }catch(e){}
+    }
+
+    function forceVideos(panel){
+      if(!panel) return;
+      panel.querySelectorAll('video').forEach(video => prepareVideo(video));
     }
 
     function activateEvent(name){
@@ -901,7 +925,7 @@
       panels.forEach(panel => {
         const isActive = panel.id === name;
         panel.classList.toggle('active', isActive);
-        if(isActive) prepareVideos(panel);
+        if(isActive) forceVideos(panel);
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -915,7 +939,7 @@
 
     window.addEventListener('resize', () => {
       const activePanel = document.querySelector('.panel.active');
-      prepareVideos(activePanel);
+      forceVideos(activePanel);
     });
 
     const galleries = {
@@ -998,37 +1022,32 @@
 
     document.querySelectorAll('.video-card').forEach(card => {
       const video = card.querySelector('video');
+      const playBtn = card.querySelector('.desktop-play-btn');
       if(!video) return;
 
-      video.addEventListener('loadedmetadata', () => {
-        card.classList.remove('video-error');
-      });
+      prepareVideo(video);
 
-      video.addEventListener('play', () => {
-        document.querySelectorAll('.video-card video').forEach(other => {
-          if(other !== video){
-            try{ other.pause(); }catch(e){}
-          }
+      if(playBtn){
+        playBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          playVideo(video);
         });
-        card.classList.add('is-playing');
-      });
+      }
 
-      video.addEventListener('pause', () => {
-        card.classList.remove('is-playing');
-      });
+      video.addEventListener('play', () => card.classList.add('is-playing'));
+      video.addEventListener('pause', () => card.classList.remove('is-playing'));
+      video.addEventListener('ended', () => card.classList.remove('is-playing'));
 
-      video.addEventListener('ended', () => {
-        card.classList.remove('is-playing');
+      video.addEventListener('click', () => {
+        prepareVideo(video);
       });
 
       video.addEventListener('error', () => {
-        card.classList.add('video-error');
+        prepareVideo(video);
         try{ video.load(); }catch(e){}
       });
     });
-
-    prepareVideos(document.querySelector('.panel.active'));
-    prepareVideos(document.getElementById('portofino'));
 
     let touchStartX = 0;
     let touchEndX = 0;
