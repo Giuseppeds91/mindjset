@@ -1597,6 +1597,7 @@
 
     const eventsNavLink = document.querySelector('a.nav-link[href="#portofino-event"]');
     const portofinoEventCard = document.getElementById("portofino-event");
+    const milanoEventCard = document.getElementById("milano-event");
 
     if(eventsNavLink && portofinoEventCard){
       eventsNavLink.addEventListener("click", function(e){
@@ -1604,8 +1605,11 @@
         closeContactPanel();
         closeInfoModal();
 
-        const navOffset = window.innerWidth <= 820 ? 160 : 110;
-        const targetTop = portofinoEventCard.getBoundingClientRect().top + window.pageYOffset - navOffset;
+        const isMobile = window.innerWidth <= 820;
+        const targetCard = (isMobile && milanoEventCard) ? milanoEventCard : portofinoEventCard;
+
+        const navOffset = isMobile ? 160 : 110;
+        const targetTop = targetCard.getBoundingClientRect().top + window.pageYOffset - navOffset;
 
         window.scrollTo({
           top: targetTop,
