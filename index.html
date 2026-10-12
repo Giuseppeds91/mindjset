@@ -741,6 +741,45 @@
   }
 }
 
+    /* Luxury soft glow - Get Ticket (menu + box Milano) */
+    .btn-ticket.luxury-glow{
+      animation:luxuryGlowSolid 3s ease-in-out infinite;
+    }
+
+    .ticket-link-soft.luxury-glow{
+      animation:luxuryGlowSoft 3s ease-in-out infinite;
+    }
+
+    @keyframes luxuryGlowSolid{
+      0%,100%{
+        background:rgba(255,255,255,.88);
+        box-shadow:0 8px 22px rgba(255,255,255,.06);
+      }
+      50%{
+        background:#fff;
+        box-shadow:
+          0 8px 28px rgba(255,255,255,.16),
+          0 0 26px rgba(255,255,255,.26);
+      }
+    }
+
+    @keyframes luxuryGlowSoft{
+      0%,100%{
+        background:rgba(255,255,255,.10);
+        border-color:rgba(255,255,255,.14);
+        color:rgba(255,255,255,.92);
+        box-shadow:0 8px 22px rgba(0,0,0,.14);
+      }
+      50%{
+        background:rgba(255,255,255,.20);
+        border-color:rgba(255,255,255,.36);
+        color:#fff;
+        box-shadow:
+          0 8px 28px rgba(255,255,255,.10),
+          0 0 26px rgba(255,255,255,.20);
+      }
+    }
+
     .soon-badge{
       display:inline-flex;
       align-items:center;
@@ -1308,7 +1347,7 @@
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Get Ticket</button>
+        <button type="button" class="btn-ticket nav-ticket luxury-glow" data-modal="next-events">Get Ticket</button>
       </div>
     </div>
 
@@ -1375,16 +1414,16 @@
               <div class="event-city-row">
                 <div class="event-city">MILANO</div>
               </div>
-              <div class="event-status">The Event Is About To Start</div>
+              <div class="event-status">Get Ready! The Event Starts Soon</div>
 
               <div class="event-body">
                 <div class="event-date">Friday 23 October 2026</div>
-                <div class="event-location">Stay connected and discover the location</div>
+                <div class="event-location">Stay tuned — the location will be revealed soon.</div>
               </div>
             </div>
 
             <div class="event-actions">
-              <button type="button" class="ticket-link ticket-link-soft" data-modal="milano-ticket">Get Ticket</button>
+              <button type="button" class="ticket-link ticket-link-soft luxury-glow" data-modal="milano-ticket">Get Ticket</button>
             </div>
           </article>
         </div>
