@@ -1303,18 +1303,36 @@
     <div class="bottom-nav-wrap">
       <div class="bottom-nav">
         <nav class="bottom-menu">
-          <a href="#milano-event" class="nav-link">Events</a>
+          <a href="#portofino-event" class="nav-link">Events</a>
           <a href="unlock-recap.html" class="nav-link">Gallery</a>
           <a href="javascript:void(0)" class="nav-link" id="contact-toggle">Contact</a>
         </nav>
 
-        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Get Ticket</button>
+        <button type="button" class="btn-ticket nav-ticket" data-modal="next-events">Next Drop</button>
       </div>
     </div>
 
     <section class="events" id="events">
       <div class="container">
         <div class="events-list">
+
+          <article class="event-card past-event">
+            <div class="event-top">
+              <div class="event-city-row">
+                <div class="event-city">Milano</div>
+              </div>
+              <div class="event-status">The Night Has Ended</div>
+
+              <div class="event-body">
+                <div class="event-date">Saturday 28 March 2026</div>
+                <div class="event-location">Nepentha Club — Piazza Armando Diaz, Milano</div>
+              </div>
+            </div>
+
+            <div class="event-actions">
+              <a href="unlock-recap.html?event=milano" class="ticket-link ticket-link-soft">Unlock Recap</a>
+            </div>
+          </article>
 
           <article class="event-card past-event">
             <div class="event-top">
@@ -1352,21 +1370,21 @@
             </div>
           </article>
 
-          <article class="event-card" id="milano-event">
+          <article class="event-card past-event" id="portofino-event">
             <div class="event-top">
               <div class="event-city-row">
-                <div class="event-city">MILANO</div>
+                <div class="event-city">Portofino</div>
               </div>
-              <div class="event-status">The Event Is About To Start</div>
+              <div class="event-status">The Night Has Ended</div>
 
               <div class="event-body">
-                <div class="event-date">Friday 23 October 2026</div>
-                <div class="event-location">Stay connected and discover the location</div>
+                <div class="event-date">Friday 19 June 2026</div>
+                <div class="event-location">Covo di Nord-Est — Santa Margherita Ligure GE</div>
               </div>
             </div>
 
             <div class="event-actions">
-              <button type="button" class="ticket-link ticket-link-soft" data-modal="milano-ticket">Get Ticket</button>
+              <a href="unlock-recap.html?event=portofino" class="ticket-link ticket-link-soft ticket-blink">Unlock Recap</a>
             </div>
           </article>
         </div>
@@ -1475,15 +1493,15 @@
     const modalContent = {
       "next-events": {
         kicker: "Mindjset",
-        title: "Get Ticket",
-        text: "Tickets for the Milano event will be available to purchase soon.",
+        title: "Next Drop",
+        text: "The next Mindjset destination will be revealed soon.",
         footer: "Stay close"
       },
-      "milano-ticket": {
-        kicker: "Milano",
-        title: "Get Ticket",
-        text: "Coming soon, stay tuned.",
-        footer: "Stay connected"
+      "portofino-recap": {
+        kicker: "Portofino",
+        title: "Recap Soon",
+        text: "Photos and videos from the Portofino night will be available soon. Stay tuned for the drop.",
+        footer: "Coming soon"
       }
     };
 
@@ -1532,17 +1550,17 @@
     });
 
 
-    const eventsNavLink = document.querySelector('a.nav-link[href="#milano-event"]');
-    const milanoEventCard = document.getElementById("milano-event");
+    const eventsNavLink = document.querySelector('a.nav-link[href="#portofino-event"]');
+    const portofinoEventCard = document.getElementById("portofino-event");
 
-    if(eventsNavLink && milanoEventCard){
+    if(eventsNavLink && portofinoEventCard){
       eventsNavLink.addEventListener("click", function(e){
         e.preventDefault();
         closeContactPanel();
         closeInfoModal();
 
         const navOffset = window.innerWidth <= 820 ? 160 : 110;
-        const targetTop = milanoEventCard.getBoundingClientRect().top + window.pageYOffset - navOffset;
+        const targetTop = portofinoEventCard.getBoundingClientRect().top + window.pageYOffset - navOffset;
 
         window.scrollTo({
           top: targetTop,
